@@ -1,0 +1,15 @@
+.page {
+  grid-template-columns: auto 1fr;
+}
+
+.side-navbar {
+  grid-column: 1/2;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.page-content {
+  grid-column: 2/3;
+}

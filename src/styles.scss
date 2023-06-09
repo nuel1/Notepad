@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins&display=swap");
+:root {
+  --color-light: #f4f5f8;
+  --color-light-shade: #d7d8da;
+  --color-light-tint: #f5f6f9;
+  --color-medium: #92949c;
+  --color-medium-shade: #808289;
+  --color-medium-tint: #9d9fa6;
+  --color-dark: #000000;
+  --color-dark-tint: #1a1a1a;
+}
+
+*,
+*::after,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input {
+  font-size: 1rem;
+}
+
+.card,
+.link {
+  padding-block: 0.8rem;
+  padding-inline: 1rem;
+  border-radius: 5px;
+}
+
+.card {
+  background: #ffff;
+}
+
+.link {
+  background: transparent;
+  color: var(--color-medium);
+}
+
+.active {
+  background: #ffff;
+  color: unset;
+}
+
+.justify-c {
+  justify-content: center;
+}
+
+.align-c {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-even {
+  justify-content: space-evenly;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+a {
+  cursor: pointer;
+}
+
+.main {
+  grid-template-columns: auto 1fr;
+}
+
+.sidebar {
+  position: sticky;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  grid-column: 1/2;
+  width: 23rem;
+  padding: 1rem;
+}
+
+.editor {
+  grid-column: 2/3;
+}

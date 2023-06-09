@@ -1,0 +1,12 @@
+<div class="search card flex align-c">
+  <ng-icon
+    name="ionSearchOutline"
+    [class]="!notHomePage ? 'hide' : ''"
+  ></ng-icon>
+  <input
+    type="search"
+    (keyup.enter)="('')"
+    [placeholder]="placeholder"
+    [disabled]="isDisabled"
+  />
+</div>

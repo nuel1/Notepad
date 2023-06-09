@@ -1,0 +1,14 @@
+<a *ngIf="!isRouterLink" class="tab flex card align-c">
+  <ng-content></ng-content>
+  <span>{{ tabName }}</span>
+</a>
+
+<a
+  class="tab flex link align-c"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  *ngIf="isRouterLink"
+>
+  <ng-content></ng-content>
+  <span>{{ tabName }}</span>
+</a>
