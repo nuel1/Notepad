@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditorComponent } from './editor.component';
+import { NoteCardComponent } from './note-card.component';
 
-describe('EditorComponent', () => {
-  let component: EditorComponent;
-  let fixture: ComponentFixture<EditorComponent>;
+describe('NoteCardComponent', () => {
+  let component: NoteCardComponent;
+  let fixture: ComponentFixture<NoteCardComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditorComponent]
+      declarations: [NoteCardComponent]
     });
-    fixture = TestBed.createComponent(EditorComponent);
+    fixture = TestBed.createComponent(NoteCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

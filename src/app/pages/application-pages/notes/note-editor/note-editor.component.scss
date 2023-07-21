@@ -1,0 +1,98 @@
+ng-icon {
+  line-height: 0;
+  font-size: 1.2rem;
+  margin-inline: 0.5rem;
+}
+
+.heading {
+  box-shadow: 0px 4px 1px #80808012;
+  padding-bottom: 1rem;
+}
+
+.note-info-table {
+  grid-template-columns: repeat(2, auto);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.row {
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+}
+.row-1 {
+  grid-row: 1/2;
+}
+
+.row-2 {
+  grid-row: 2/3;
+}
+
+.row-3 {
+  grid-row: 3/4;
+}
+
+img {
+  width: 35px;
+  height: 35px;
+  margin-right: 0.7rem;
+}
+
+p {
+  font-weight: 600;
+}
+
+.col-1,
+p {
+  color: var(--color-dark-shade);
+}
+
+.custom {
+  height: 300px;
+}
+
+::ng-deep {
+  .NgxEditor {
+    height: 320px;
+    overflow-y: scroll;
+    border: transparent !important;
+  }
+
+  .NgxEditor__Content {
+    min-height: 320px;
+    background: #80808014;
+  }
+}
+
+.action-btns {
+  margin-block: 1rem;
+
+  button {
+    padding: 9px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed !important;
+  }
+}
+
+.btn-preview {
+  border: 1px solid var(--color-dark);
+
+  &:disabled {
+    border: 1px solid var(--color-medium);
+  }
+}
+
+.btn-save {
+  background: #4827a8;
+  border: transparent;
+  color: var(--color-light);
+  margin-right: 0.7rem;
+
+  &:disabled {
+    background: #4727a8bc;
+  }
+}

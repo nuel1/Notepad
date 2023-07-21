@@ -1,0 +1,29 @@
+<a
+  class="card"
+  *ngIf="note"
+  [ngClass]="!note.noteIsFocused ? 'inactive' : ''"
+  (click)="openNote(note)"
+>
+  <p class="date flex align-c justify-between">
+    <span
+      ><b>{{ note.date }}</b></span
+    >
+    <button class="icon" [disabled]="!note.noteIsFocused">
+      <ng-icon name="ionEllipsisHorizontal"></ng-icon>
+    </button>
+    <button
+      class="delete"
+      *ngIf="note.noteOptionToggled"
+      (click)="onDelete(note)"
+    >
+      <i>Delete</i>
+    </button>
+  </p>
+  <h3 class="title">{{ note.title }}</h3>
+  <p class="content">{{ convertHtmlToText(note.content) }}</p>
+  <div class="tags">
+    <span class="tag" *ngFor="let tag of note.tags">{{ tag }}</span>
+  </div>
+
+  <div class="overlay" *ngIf="note.noteOptionToggled"></div>
+</a>

@@ -2,13 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins&display=swap");
 :root {
   --color-light: #f4f5f8;
+  --color-lighter: #f3f3f3;
   --color-light-shade: #d7d8da;
   --color-light-tint: #f5f6f9;
+  --color-mild: #ecedef;
   --color-medium: #92949c;
   --color-medium-shade: #808289;
   --color-medium-tint: #9d9fa6;
   --color-dark: #000000;
   --color-dark-tint: #1a1a1a;
+  --color-dark-shade: #383838;
+  --color-danger: #dc143c;
 }
 
 *,
@@ -18,9 +22,12 @@
 }
 
 * {
+  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*:not(.previewer *) {
   margin: 0;
   padding: 0;
-  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 input {
@@ -28,14 +35,22 @@ input {
 }
 
 .card,
-.link {
+.form-modal-toggle-button {
   padding-block: 0.8rem;
   padding-inline: 1rem;
   border-radius: 5px;
 }
 
-.card {
+.bg-card--light {
   background: #ffff;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.bg-card--light-tint {
+  background: var(--color-light-tint);
 }
 
 .link {
@@ -97,4 +112,44 @@ a {
 
 .editor {
   grid-column: 2/3;
+}
+
+.form-modal-toggle-button {
+  background: var(--color-light-tint);
+  margin-bottom: 0.7rem;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #f0f0f0;
+  margin-top: 1.85rem;
+}
+
+.form-modal-toggle-button {
+  span {
+    margin-left: 1rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-light-shade);
+  opacity: 0.5;
+}
+
+.tags {
+  margin-top: 1rem;
+}
+
+.tag {
+  background: var(--color-medium-tint);
+  color: var(--color-medium);
+  font-weight: 600;
+  padding: 0.2rem 1rem;
+  color: var(--color-dark-shade);
+  border-radius: 3px;
+  background: #c1c1c159;
+  margin-right: 0.6rem;
+  font-size: 0.85rem;
 }

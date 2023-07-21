@@ -1,0 +1,33 @@
+<div class="editor-heading" *ngIf="note">
+  <div class="heading">
+    <h1>{{ title | titlecase }}</h1>
+  </div>
+  <div class="note-info-table grid">
+    <div class="row-2 row grid align-c">
+      <div class="col-1">Last Modified</div>
+      <div class="col-2 flex">
+        <p>{{ note.date }}</p>
+      </div>
+    </div>
+    <div class="row-3 row grid align-c">
+      <div class="col-1">Tags</div>
+      <div class="col-2 flex">
+        <span class="tag" *ngFor="let tag of note.tags">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="editor">
+  <ngx-editor-menu [editor]="editor" [toolbar]="editorToolbarConfig">
+  </ngx-editor-menu>
+  <ngx-editor
+    [editor]="editor"
+    [placeholder]="'Type here...'"
+    [(ngModel)]="html"
+    (ngModelChange)="editorChange()"
+  ></ngx-editor>
+</div>
+<div class="action-btns">
+  <button class="btn-save" [disabled]="!changes">Save changes</button>
+  <button class="btn-preview" [disabled]="!plainText">Preview</button>
+</div>

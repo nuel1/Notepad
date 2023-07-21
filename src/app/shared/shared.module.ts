@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
@@ -14,9 +14,18 @@ import {
   ionChevronDownOutline,
   ionSearchOutline,
   ionHomeOutline,
+  ionEllipsisHorizontal,
+  ionCloseCircle,
+  ionChevronForward,
+  ionPencil,
 } from '@ng-icons/ionicons';
 import { SideNavbarTabComponent } from './side-navbar-tab/side-navbar-tab.component';
 import { SearchComponent } from './search/search.component';
+import { NoteCardComponent } from './note-card/note-card.component';
+import { NoteFormComponent } from './forms/note-form/note-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxEditorModule } from 'ngx-editor';
+import { DeleteNoteModalComponent } from './modals/delete-note-modal/delete-note-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +33,9 @@ import { SearchComponent } from './search/search.component';
     SideNavbarComponent,
     SideNavbarTabComponent,
     SearchComponent,
+    NoteCardComponent,
+    NoteFormComponent,
+    DeleteNoteModalComponent,
   ],
   imports: [
     CommonModule,
@@ -38,13 +50,25 @@ import { SearchComponent } from './search/search.component';
       ionChevronDownOutline,
       ionSearchOutline,
       ionHomeOutline,
+      ionEllipsisHorizontal,
+      ionCloseCircle,
+      ionChevronForward,
+      ionPencil,
     }),
+    ReactiveFormsModule,
+    FormsModule,
+    NgxEditorModule,
   ],
   exports: [
     ProfileCardComponent,
     SideNavbarComponent,
     SideNavbarTabComponent,
     SearchComponent,
+    NgIconsModule,
+    NoteCardComponent,
+    NoteFormComponent,
+    NgxEditorModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}

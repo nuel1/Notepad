@@ -1,5 +1,30 @@
 <div class="main grid">
   <div class="sidebar">
     <h1>My Notes</h1>
+    <button
+      class="form-modal-toggle-button flex align-c"
+      (click)="openNoteForm()"
+    >
+      <ng-icon name="ionAddOutline"></ng-icon>
+      <span>Add new note</span>
+    </button>
+    <ng-container *ngIf="notes">
+      <note-card
+        *ngFor="let note of notes"
+        [note]="note"
+        (onToggleNoteOption)="toggleFocusedNoteOption($event)"
+        (deleteNote)="delete($event)"
+        (onFocusNote)="focusNote($event)"
+      ></note-card>
+    </ng-container>
   </div>
+  <div class="editor-container">
+    <router-outlet></router-outlet>
+  </div>
+  <ng-container *ngIf="openForm">
+    <note-form
+      (cancel)="cancel($event)"
+      (createNote)="createNote($event)"
+    ></note-form>
+  </ng-container>
 </div>

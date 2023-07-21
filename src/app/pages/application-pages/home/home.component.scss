@@ -1,5 +1,20 @@
-h1 {
-  font-size: 7rem;
-  margin-block: 6rem;
+// h1 {
+//   font-size: 7rem;
+//   margin-block: 6rem;
+//   text-align: center;
+// }
+
+.header {
+  padding-block: 3rem;
+  padding-inline: 12rem;
   text-align: center;
+}
+ul {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+}
+
+li {
+  width: 20rem;
 }

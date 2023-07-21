@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { GlobalsService } from 'src/app/core/globals/globals.service';
 
 @Component({
   selector: 'search',
@@ -8,35 +8,27 @@ import { filter, map, mergeMap } from 'rxjs';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private globals: GlobalsService, private router: Router) {
+    globals.activeRoute().subscribe((path) => {
+      if (path[path.length - 1] === 'home') {
+        this.placeholder = '📔📕📗📘📙📓📒';
+        this.isDisabled = true;
+        this.notHome = false;
+      } else {
+        if (path.includes('editor')) {
+          this.placeholder = `Search ${path[0]}...`;
+        } else {
+          this.placeholder = `Search ${path[0]}...`;
+        }
+        this.isDisabled = false;
+        this.notHome = true;
+      }
+    });
+  }
 
   placeholder = '';
-  notHomePage = true;
+  notHome = true;
   isDisabled = true;
 
-  ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => this.route),
-        map((route) => {
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route;
-        }),
-        filter((route) => route.outlet === 'primary'),
-        mergeMap((route) => route.url),
-        map((url) => url.map((segment) => segment.path).join('/'))
-      )
-      .subscribe((path: string) => {
-        path == 'home'
-          ? ((this.notHomePage = false),
-            (this.placeholder = '📔📕📗📘📙📓📒'),
-            (this.isDisabled = true))
-          : ((this.notHomePage = true),
-            (this.placeholder = `Search ${path}...`),
-            (this.isDisabled = false));
-      });
-  }
+  ngOnInit(): void {}
 }

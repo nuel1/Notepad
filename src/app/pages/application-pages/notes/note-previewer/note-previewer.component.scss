@@ -1,0 +1,26 @@
+ul {
+  margin-left: 1rem;
+}
+
+p {
+  background-color: red;
+}
+
+ng-icon {
+  font-size: 2rem;
+  color: var(--color-light);
+}
+
+.icon {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--color-dark);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

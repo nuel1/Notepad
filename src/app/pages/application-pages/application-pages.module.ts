@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ApplicationPagesRoutingModule } from './application-pages-routing.module';
 import { ApplicationPagesComponent } from './application-pages.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -9,7 +10,9 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { JournalComponent } from './journal/journal.component';
-import { EditorComponent } from './journal/editor/editor.component';
+import { NoteEditorComponent } from './notes/note-editor/note-editor.component';
+import { NotePreviewerComponent } from './notes/note-previewer/note-previewer.component';
+
 const pages = [
   ApplicationPagesComponent,
   HomeComponent,
@@ -18,10 +21,16 @@ const pages = [
   ReadingListComponent,
   TodoListComponent,
   JournalComponent,
-  EditorComponent,
+  NoteEditorComponent,
+  NotePreviewerComponent,
 ];
 @NgModule({
   declarations: pages,
-  imports: [CommonModule, ApplicationPagesRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ApplicationPagesRoutingModule,
+    SharedModule,
+    FormsModule,
+  ],
 })
 export class ApplicationPagesModule {}

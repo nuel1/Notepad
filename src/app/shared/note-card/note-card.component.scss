@@ -1,0 +1,60 @@
+p.content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+p.date {
+  text-transform: uppercase;
+  position: relative;
+}
+
+h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-block: 1rem;
+}
+
+a {
+  margin-top: 1.85rem;
+  background: var(--color-lighter);
+  display: block;
+}
+
+a.inactive {
+  p,
+  h3,
+  .tag {
+    color: var(--color-medium);
+  }
+}
+
+.delete {
+  inset-inline-end: 0;
+  background: var(--color-light);
+  position: absolute;
+  z-index: 2;
+  padding: 0.3rem 0.7rem;
+  bottom: 100%;
+  border-radius: 5px;
+
+  &:hover {
+    i {
+      color: var(--color-danger);
+    }
+  }
+  i {
+    line-height: 2;
+    font-style: normal;
+    transition: color 0.3s ease;
+    text-transform: none;
+  }
+}
+
+button {
+  border: transparent;
+  cursor: pointer;
+}

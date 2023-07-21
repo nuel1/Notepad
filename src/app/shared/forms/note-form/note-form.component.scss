@@ -1,0 +1,82 @@
+.form-container {
+  background: #fff;
+  width: 450px;
+}
+
+h2 {
+  text-align: center;
+}
+
+div:not(.form-container).flex {
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+
+  .overlay {
+    z-index: -1;
+    cursor: pointer;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  padding-inline: 0.7rem;
+  height: 50px;
+  border: 1px solid var(--color-medium);
+  border-radius: 5px;
+}
+
+button {
+  background: var(--color-dark);
+  color: var(--color-light);
+  border: transparent;
+  border-radius: 50px;
+  margin-inline: auto;
+  display: block;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+}
+
+.invalid {
+  color: var(--color-danger);
+}
+
+.form {
+  div {
+    margin-bottom: 1.5rem;
+  }
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.validation-message {
+  font-size: 0.85rem;
+  line-height: 2;
+  margin-left: 0.7rem;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0.7rem;
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+
+  li {
+    margin-right: 0.7rem;
+    position: relative;
+    margin-bottom: 0.7rem;
+  }
+}
+
+ng-icon {
+  cursor: pointer;
+  margin-left: 0.3rem;
+}

@@ -5,52 +5,38 @@
   </div>
 
   <div class="side-navbar-tabs">
-    <side-navbar-tab tabName="Home" routerLink="home" [isRouterLink]="true">
+    <side-navbar-tab tabName="Home" routerLink="home">
       <ng-icon name="ionHomeOutline"></ng-icon>
     </side-navbar-tab>
-    <side-navbar-tab
-      tabName="My Notes"
-      routerLink="notes"
-      [isRouterLink]="true"
-    >
+    <side-navbar-tab tabName="My Notes" routerLink="notes">
       <ng-icon name="ionNewspaperOutline"></ng-icon>
     </side-navbar-tab>
-    <side-navbar-tab
-      tabName="To-do-list"
-      routerLink="todo-list"
-      [isRouterLink]="true"
-    >
+    <side-navbar-tab tabName="To-do-list" routerLink="todo-list">
       <ng-icon name="ionCheckmarkOutline"></ng-icon>
     </side-navbar-tab>
-    <side-navbar-tab
-      tabName="Projects"
-      routerLink="projects"
-      [isRouterLink]="true"
-    >
+    <side-navbar-tab tabName="Projects" routerLink="projects">
       <ng-icon name="ionNewspaperOutline"></ng-icon>
     </side-navbar-tab>
-    <side-navbar-tab
-      tabName="Journals"
-      routerLink="journal"
-      [isRouterLink]="true"
-    >
+    <side-navbar-tab tabName="Journals" routerLink="journal">
       <ng-icon name="ionJournalOutline"></ng-icon>
     </side-navbar-tab>
-    <side-navbar-tab
-      tabName="Reading List"
-      routerLink="reading-list"
-      [isRouterLink]="true"
-    >
+    <side-navbar-tab tabName="Reading List" routerLink="reading-list">
       <ng-icon name="ionBookOutline"></ng-icon>
     </side-navbar-tab>
   </div>
 
   <div class="side-navbar-footer">
-    <a class="tab flex card align-c" [style]="{ 'margin-bottom': '0.7rem' }">
+    <a
+      class="tab flex card bg-card--light align-c"
+      [style]="{ 'margin-bottom': '0.7rem' }"
+    >
       <ng-icon name="ionAddOutline"></ng-icon>
       <span [style]="{ 'margin-left': '1rem' }">Add folder</span>
     </a>
-    <a class="tab flex card align-c" [style]="{ 'margin-bottom': '0.7rem' }">
+    <a
+      class="tab flex card bg-card--light align-c"
+      [style]="{ 'margin-bottom': '0.7rem' }"
+    >
       <ng-icon name="ionSettingsOutline"></ng-icon>
       <span [style]="{ 'margin-left': '1rem' }">Settings</span>
     </a>
