@@ -7,35 +7,33 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/core/storage/storage.service';
-import { iNote } from 'src/app/interface/model';
+import { INote } from 'src/app/interface/model';
 
 @Component({
   selector: 'app-note-previewer',
   templateUrl: './note-previewer.component.html',
   styleUrls: ['./note-previewer.component.scss'],
 })
-export class NotePreviewerComponent implements OnInit, AfterViewInit {
+export class NotePreviewerComponent implements OnInit {
   @ViewChild('container') container: ElementRef = new ElementRef(null);
 
   constructor(
     private route: ActivatedRoute,
     private storage: StorageService,
     private router: Router
-  ) {
-    const id = route.snapshot.params['id'];
-    storage.getItem('notes', id).then((result: iNote) => (this.note = result));
-  }
+  ) {}
 
-  note?: iNote;
+  note?: INote;
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
+  async ngOnInit() {
+    const id = this.route.snapshot.params['id'];
+    this.note = await this.storage.getItem('notes', id);
     const html = this.container.nativeElement;
-    if (this.note) html.innerHTML = this.note.content;
+    html.innerHTML = this.note.content;
   }
 
-  editNote() {
-    this.router.navigate(['notes', this.note?.id, 'editor']);
+  routeToEditor() {
+    // this.router.navigateByUrl('./notes/note/editor/' + this.note?.id);
+    this.router.navigate(['/notes', 'note', 'editor', this.note?.id]);
   }
 }

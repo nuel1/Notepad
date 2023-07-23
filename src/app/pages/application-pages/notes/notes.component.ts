@@ -1,32 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals/globals.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { StorageService } from 'src/app/core/storage/storage.service';
-import { iNote } from 'src/app/interface/model';
+import { INote } from 'src/app/interface/model';
+import { NoteService } from './service/note.service';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
+  providers: [NoteService],
 })
 export class NotesComponent implements OnInit {
-  constructor(
-    private storage: StorageService,
-    private globals: GlobalsService
-  ) {}
+  constructor(private router: Router, private noteService: NoteService) {}
 
   openForm = false;
-  notes: iNote[] = [];
+  notes: INote[] = [];
 
-  ngOnInit(): void {
-    this.getNotes();
+  async ngOnInit() {
+    this.notes = await this.noteService.getNotes();
   }
 
-  async getNotes() {
-    try {
-      const storedNotes = (await this.storage.getItems('notes')) as any;
-      this.notes = [...this.notes, ...storedNotes];
-    } catch (e) {}
-  }
+  async getNotes() {}
 
   createNote(noteCreated: boolean) {
     if (noteCreated) this.openForm = false;
@@ -40,27 +36,8 @@ export class NotesComponent implements OnInit {
     if (formCanceled) this.openForm = false;
   }
 
-  toggleFocusedNoteOption(focusedNote: iNote) {
-    this.notes = this.notes.map((note: iNote) =>
-      note.id !== focusedNote.id && note.noteOptionToggled
-        ? ((note.noteOptionToggled = false), note)
-        : note
-    );
-  }
-
-  focusNote(focusedNote: iNote) {
-    focusedNote.noteIsFocused = true;
-    this.notes = this.notes.filter((note: iNote) =>
-      note.id !== focusedNote.id && note.noteIsFocused
-        ? ((note.noteIsFocused = false), note)
-        : note
-    );
-  }
-
-  delete(selectedNote: iNote) {
-    this.notes = this.notes.filter(
-      (note: iNote) => note.id !== selectedNote.id
-    );
-    this.storage.saveItem('notes', this.notes);
+  async deleteNote(note: INote) {
+    const noteId = note.id;
+    await this.noteService.deleteNote(noteId);
   }
 }

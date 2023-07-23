@@ -12,9 +12,7 @@
       <note-card
         *ngFor="let note of notes"
         [note]="note"
-        (onToggleNoteOption)="toggleFocusedNoteOption($event)"
-        (deleteNote)="delete($event)"
-        (onFocusNote)="focusNote($event)"
+        (deleteNote)="deleteNote($event)"
       ></note-card>
     </ng-container>
   </div>
