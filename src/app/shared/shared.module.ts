@@ -25,7 +25,6 @@ import { NoteCardComponent } from './note-card/note-card.component';
 import { NoteFormComponent } from './forms/note-form/note-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
-import { DeleteNoteModalComponent } from './modals/delete-note-modal/delete-note-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { DeleteNoteModalComponent } from './modals/delete-note-modal/delete-note
     SearchComponent,
     NoteCardComponent,
     NoteFormComponent,
-    DeleteNoteModalComponent,
   ],
   imports: [
     CommonModule,

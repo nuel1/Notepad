@@ -1,6 +1,6 @@
-import { iNote } from './interface/model';
+import { INote } from './interface/note';
 
-export class DefaultNote implements iNote {
+export class DefaultNote implements INote {
   readonly title =
     'Get Your Note-Taking Mojo Flowing: Meet Our Snazzy Note Editor!';
   readonly content = `

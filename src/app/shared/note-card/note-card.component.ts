@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { iNote } from 'src/app/interface/model';
+import { INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
-import { iNgxEditorJson } from 'src/app/interface/model';
-import { Router } from '@angular/router';
+import { INgxEditorJson } from 'src/app/interface/ngx-editor';
 
 @Component({
   selector: 'note-card',
@@ -12,39 +11,20 @@ import { Router } from '@angular/router';
 export class NoteCardComponent implements OnInit {
   @Input() tags: string[] = [];
   @Input() noteIndex = 0;
-  @Input() note?: iNote;
-  @Output() onToggleNoteOption = new EventEmitter();
+  @Input() note: INote | undefined;
   @Output() deleteNote = new EventEmitter();
-  @Output() onFocusNote = new EventEmitter();
 
-  constructor(private router: Router) {}
+  btnDisabled = true;
+  constructor() {}
 
-  noteIsFocused = false;
-  noteOptionToggled = false;
-
-  ngOnInit(): void {
-    if (this.note) {
-      this.note['noteIsFocused'] = this.noteIsFocused;
-      this.note['noteOptionToggled'] = this.noteOptionToggled;
-    }
-  }
+  ngOnInit(): void {}
 
   convertHtmlToText(html: string) {
-    const jsonDoc: iNgxEditorJson = toDoc(html) as iNgxEditorJson;
+    const jsonDoc: INgxEditorJson = toDoc(html) as INgxEditorJson;
     return jsonDoc.content[0].content[0].text;
   }
 
-  toggleNoteOption(note: iNote) {
-    note.noteOptionToggled = true;
-    this.onToggleNoteOption.emit(note);
-  }
-
-  onDelete(note: iNote) {
+  onDelete(note: INote) {
     this.deleteNote.emit(note);
-  }
-
-  openNote(note: iNote) {
-    this.onFocusNote.emit(note);
-    this.router.navigate(['notes', note.id, 'preview']);
   }
 }

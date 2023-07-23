@@ -34,16 +34,15 @@ const routes: Routes = [
       {
         path: 'notes',
         component: NotesComponent,
+
         children: [
           {
-            path: ':id/editor',
-            component: NoteEditorComponent,
-            data: { title: 'Notes' },
+            path: 'note/preview/:id',
+            component: NotePreviewerComponent,
           },
           {
-            path: ':id/preview',
-            component: NotePreviewerComponent,
-            data: { title: 'Notes' },
+            path: 'note/preview/:id/editor',
+            component: NoteEditorComponent,
           },
         ],
         data: { title: 'Notes' },

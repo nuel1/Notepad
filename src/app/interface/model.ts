@@ -1,19 +1,17 @@
-export interface iNote {
+export interface INote {
   id: string;
   title: string;
   date: string;
   tags: string[];
   content: string;
-  noteIsFocused?: boolean;
-  noteOptionToggled?: boolean;
 }
 
-export interface iUser {
+export interface IUser {
   name: string;
   img: any;
 }
 
-export interface iNgxEditorJson {
+export interface INgxEditorJson {
   content: [
     {
       content: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalsService } from 'src/app/core/globals/globals.service';
+import { GlobalsService } from 'src/app/core/services/globals.service';
 
 @Component({
   selector: 'app-home',

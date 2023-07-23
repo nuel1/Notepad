@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPagesRoutingModule } from './application-pages-routing.module';
 import { ApplicationPagesComponent } from './application-pages.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -31,6 +31,7 @@ const pages = [
     ApplicationPagesRoutingModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class ApplicationPagesModule {}

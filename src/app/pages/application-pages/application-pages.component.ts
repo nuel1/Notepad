@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalsService } from 'src/app/core/globals/globals.service';
-import { StorageService } from 'src/app/core/storage/storage.service';
+import { GlobalsService } from 'src/app/core/services/globals.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { DefaultNote } from 'src/app/note.default';
 @Component({
   selector: 'app-application-pages',

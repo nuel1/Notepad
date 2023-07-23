@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
-import * as crypto from 'crypto-js';
+import * as Crypto from 'crypto-js';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GlobalsService {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -35,19 +33,19 @@ export class GlobalsService {
   }
 
   encrypt(id: string) {
-    return crypto.AES.encrypt(id, this.secreteKey).toString();
+    return Crypto.AES.encrypt(id, this.secreteKey).toString();
   }
 
   decrypt(id: string) {
-    const decrypted = crypto.AES.decrypt(id, this.secreteKey).toString(
-      crypto.enc.Utf8
+    const decrypted = Crypto.AES.decrypt(id, this.secreteKey).toString(
+      Crypto.enc.Utf8
     );
 
     return decrypted;
   }
 
   get generateKey() {
-    return crypto.lib.WordArray.random(16).toString();
+    return Crypto.lib.WordArray.random(16).toString();
   }
 
   get date() {
@@ -56,5 +54,21 @@ export class GlobalsService {
       month: 'long',
       day: 'numeric',
     });
+  }
+
+  generateId() {
+    const uuid = String(1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(
+      /[018]/g,
+      (c: any) => {
+        return (
+          c ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        )
+          .toString(16)
+          .replace(/\w+-/g, '');
+      }
+    );
+
+    return this.encrypt(uuid);
   }
 }

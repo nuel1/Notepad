@@ -18,13 +18,14 @@ h3 {
   margin-block: 1rem;
 }
 
-a {
+.card {
   margin-top: 1.85rem;
   background: var(--color-lighter);
   display: block;
+  cursor: pointer;
 }
 
-a.inactive {
+.card {
   p,
   h3,
   .tag {
@@ -32,25 +33,50 @@ a.inactive {
   }
 }
 
-.delete {
-  inset-inline-end: 0;
-  background: var(--color-light);
-  position: absolute;
-  z-index: 2;
-  padding: 0.3rem 0.7rem;
-  bottom: 100%;
-  border-radius: 5px;
+.card.active {
+  p,
+  h3 {
+    color: inherit;
+  }
 
-  &:hover {
+  .tag {
+    color: var(--color-dark-shade);
+  }
+
+  .delete {
+    border: 1px solid #524451;
+
     i {
-      color: var(--color-danger);
+      color: inherit;
+    }
+
+    &:hover {
+      i {
+        color: var(--color-danger);
+        text-decoration: underline;
+      }
     }
   }
+}
+
+.card .delete {
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  border: 1px solid #c2c2c2;
+
   i {
     line-height: 2;
     font-style: normal;
     transition: color 0.3s ease;
     text-transform: none;
+    color: var(--color-medium);
+  }
+
+  &:hover {
+    i {
+      color: inherit;
+    }
   }
 }
 
