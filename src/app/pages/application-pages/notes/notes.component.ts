@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalsService } from 'src/app/core/globals/globals.service';
-import { UserService } from 'src/app/core/services/user.service';
-import { StorageService } from 'src/app/core/storage/storage.service';
-import { INote } from 'src/app/interface/model';
-import { NoteService } from './service/note.service';
+import { GlobalsService } from 'src/app/core/services/globals.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { INote } from 'src/app/interface/note';
+import { NoteService } from 'src/app/core/services/note.service';
 
 @Component({
   selector: 'app-notes',

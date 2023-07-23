@@ -18,16 +18,22 @@
   </div>
 </div>
 <div class="editor">
-  <ngx-editor-menu [editor]="editor" [toolbar]="editorToolbarConfig">
-  </ngx-editor-menu>
-  <ngx-editor
-    [editor]="editor"
-    [placeholder]="'Type here...'"
-    [(ngModel)]="html"
-    (ngModelChange)="editorChange()"
-  ></ngx-editor>
-</div>
-<div class="action-btns">
-  <button class="btn-save" [disabled]="!changes">Save changes</button>
-  <button class="btn-preview" [disabled]="!plainText">Preview</button>
+  <form [formGroup]="form">
+    <ngx-editor-menu [editor]="editor" [toolbar]="editorToolbarConfig">
+    </ngx-editor-menu>
+    <ngx-editor
+      [editor]="editor"
+      [placeholder]="'Type here...'"
+      formControlName="editorContent"
+    ></ngx-editor>
+    <div class="action-btns">
+      <button
+        class="btn-preview"
+        [disabled]="form.invalid"
+        [routerLink]="'/notes/note/preview/' + note?.id"
+      >
+        Preview
+      </button>
+    </div>
+  </form>
 </div>

@@ -6,8 +6,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StorageService } from 'src/app/core/storage/storage.service';
-import { INote } from 'src/app/interface/model';
+import { NoteService } from 'src/app/core/services/note.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { INote } from 'src/app/interface/note';
 
 @Component({
   selector: 'app-note-previewer',
@@ -19,21 +20,15 @@ export class NotePreviewerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private storage: StorageService,
-    private router: Router
+    private noteService: NoteService
   ) {}
 
   note?: INote;
 
   async ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.note = await this.storage.getItem('notes', id);
+    this.note = (await this.noteService.getNote(id)) as INote;
     const html = this.container.nativeElement;
     html.innerHTML = this.note.content;
-  }
-
-  routeToEditor() {
-    // this.router.navigateByUrl('./notes/note/editor/' + this.note?.id);
-    this.router.navigate(['/notes', 'note', 'editor', this.note?.id]);
   }
 }

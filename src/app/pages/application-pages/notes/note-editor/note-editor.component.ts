@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StorageService } from 'src/app/core/storage/storage.service';
-import { Editor } from 'ngx-editor';
+import { Editor, Validators } from 'ngx-editor';
 import { toolbar } from './editor.config';
-import { iNgxEditorJson, iNote } from 'src/app/interface/model';
+import { INgxEditorJson } from 'src/app/interface/ngx-editor';
+import { INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
+import { NoteService } from 'src/app/core/services/note.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-note-editor',
@@ -15,41 +18,36 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private storage: StorageService,
-    private router: Router
+    private router: Router,
+    private noteService: NoteService
   ) {}
-  editor: Editor = new Editor();
-  note?: iNote;
+  editor = new Editor();
+  note: INote | undefined;
   title = '';
   editorToolbarConfig = toolbar;
   html = '';
   plainText = '';
-  changes = false;
+  form: FormGroup | any;
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') as string;
-    this.note = await this.storage.getItem('notes', id);
+    this.note = (await this.noteService.getNote(id)) as INote;
     this.title = this.note.title;
-  }
 
-  editorChange() {
-    const jsonDoc: iNgxEditorJson = toDoc(this.html) as iNgxEditorJson;
-    this.plainText = jsonDoc.content[0].content[0].text.trim();
-    this.changes = true;
-  }
+    this.form = new FormGroup({
+      editorContent: new FormControl(
+        {
+          value: this.note.content,
+          disabled: false,
+        },
+        Validators.required()
+      ),
+    });
 
-  saveChanges() {
-    if (this.note) {
-      (this.note.content = this.html), (this.changes = false);
+    this.form.get('editorContent').valueChanges.subscribe((value: string) => {
+      this.note!.content = value;
       this.storage.saveItem('notes', this.note);
-    }
-  }
-
-  previewChanges() {
-    if (this.changes)
-      localStorage.setItem('unsavedChanges', JSON.stringify(this.html));
-
-    if (this.plainText)
-      this.router.navigate(['notes', this.note?.id, 'preview']);
+    });
   }
 
   ngOnDestroy(): void {

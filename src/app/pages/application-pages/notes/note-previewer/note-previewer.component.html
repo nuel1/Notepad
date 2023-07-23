@@ -1,4 +1,7 @@
 <div #container></div>
-<div class="icon" (click)="routeToEditor()">
+<div
+  class="icon"
+  [routerLink]="'/notes/note/preview/' + this.note?.id + '/editor'"
+>
   <ng-icon name="ionPencil"></ng-icon>
 </div>
