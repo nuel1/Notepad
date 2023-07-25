@@ -140,6 +140,9 @@ a {
 
 .tags {
   margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .tag {
@@ -150,6 +153,24 @@ a {
   color: var(--color-dark-shade);
   border-radius: 3px;
   background: #c1c1c159;
-  margin-right: 0.6rem;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
+  line-height: 2;
 }
+
+// .preview {
+//   h1,
+//   h2,
+//   h3,
+//   h4,
+//   h5,
+//   h6,
+//   p,
+//   div {
+//     margin-block: 1.3rem;
+//   }
+
+//   ul,
+//   ol {
+//     margin-left: 1rem;
+//   }
+// }
