@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPagesRoutingModule } from './application-pages-routing.module';
 import { ApplicationPagesComponent } from './application-pages.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { NotesComponent } from './notes/notes.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -12,6 +11,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { JournalComponent } from './journal/journal.component';
 import { NoteEditorComponent } from './notes/note-editor/note-editor.component';
 import { NotePreviewerComponent } from './notes/note-previewer/note-previewer.component';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { DirectiveModule } from 'src/app/shared/directives/directive.module';
 
 const pages = [
   ApplicationPagesComponent,
@@ -29,9 +30,10 @@ const pages = [
   imports: [
     CommonModule,
     ApplicationPagesRoutingModule,
-    SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
+    DirectiveModule,
   ],
 })
 export class ApplicationPagesModule {}
