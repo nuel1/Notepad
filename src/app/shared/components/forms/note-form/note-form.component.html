@@ -1,0 +1,45 @@
+<div class="flex align-c justify-c">
+  <div class="form-container card">
+    <h2>Create note</h2>
+    <div class="form" novalidate>
+      <label for="title">Add Title</label>
+      <div>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          [formControl]="title"
+        />
+        <p
+          class="validation-message"
+          *ngIf="title.touched && title.invalid"
+          [class]="title.touched && title.invalid ? 'invalid' : ''"
+        >
+          Title is required
+        </p>
+      </div>
+
+      <label for="tag">Add tag</label>
+      <div>
+        <input
+          #inputtag
+          type="text"
+          name="tag"
+          placeholder="Tag"
+          [(ngModel)]="tag"
+          (keyup.enter)="addTag()"
+        />
+        <ul class="flex">
+          <li *ngFor="let tag of tags" class="flex tag align-c">
+            <span>{{ tag }}</span>
+            <ng-icon name="ionCloseCircle"></ng-icon>
+          </li>
+        </ul>
+      </div>
+      <button (click)="onCreateNote()" [disabled]="title.invalid">
+        Create note
+      </button>
+    </div>
+  </div>
+  <div class="overlay" (click)="onCancel()"></div>
+</div>

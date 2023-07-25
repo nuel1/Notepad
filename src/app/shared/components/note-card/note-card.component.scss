@@ -1,0 +1,68 @@
+p.content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+p.date {
+  text-transform: uppercase;
+  position: relative;
+}
+
+h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-block: 1rem;
+}
+
+.card {
+  margin-top: 1.85rem;
+  background: var(--color-lighter);
+  display: block;
+  cursor: pointer;
+}
+
+.card {
+  p,
+  h3,
+  .tag {
+    color: var(--color-medium);
+  }
+}
+
+.card.active {
+  p,
+  h3 {
+    color: inherit;
+  }
+
+  .tag {
+    color: var(--color-dark-shade);
+  }
+
+  .delete {
+    border: 1px solid #524451;
+    color: inherit;
+
+    &:hover {
+      color: var(--color-danger);
+    }
+  }
+}
+
+.card .delete {
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  border: 1px solid #c2c2c2;
+  color: inherit;
+  line-height: 2;
+}
+
+button {
+  border: transparent;
+  cursor: pointer;
+}

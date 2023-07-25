@@ -1,0 +1,9 @@
+<div class="search card bg-card--light flex align-c">
+  <ng-icon name="ionSearchOutline" [class]="!notHome ? 'hide' : ''"></ng-icon>
+  <input
+    type="search"
+    (keyup.enter)="('')"
+    [placeholder]="placeholder"
+    [disabled]="isDisabled"
+  />
+</div>
