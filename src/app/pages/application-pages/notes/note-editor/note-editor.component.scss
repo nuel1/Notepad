@@ -47,6 +47,11 @@ p {
   color: var(--color-dark-shade);
 }
 
+.col-2 {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .custom {
   height: 300px;
 }
@@ -69,7 +74,7 @@ p {
 
   button {
     padding: 9px 12px;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
   }
 
@@ -79,20 +84,44 @@ p {
 }
 
 .btn-preview {
-  border: 1px solid var(--color-dark);
-
-  &:disabled {
-    border: 1px solid var(--color-medium);
-  }
-}
-
-.btn-save {
   background: #4827a8;
   border: transparent;
   color: var(--color-light);
-  margin-right: 0.7rem;
+  width: 100%;
 
   &:disabled {
     background: #4727a8bc;
   }
+}
+
+.add-tag {
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  border: 1px solid #c2c2c2;
+  color: inherit;
+  line-height: 2;
+  cursor: pointer;
+  margin-left: 0.6;
+
+  ng-icon {
+    margin-left: 0;
+    margin-right: 0.1rem;
+    font-size: 0.9rem;
+  }
+
+  &:disabled {
+    cursor: default;
+    ng-icon,
+    span {
+      color: var(--color-medium);
+    }
+  }
+}
+
+.tag-input {
+  font-size: 0.7rem;
+  line-height: 2;
+  padding-left: 0.4rem;
+  margin-right: 0.4rem;
 }
