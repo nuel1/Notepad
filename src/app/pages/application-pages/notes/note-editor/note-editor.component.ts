@@ -9,6 +9,8 @@ import { NoteService } from 'src/app/core/services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StorageService } from 'src/app/core/services/storage.service';
 
+const document = window;
+
 @Component({
   selector: 'app-note-editor',
   templateUrl: './note-editor.component.html',
@@ -17,7 +19,6 @@ import { StorageService } from 'src/app/core/services/storage.service';
 export class NoteEditorComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
-    private storage: StorageService,
     private router: Router,
     private noteService: NoteService
   ) {}
@@ -25,32 +26,50 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   note: INote | undefined;
   title = '';
   editorToolbarConfig = toolbar;
+  showTagInputField = false;
   html = '';
-  plainText = '';
-  form: FormGroup | any;
+
+  tagName = new FormControl('', Validators.required());
+
+  form = new FormGroup({
+    editorContent: new FormControl('', Validators.required()),
+  });
 
   async ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id') as string;
-    this.note = (await this.noteService.getNote(id)) as INote;
-    this.title = this.note.title;
+    try {
+      const id = this.route.snapshot.paramMap.get('id') as string;
+      this.note = await this.noteService.getNote(id);
 
-    this.form = new FormGroup({
-      editorContent: new FormControl(
-        {
-          value: this.note.content,
-          disabled: false,
-        },
-        Validators.required()
-      ),
-    });
+      if (this.note) {
+        this.form.get('editorContent')!.patchValue(this.note.content);
+        return;
+      }
+    } catch (e) {
+      console.log('error:', e);
+    }
+  }
 
-    this.form.get('editorContent').valueChanges.subscribe((value: string) => {
-      this.note!.content = value;
-      this.storage.saveItem('notes', this.note);
-    });
+  previewNote() {
+    this.note!.content = this.form.get('editorContent')!.value as string;
+    console.log(this.note?.content);
+    const note = this.note as INote;
+    this.noteService.saveNote(note);
+    this.router.navigateByUrl('/notes/note/preview/' + note.id);
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
+  }
+
+  clickOutside() {
+    this.showTagInputField = false;
+  }
+
+  addTag() {
+    if (this.showTagInputField) {
+      const newTag = this.tagName.value as string;
+      this.note?.tags.push(newTag);
+      this.note && this.noteService.saveNote(this.note);
+    }
   }
 }

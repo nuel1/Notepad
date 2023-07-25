@@ -12,31 +12,26 @@ import { NoteService } from 'src/app/core/services/note.service';
   providers: [NoteService],
 })
 export class NotesComponent implements OnInit {
-  constructor(private router: Router, private noteService: NoteService) {}
+  constructor(
+    private router: Router,
+    public noteService: NoteService,
+    private globalService: GlobalsService
+  ) {}
 
   openForm = false;
-  notes: INote[] = [];
-
   async ngOnInit() {
-    this.notes = await this.noteService.getNotes();
+    await this.noteService.getNotes();
   }
 
   async getNotes() {}
 
-  createNote(noteCreated: boolean) {
-    if (noteCreated) this.openForm = false;
-  }
+  createNote(noteCreated: boolean) {}
 
-  openNoteForm() {
-    this.openForm = true;
-  }
+  openNoteForm() {}
 
-  cancel(formCanceled: boolean) {
-    if (formCanceled) this.openForm = false;
-  }
+  cancel(formCanceled: boolean) {}
 
   async deleteNote(note: INote) {
-    const noteId = note.id;
-    await this.noteService.deleteNote(noteId);
+    // await this.noteService.deleteNote(noteId);
   }
 }

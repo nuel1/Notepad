@@ -8,9 +8,9 @@
       <ng-icon name="ionAddOutline"></ng-icon>
       <span>Add new note</span>
     </button>
-    <ng-container *ngIf="notes">
+    <ng-container *ngIf="noteService.notes">
       <note-card
-        *ngFor="let note of notes"
+        *ngFor="let note of noteService.notes"
         [note]="note"
         (deleteNote)="deleteNote($event)"
       ></note-card>

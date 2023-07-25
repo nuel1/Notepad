@@ -10,51 +10,54 @@ export class NoteService {
     private global: GlobalsService
   ) {}
 
-  async createNote(tags: string[], title: string) {
+  public notes: INote[] = [];
+
+  public async createNote(tags: string[], title: string) {
     try {
       const id = this.global.generateId();
-      const encryptedId = this.global.encrypt(String(id));
-      const dateCreate = this.global.date;
+      const date = this.global.date;
       const note = {
-        title,
-        id: encryptedId,
-        dateCreate,
-        tags,
+        title: title,
+        id: id,
+        date: date,
+        tags: tags,
+        content: '',
       };
 
-      await this.storage.saveItem('notes', note);
-      return encryptedId;
+      await this.saveNote(note);
     } catch (e) {
       throw e;
     }
   }
 
-  async getNotes(): Promise<INote[]> {
+  public async getNotes() {
     try {
-      const notes = (await this.storage.getItems('notes')) as INote[];
-      return notes;
+      this.notes = (await this.storage.getItems('notes')) as INote[];
     } catch (e) {
       throw e;
     }
   }
 
-  async getNote(noteId: string): Promise<INote | undefined> {
-    const notes = await this.getNotes();
-    return notes.find((note: INote) => {
-      const decryptedId = this.global.decrypt(note.id);
-      const decryptedNoteId = this.global.decrypt(noteId);
-      // When decrypting none-encrypted string, the returned value is always
-      // an empty string. Thus checking if both constants have value.
-      if (decryptedId && decryptedNoteId)
-        return decryptedNoteId === decryptedId;
-      return note.id === noteId;
+  public async getNote(noteId: string): Promise<INote | undefined> {
+    await this.getNotes();
+
+    return this.notes.find((note: INote) => {
+      return noteId === note.id;
     });
   }
 
-  async deleteNote(noteId: string) {
-    const notes = await this.getNotes();
+  public async saveNote(note: INote) {
+    this.storage.saveItem('notes', note);
+    await this.getNotes();
+  }
 
-    const filteredNotes = notes.filter((note: INote) => note.id !== noteId);
+  public async deleteNote(noteId: string) {
+    await this.getNotes();
+
+    const filteredNotes = this.notes.filter(
+      (note: INote) => note.id !== noteId
+    );
     this.storage.saveItem('notes', filteredNotes);
+    await this.getNotes();
   }
 }
