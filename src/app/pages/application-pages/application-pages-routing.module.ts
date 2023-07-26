@@ -41,7 +41,7 @@ const routes: Routes = [
             component: NotePreviewerComponent,
           },
           {
-            path: 'note/preview/:id/editor',
+            path: 'note/preview/:id/edit',
             component: NoteEditorComponent,
           },
         ],
