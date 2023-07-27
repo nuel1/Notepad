@@ -10,7 +10,7 @@
     >
     <button class="delete" (click)="onDelete(note)">Delete</button>
   </p>
-  <h3 class="title">{{ note.title }}</h3>
+  <h3 class="title">{{ note.title | titlecase }}</h3>
   <p class="content">{{ convertHtmlToText(note.content) }}</p>
   <div class="tags flex">
     <span class="tag" *ngFor="let tag of getAmtOfTags(2)">{{ tag }}</span>

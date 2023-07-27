@@ -28,16 +28,14 @@ export class NoteFormComponent {
   tag = '';
 
   async onCreateNote() {
-    // const id = await this.user.createNote(
-    //   this.tags,
-    //   this.title.value as string
-    // );
-    // this.router.navigate(['notes', id, 'editor']);
-    // this.createNote.emit(true);
+    this.createNote.emit({
+      title: this.title.value,
+      tags: this.tags,
+    });
   }
 
   onCancel() {
-    this.cancel.emit(true);
+    this.cancel.emit(false);
   }
 
   addTag() {

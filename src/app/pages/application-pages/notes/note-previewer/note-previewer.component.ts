@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
+  AfterContentInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/services/globals.service';
@@ -17,7 +18,7 @@ import { INote } from 'src/app/interface/note';
   templateUrl: './note-previewer.component.html',
   styleUrls: ['./note-previewer.component.scss'],
 })
-export class NotePreviewerComponent implements OnInit {
+export class NotePreviewerComponent implements OnInit, AfterContentInit {
   @ViewChild('container') container: ElementRef = new ElementRef(null);
 
   constructor(
@@ -32,7 +33,19 @@ export class NotePreviewerComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.note = (await this.noteService.getNote(id)) as INote;
     const html = this.container.nativeElement;
-    html.innerHTML = this.note.content;
+    this.note.content.length
+      ? (html.innerHTML = this.note.content)
+      : (html.innerHTML = '');
+  }
+
+  async ngAfterContentInit() {
+    // const id = this.route.snapshot.params['id'];
+    // this.note = (await this.noteService.getNote(id)) as INote;
+    // const html = this.container.nativeElement;
+    // console.log(this.note);
+    // this.note.content.length
+    //   ? (html.innerHTML = this.note.content)
+    //   : (html.innerHTML = '');
   }
 
   encryptID(noteID: string) {

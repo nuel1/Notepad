@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&family=Montserrat&display=swap");
+
 :root {
   --color-light: #f4f5f8;
   --color-lighter: #f3f3f3;
@@ -23,8 +25,10 @@
 }
 
 * {
-  font-family: Poppins, "Alegreya Sans", "Segoe UI", Tahoma, Geneva, Verdana,
-    sans-serif;
+  font-family: Montserrat, Poppins, "Alegreya Sans", "Segoe UI", Tahoma, Geneva,
+    Verdana, sans-serif;
+
+  line-height: 1.5;
 }
 
 *:not(.previewer *) {
@@ -32,11 +36,11 @@
   padding: 0;
 }
 
-.previewer {
-  * {
-    font-family: "Alegreya Sans";
-  }
-}
+// .previewer {
+//   * {
+//     font-family: "Alegreya Sans";
+//   }
+// }
 
 input {
   font-size: 1rem;

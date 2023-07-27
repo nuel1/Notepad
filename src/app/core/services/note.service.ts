@@ -12,15 +12,15 @@ export class NoteService {
 
   public notes: INote[] = [];
 
-  public async createNote(tags: string[], title: string) {
+  public async createNote(formEntry: { title: string; tags: string[] }) {
     try {
       const id = this.global.generateId();
       const date = this.global.date;
       const note = {
-        title: title,
+        title: formEntry.title,
         id: id,
         date: date,
-        tags: tags,
+        tags: formEntry.tags,
         content: '',
       };
 

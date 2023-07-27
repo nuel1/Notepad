@@ -3,7 +3,7 @@
     <h1>My Notes</h1>
     <button
       class="form-modal-toggle-button flex align-c"
-      (click)="openNoteForm()"
+      (click)="formOpen = true"
     >
       <ng-icon name="ionAddOutline"></ng-icon>
       <span>Add new note</span>
@@ -19,10 +19,10 @@
   <div class="editor-container">
     <router-outlet></router-outlet>
   </div>
-  <ng-container *ngIf="openForm">
-    <!-- <note-form
-      (cancel)="cancel($event)"
-      (createNote)="createNote($event)"
-    ></note-form> -->
+  <ng-container *ngIf="formOpen">
+    <note-form
+      (cancel)="formOpen = $event"
+      (createNote)="noteService.createNote($event); formOpen = false"
+    ></note-form>
   </ng-container>
 </div>

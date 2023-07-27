@@ -28,6 +28,7 @@ export class NoteCardComponent implements OnInit {
   ngOnInit(): void {}
   convertHtmlToText(html: string) {
     try {
+      if (!this.note?.content) return '';
       const jsonDoc: INgxEditorJson = toDoc(html) as INgxEditorJson;
       return jsonDoc.content[0].content[0].text;
     } catch (e) {
@@ -40,7 +41,7 @@ export class NoteCardComponent implements OnInit {
   }
 
   getAmtOfTags(amt: number) {
-    if (this.note) {
+    if (this.note && this.note.tags.length) {
       if (amt === this.note.tags.length || amt > this.note.tags.length)
         return this.note.tags;
       this.tagReminder = this.note.tags.length - amt;

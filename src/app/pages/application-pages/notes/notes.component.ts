@@ -18,17 +18,12 @@ export class NotesComponent implements OnInit {
     private globalService: GlobalsService
   ) {}
 
-  openForm = false;
+  formOpen = false;
   async ngOnInit() {
     await this.noteService.getNotes();
-    console.log(this.noteService.notes);
   }
 
   async getNotes() {}
-
-  createNote(noteCreated: boolean) {}
-
-  openNoteForm() {}
 
   cancel(formCanceled: boolean) {}
 
