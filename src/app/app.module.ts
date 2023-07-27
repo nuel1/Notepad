@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { ComponentsModule } from './shared/components/components.module';
-import { DirectiveModule } from './shared/directives/directive.module';
 
 @NgModule({
   declarations: [AppComponent],

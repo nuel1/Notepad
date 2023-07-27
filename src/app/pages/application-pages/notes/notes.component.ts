@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/services/globals.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -21,6 +21,7 @@ export class NotesComponent implements OnInit {
   openForm = false;
   async ngOnInit() {
     await this.noteService.getNotes();
+    console.log(this.noteService.notes);
   }
 
   async getNotes() {}

@@ -34,7 +34,7 @@ export class NoteService {
     try {
       this.notes = (await this.storage.getItems('notes')) as INote[];
     } catch (e) {
-      throw e;
+      throw Error('ERROR at getNotes');
     }
   }
 

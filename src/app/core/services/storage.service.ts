@@ -29,7 +29,7 @@ export class StorageService {
 
   dataExist(
     path: 'notes' | 'todo-list' | 'reading-list' | 'projects',
-    data: any
+    data: INote
   ) {
     if (!localStorage.getItem(path)) {
       return;

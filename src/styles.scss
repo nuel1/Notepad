@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap");
 :root {
   --color-light: #f4f5f8;
   --color-lighter: #f3f3f3;
@@ -22,12 +23,19 @@
 }
 
 * {
-  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Poppins, "Alegreya Sans", "Segoe UI", Tahoma, Geneva, Verdana,
+    sans-serif;
 }
 
 *:not(.previewer *) {
   margin: 0;
   padding: 0;
+}
+
+.previewer {
+  * {
+    font-family: "Alegreya Sans";
+  }
 }
 
 input {
@@ -156,21 +164,3 @@ a {
   font-size: 0.7rem;
   line-height: 2;
 }
-
-// .preview {
-//   h1,
-//   h2,
-//   h3,
-//   h4,
-//   h5,
-//   h6,
-//   p,
-//   div {
-//     margin-block: 1.3rem;
-//   }
-
-//   ul,
-//   ol {
-//     margin-left: 1rem;
-//   }
-// }

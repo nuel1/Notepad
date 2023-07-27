@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalsService } from 'src/app/core/services/globals.service';
-import { StorageService } from 'src/app/core/services/storage.service';
+import { NoteService } from 'src/app/core/services/note.service';
 import { DefaultNote } from 'src/app/note.default';
 @Component({
   selector: 'app-application-pages',
@@ -8,20 +7,15 @@ import { DefaultNote } from 'src/app/note.default';
   styleUrls: ['./application-pages.component.scss'],
 })
 export class ApplicationPagesComponent implements OnInit {
-  constructor(
-    private globals: GlobalsService,
-    private storage: StorageService
-  ) {}
-  ngOnInit(): void {
+  constructor(private noteService: NoteService) {}
+  async ngOnInit() {
     const authorNote = new DefaultNote();
 
-    /* Default note can only be saved once, therefore, if
-    it is saved a flag called defaultNoteSaved marks it saved.
-    In case this note is deleted, the flag still has the record
-    that default note was onced saved, but now deleted. Therefore,
-    default note cannot be saved again. */
-    if (localStorage.getItem('defaultNoteSaved')) return;
-    this.storage.saveItem('notes', authorNote);
-    localStorage.setItem('defaultNoteSaved', JSON.stringify(true));
+    /* 
+    Author's note can only be saved once.
+    */
+    if (localStorage.getItem('authorNoteSaved')) return;
+    await this.noteService.saveNote(authorNote);
+    localStorage.setItem('authorNoteSaved', JSON.stringify(true));
   }
 }

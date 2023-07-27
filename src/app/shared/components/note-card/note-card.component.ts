@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
 import { INgxEditorJson } from 'src/app/interface/ngx-editor';
@@ -8,6 +15,7 @@ import { GlobalsService } from 'src/app/core/services/globals.service';
   selector: 'note-card',
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteCardComponent implements OnInit {
   @Input() note: INote | undefined;

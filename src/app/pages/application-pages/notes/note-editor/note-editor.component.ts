@@ -1,13 +1,15 @@
-import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Validators } from 'ngx-editor';
 import { toolbar } from './editor.config';
-import { INgxEditorJson } from 'src/app/interface/ngx-editor';
 import { INote } from 'src/app/interface/note';
-import { toHTML, toDoc } from 'ngx-editor';
 import { NoteService } from 'src/app/core/services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { StorageService } from 'src/app/core/services/storage.service';
 
 const document = window;
 
