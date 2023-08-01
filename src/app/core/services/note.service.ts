@@ -51,7 +51,7 @@ export class NoteService {
     await this.getNotes();
   }
 
-  public async deleteNote(noteId: string) {
+  public async deleteNote(noteId: string | any) {
     await this.getNotes();
 
     const filteredNotes = this.notes.filter(

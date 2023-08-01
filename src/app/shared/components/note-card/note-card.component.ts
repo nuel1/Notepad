@@ -37,7 +37,7 @@ export class NoteCardComponent implements OnInit {
   }
 
   onDelete(note: INote) {
-    this.deleteNote.emit(note);
+    this.deleteNote.emit(note.id);
   }
 
   getAmtOfTags(amt: number) {
