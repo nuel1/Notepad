@@ -30,7 +30,18 @@ export class NoteCardComponent implements OnInit {
   convertHtmlToText(html: string) {
     try {
       if (!this.note?.content) return '';
-      const jsonDoc: INgxEditorJson = toDoc(html) as INgxEditorJson;
+      const parse = new DOMParser();
+      const htmlDoc = parse.parseFromString(html, 'text/html');
+      const anchorTags = htmlDoc.querySelectorAll('a');
+      anchorTags.forEach((a: HTMLElement) => {
+        a.parentNode?.replaceChild(
+          htmlDoc.createTextNode(a.textContent as string),
+          a
+        );
+      });
+
+      const textDoc = new XMLSerializer().serializeToString(htmlDoc);
+      const jsonDoc: INgxEditorJson = toDoc(textDoc) as INgxEditorJson;
       return jsonDoc.content[0].content[0].text;
     } catch (e) {
       return '';

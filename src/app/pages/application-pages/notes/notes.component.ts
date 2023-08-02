@@ -4,6 +4,7 @@ import { GlobalsService } from 'src/app/core/services/globals.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { INote } from 'src/app/interface/note';
 import { NoteService } from 'src/app/core/services/note.service';
+import { DefaultNote } from 'src/app/note.default';
 
 @Component({
   selector: 'app-notes',
@@ -20,6 +21,17 @@ export class NotesComponent implements OnInit {
 
   formOpen = false;
   async ngOnInit() {
+    const authorNote = new DefaultNote();
+
+    /* 
+    Author's note can only be saved once.
+    */
+    if (!localStorage.getItem('authorNoteSaved')) {
+      this.noteService.notes = [...this.noteService.notes, authorNote];
+      this.noteService.saveNotes();
+      localStorage.setItem('authorNoteSaved', JSON.stringify(true));
+    }
+
     this.noteService.getNotes();
   }
 

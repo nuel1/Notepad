@@ -28,11 +28,9 @@ export class StorageService {
   //   return items.find((item: any) => item.id === data.id);
   // }
 
-  async getItems(path: 'notes' | 'todo-list' | 'reading-list' | 'projects') {
-    return await new Promise((resolve, reject) => {
-      localStorage.getItem(path)
-        ? resolve(JSON.parse(localStorage.getItem(path) as any))
-        : reject([]);
-    });
+  getItems(path: 'notes' | 'todo-list' | 'reading-list' | 'projects') {
+    return localStorage.getItem(path)
+      ? JSON.parse(localStorage.getItem(path) as any)
+      : [];
   }
 }

@@ -12,7 +12,7 @@ export class NoteService {
 
   public notes: INote[] = [];
 
-  public async createNote(formEntry: { title: string; tags: string[] }) {
+  public createNote(formEntry: { title: string; tags: string[] }) {
     try {
       const id = this.global.generateId();
       const date = this.global.date;
@@ -25,19 +25,17 @@ export class NoteService {
       };
 
       this.notes = [...this.notes, note];
-      await this.saveNote();
+      this.saveNotes();
     } catch (e) {
       throw e;
     }
   }
 
   public getNotes() {
-    this.storage
-      .getItems('notes')
-      .then((notes) => (this.notes = notes as INote[]));
+    this.notes = this.storage.getItems('notes');
   }
 
-  public async getNote(noteId: string): Promise<INote | undefined> {
+  public getNote(noteId: string): INote | undefined {
     this.getNotes();
 
     if (this.notes.length) {
@@ -48,18 +46,26 @@ export class NoteService {
     return undefined;
   }
 
-  public async saveNote() {
+  public saveNotes() {
     this.storage.saveItem('notes', this.notes);
     this.getNotes();
   }
 
-  public async deleteNote(noteId: string) {
+  public saveupdatedNote(note: INote) {
+    this.notes.forEach(
+      (storedNote: INote, index: number) =>
+        storedNote.id === note.id && (this.notes[index] = note)
+    );
+    this.saveNotes();
+  }
+
+  public deleteNote(noteId: string) {
     const filteredNotes = this.notes.filter(
       (note: INote) => note.id !== noteId
     );
 
     this.notes = [...filteredNotes];
-    this.saveNote();
+    this.saveNotes();
     this.getNotes();
   }
 }

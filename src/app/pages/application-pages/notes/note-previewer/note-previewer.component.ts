@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
-  AfterContentInit,
 } from '@angular/core';
 import {
   ActivatedRoute,
@@ -25,7 +24,9 @@ import { INote } from 'src/app/interface/note';
   templateUrl: './note-previewer.component.html',
   styleUrls: ['./note-previewer.component.scss'],
 })
-export class NotePreviewerComponent implements OnInit, OnDestroy {
+export class NotePreviewerComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @ViewChild('container') container: ElementRef = new ElementRef(null);
 
   constructor(
@@ -39,21 +40,24 @@ export class NotePreviewerComponent implements OnInit, OnDestroy {
   notePreview: any;
 
   async ngOnInit() {
-    this.previewNote();
+    const id = this.route.snapshot.params['id'];
+    this.note = this.noteService.getNote(id) as INote;
     this.notePreview = this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) this.previewNote();
+      if (e instanceof NavigationEnd) {
+        const id = this.route.snapshot.params['id'];
+        this.note = this.noteService.getNote(id) as INote;
+        this.previewNote();
+      }
     });
   }
 
-  async previewNote() {
-    const id = this.route.snapshot.params['id'];
-    this.note = (await this.noteService.getNote(id)) as INote;
-    const html = this.container.nativeElement;
-    html.innerHTML = this.note.content;
+  ngAfterViewInit(): void {
+    this.previewNote();
   }
 
-  encryptID(noteID: string) {
-    return this.globalService.encrypt(noteID);
+  async previewNote() {
+    const html = this.container.nativeElement;
+    html.innerHTML = this.note!.content;
   }
 
   ngOnDestroy(): void {
