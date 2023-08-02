@@ -33,7 +33,7 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  async changeRoute(id: string, fn: Function) {
+  async changeRoute(id: string, deleteFn: Function) {
     const [prevIndex, nextIndex] = this.noteService.notes.reduce(
       (result: number[], note: INote, index: number) =>
         note.id === id ? result.concat(index - 1, index + 1) : result,
@@ -47,7 +47,7 @@ export class NotesComponent implements OnInit {
     if (!note && this.noteService.notes[prevIndex])
       note = this.noteService.notes[prevIndex];
 
-    await fn();
+    await deleteFn();
     note
       ? this.router.navigateByUrl(`/notes/note/preview/${note.id}`)
       : this.router.navigateByUrl('/notes');
