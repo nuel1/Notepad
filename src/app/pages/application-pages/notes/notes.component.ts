@@ -44,14 +44,12 @@ export class NotesComponent implements OnInit {
     if (this.noteService.notes[nextIndex])
       note = this.noteService.notes[nextIndex];
 
-    console.log(prevIndex);
     if (!note && this.noteService.notes[prevIndex])
       note = this.noteService.notes[prevIndex];
 
     await fn();
     note
-      ? (console.log(true),
-        this.router.navigateByUrl(`/notes/note/preview/${note.id}`))
+      ? this.router.navigateByUrl(`/notes/note/preview/${note.id}`)
       : this.router.navigateByUrl('/notes');
   }
 }
