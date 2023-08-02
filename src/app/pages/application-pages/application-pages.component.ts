@@ -15,7 +15,8 @@ export class ApplicationPagesComponent implements OnInit {
     Author's note can only be saved once.
     */
     if (localStorage.getItem('authorNoteSaved')) return;
-    await this.noteService.saveNote(authorNote);
+    this.noteService.notes = [...this.noteService.notes, authorNote];
+    await this.noteService.saveNote();
     localStorage.setItem('authorNoteSaved', JSON.stringify(true));
   }
 }

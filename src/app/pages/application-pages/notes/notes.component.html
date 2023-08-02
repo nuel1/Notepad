@@ -23,7 +23,6 @@
     <note-form
       (cancel)="formOpen = $event"
       (createNote)="noteService.createNote($event); formOpen = false"
-      (deleteNote)="noteService.deleteNote($event)"
     ></note-form>
   </ng-container>
 </div>

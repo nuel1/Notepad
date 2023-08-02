@@ -20,14 +20,38 @@ export class NotesComponent implements OnInit {
 
   formOpen = false;
   async ngOnInit() {
-    await this.noteService.getNotes();
+    this.noteService.getNotes();
   }
 
   async getNotes() {}
 
   cancel(formCanceled: boolean) {}
 
-  async deleteNote(note: INote) {
-    // await this.noteService.deleteNote(noteId);
+  async deleteNote(id: string) {
+    this.changeRoute(id, async () => {
+      await this.noteService.deleteNote(id);
+    });
+  }
+
+  async changeRoute(id: string, fn: Function) {
+    const [prevIndex, nextIndex] = this.noteService.notes.reduce(
+      (result: number[], note: INote, index: number) =>
+        note.id === id ? result.concat(index - 1, index + 1) : result,
+      []
+    );
+
+    let note;
+    if (this.noteService.notes[nextIndex])
+      note = this.noteService.notes[nextIndex];
+
+    console.log(prevIndex);
+    if (!note && this.noteService.notes[prevIndex])
+      note = this.noteService.notes[prevIndex];
+
+    await fn();
+    note
+      ? (console.log(true),
+        this.router.navigateByUrl(`/notes/note/preview/${note.id}`))
+      : this.router.navigateByUrl('/notes');
   }
 }

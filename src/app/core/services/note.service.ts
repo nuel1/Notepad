@@ -24,40 +24,42 @@ export class NoteService {
         content: '',
       };
 
-      await this.saveNote(note);
+      this.notes = [...this.notes, note];
+      await this.saveNote();
     } catch (e) {
       throw e;
     }
   }
 
-  public async getNotes() {
-    try {
-      this.notes = (await this.storage.getItems('notes')) as INote[];
-    } catch (e) {
-      throw Error('ERROR at getNotes');
-    }
+  public getNotes() {
+    this.storage
+      .getItems('notes')
+      .then((notes) => (this.notes = notes as INote[]));
   }
 
   public async getNote(noteId: string): Promise<INote | undefined> {
-    await this.getNotes();
+    this.getNotes();
 
-    return this.notes.find((note: INote) => {
-      return noteId === note.id;
-    });
+    if (this.notes.length) {
+      return this.notes.find((note: INote) => {
+        return noteId === note.id;
+      });
+    }
+    return undefined;
   }
 
-  public async saveNote(note: INote) {
-    this.storage.saveItem('notes', note);
-    await this.getNotes();
+  public async saveNote() {
+    this.storage.saveItem('notes', this.notes);
+    this.getNotes();
   }
 
-  public async deleteNote(noteId: string | any) {
-    await this.getNotes();
-
+  public async deleteNote(noteId: string) {
     const filteredNotes = this.notes.filter(
       (note: INote) => note.id !== noteId
     );
-    this.storage.saveItem('notes', filteredNotes);
-    await this.getNotes();
+
+    this.notes = [...filteredNotes];
+    this.saveNote();
+    this.getNotes();
   }
 }

@@ -55,7 +55,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     this.note!.content = this.form.get('editorContent')!.value as string;
     console.log(this.note?.content);
     const note = this.note as INote;
-    this.noteService.saveNote(note);
+    this.noteService.saveNote();
     this.router.navigateByUrl('/notes/note/preview/' + note.id);
   }
 
@@ -71,7 +71,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     if (this.showTagInputField) {
       const newTag = this.tagName.value as string;
       this.note?.tags.push(newTag);
-      this.note && this.noteService.saveNote(this.note);
+      this.note && this.noteService.saveNote();
     }
   }
 }

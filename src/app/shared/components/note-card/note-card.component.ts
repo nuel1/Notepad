@@ -10,6 +10,7 @@ import { INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
 import { INgxEditorJson } from 'src/app/interface/ngx-editor';
 import { GlobalsService } from 'src/app/core/services/globals.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'note-card',
@@ -19,11 +20,11 @@ import { GlobalsService } from 'src/app/core/services/globals.service';
 })
 export class NoteCardComponent implements OnInit {
   @Input() note: INote | undefined;
-  @Output() deleteNote = new EventEmitter();
+  @Output() deleteNote = new EventEmitter<string>();
 
   btnDisabled = true;
   tagReminder = 0;
-  constructor(private globalService: GlobalsService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
   convertHtmlToText(html: string) {
@@ -41,7 +42,7 @@ export class NoteCardComponent implements OnInit {
   }
 
   getAmtOfTags(amt: number) {
-    if (this.note && this.note.tags.length) {
+    if (this.note) {
       if (amt === this.note.tags.length || amt > this.note.tags.length)
         return this.note.tags;
       this.tagReminder = this.note.tags.length - amt;
