@@ -13,7 +13,16 @@
       <div class="row-3 row grid align-c">
         <div class="col-1">Tags</div>
         <div class="col-2 flex align-c">
-          <span class="tag" *ngFor="let tag of note.tags">{{ tag }}</span>
+          <ul class="flex">
+            <li *ngFor="let tag of note.tags" class="flex tag align-c">
+              <span>{{ tag }}</span>
+              <ng-icon
+                name="ionCloseCircle"
+                (click)="deleteTag(tag)"
+                class="close-icon"
+              ></ng-icon>
+            </li>
+          </ul>
           <form
             EventClickOutsideDirective
             (customBlur)="showTagInputField = false"

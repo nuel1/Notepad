@@ -161,11 +161,18 @@ a {
   background: #c1c1c159;
   font-size: 0.7rem;
   line-height: 2;
+  position: relative;
 
   ng-icon {
     position: absolute;
     right: 0;
     top: -5px;
     cursor: pointer;
+    transition: transform 0.3s;
+    transform: scale(1);
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }

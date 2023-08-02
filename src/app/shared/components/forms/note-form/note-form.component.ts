@@ -43,4 +43,8 @@ export class NoteFormComponent {
     this.tags.push(newTag);
     this.inputTag.nativeElement.value = '';
   }
+
+  deleteTag(tag: string) {
+    this.tags.splice(this.tags.indexOf(tag), 1);
+  }
 }

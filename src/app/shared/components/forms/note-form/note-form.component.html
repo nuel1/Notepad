@@ -32,7 +32,7 @@
         <ul class="flex">
           <li *ngFor="let tag of tags" class="flex tag align-c">
             <span>{{ tag }}</span>
-            <ng-icon name="ionCloseCircle"></ng-icon>
+            <ng-icon name="ionCloseCircle" (click)="deleteTag(tag)"></ng-icon>
           </li>
         </ul>
       </div>

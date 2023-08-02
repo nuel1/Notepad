@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Validators } from 'ngx-editor';
@@ -72,5 +73,10 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
       this.note?.tags.push(newTag);
       this.note && this.noteService.saveupdatedNote(this.note);
     }
+  }
+
+  deleteTag(tag: string) {
+    this.note?.tags.splice(this.note.tags.indexOf(tag), 1);
+    this.noteService.saveupdatedNote(this.note as INote);
   }
 }

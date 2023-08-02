@@ -1,8 +1,8 @@
-ng-icon {
-  line-height: 0;
-  font-size: 1.2rem;
-  margin-inline: 0.5rem;
-}
+// ng-icon {
+//   line-height: 0;
+//   font-size: 1.2rem;
+//   margin-inline: 0.5rem;
+// }
 
 .heading {
   box-shadow: 0px 4px 1px #80808012;
@@ -124,4 +124,21 @@ p {
   line-height: 2;
   padding-left: 0.4rem;
   margin-right: 0.4rem;
+}
+
+ul {
+  gap: 0.5rem;
+}
+
+.tag {
+  .close-icon {
+    opacity: 0;
+    transition: opacity 0.3;
+  }
+
+  &:hover {
+    .close-icon {
+      opacity: 1;
+    }
+  }
 }
