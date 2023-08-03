@@ -75,3 +75,21 @@ ul {
     margin-bottom: 0.7rem;
   }
 }
+
+.tag-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    border-radius: 10px;
+    padding: 0;
+    width: 70px;
+    border: 1px solid #c2c2c2;
+    background: var(--color-mild);
+  }
+
+  ng-icon {
+    font-size: 1.3rem;
+    color: var(--color-dark);
+  }
+}

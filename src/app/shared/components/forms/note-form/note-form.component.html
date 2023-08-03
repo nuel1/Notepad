@@ -21,14 +21,19 @@
 
       <label for="tag">Add tag</label>
       <div>
-        <input
-          #inputtag
-          type="text"
-          name="tag"
-          placeholder="Tag"
-          [(ngModel)]="tag"
-          (keyup.enter)="addTag()"
-        />
+        <div class="tag-input-wrapper">
+          <input
+            #inputtag
+            type="text"
+            name="tag"
+            placeholder="Tag"
+            [(ngModel)]="tag"
+            (keyup.enter)="addTag()"
+          />
+          <button>
+            <ng-icon name="ionAddOutline"></ng-icon>
+          </button>
+        </div>
         <ul class="flex">
           <li *ngFor="let tag of tags" class="flex tag align-c">
             <span>{{ tag }}</span>
