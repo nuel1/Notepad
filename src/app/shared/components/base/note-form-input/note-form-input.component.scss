@@ -1,0 +1,51 @@
+.input-title-wrapper {
+  margin-bottom: 1rem;
+}
+
+.tag-input {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    border-radius: 10px;
+    padding: 0;
+    width: 70px;
+    border: 1px solid var(--color-dark);
+    background: transparent;
+    transition: background 0.3s;
+
+    &:hover {
+      background: var(--color-mild);
+    }
+  }
+
+  ng-icon {
+    font-size: 1.3rem;
+    color: var(--color-dark);
+  }
+}
+
+.tags {
+  margin-left: 0.7rem;
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+
+  .tag {
+    margin-right: 0.7rem;
+    position: relative;
+    margin-bottom: 0.7rem;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  padding-inline: 0.7rem;
+  height: 50px;
+  border: 1px solid var(--color-medium);
+  border-radius: 5px;
+}

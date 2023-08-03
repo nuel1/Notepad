@@ -1,0 +1,34 @@
+<ng-container
+  *ngIf="name == 'title'; then temp_title; else temp_tag"
+></ng-container>
+
+<ng-template #temp_title>
+  <label [for]="name">{{ inputTitle }}</label>
+  <div class="input-title-wrapper">
+    <input type="text" [placeholder]="placeholder" [formControl]="formTitle" />
+    <note-form-input-error [input]="formTitle"></note-form-input-error>
+  </div>
+</ng-template>
+
+<ng-template #temp_tag>
+  <label [for]="name">{{ inputTitle }}</label>
+  <div class="tag-input">
+    <input type="text" [placeholder]="placeholder" [formControl]="formTag" />
+    <button (click)="onAddNewTag()">
+      <ng-icon name="ionAddOutline"></ng-icon>
+    </button>
+  </div>
+
+  <div class="tags">
+    <ng-container *ngTemplateOutlet="temp_tags"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #temp_tags let-tag>
+  <ng-container *ngFor="let tag of tags; trackByTagName">
+    <div class="flex tag align-c">
+      <span>{{ tag }}</span>
+      <ng-icon name="ionCloseCircle" (click)="onDeleteTag(tag)"></ng-icon>
+    </div>
+  </ng-container>
+</ng-template>
