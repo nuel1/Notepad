@@ -38,13 +38,11 @@ export class NoteFormComponent {
     this.cancel.emit(false);
   }
 
-  addTag() {
-    const newTag = this.tag;
-    this.tags.push(newTag);
-    this.inputTag.nativeElement.value = '';
+  newTags(tags: string[]) {
+    this.tags = tags;
   }
 
-  deleteTag(tag: string) {
-    this.tags.splice(this.tags.indexOf(tag), 1);
+  onInputChange(text: string) {
+    this.title.setValue(text);
   }
 }

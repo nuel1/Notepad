@@ -10,6 +10,8 @@ import { SideNavbarTabComponent } from './side-navbar-tab/side-navbar-tab.compon
 import { SearchComponent } from './search/search.component';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { NoteFormComponent } from './forms/note-form/note-form.component';
+import { NoteFormInputComponent } from './base/note-form-input/note-form-input.component';
+import { NoteFormInputErrorComponent } from './base/note-form-input-error/note-form-input-error.component';
 import {
   ionNewspaperOutline,
   ionCheckmarkOutline,
@@ -33,6 +35,8 @@ const components = [
   SearchComponent,
   NoteCardComponent,
   NoteFormComponent,
+  NoteFormInputComponent,
+  NoteFormInputErrorComponent,
 ];
 @NgModule({
   declarations: components,

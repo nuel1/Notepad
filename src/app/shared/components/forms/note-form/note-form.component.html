@@ -1,50 +1,32 @@
-<div class="flex align-c justify-c">
+<div class="modal-backdrop flex align-c justify-c">
   <div class="form-container card">
     <h2>Create note</h2>
-    <div class="form" novalidate>
-      <label for="title">Add Title</label>
-      <div>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          [formControl]="title"
-        />
-        <p
-          class="validation-message"
-          *ngIf="title.touched && title.invalid"
-          [class]="title.touched && title.invalid ? 'invalid' : ''"
-        >
-          Title is required
-        </p>
-      </div>
-
-      <label for="tag">Add tag</label>
-      <div>
-        <div class="tag-input-wrapper">
-          <input
-            #inputtag
-            type="text"
-            name="tag"
-            placeholder="Tag"
-            [(ngModel)]="tag"
-            (keyup.enter)="addTag()"
-          />
-          <button>
-            <ng-icon name="ionAddOutline"></ng-icon>
-          </button>
-        </div>
-        <ul class="flex">
-          <li *ngFor="let tag of tags" class="flex tag align-c">
-            <span>{{ tag }}</span>
-            <ng-icon name="ionCloseCircle" (click)="deleteTag(tag)"></ng-icon>
-          </li>
-        </ul>
-      </div>
-      <button (click)="onCreateNote()" [disabled]="title.invalid">
-        Create note
-      </button>
+    <div class="form">
+      <note-form-input
+        [inputTitle]="'Add title'"
+        [name]="'title'"
+        [placeholder]="'Title'"
+        (inputChange)="onInputChange($event)"
+      ></note-form-input>
+      <note-form-input
+        [inputTitle]="'Add tag'"
+        [name]="'tag'"
+        [placeholder]="'Tag'"
+        (addTag)="newTags($event)"
+        (deleteTag)="newTags($event)"
+      ></note-form-input>
+      <ng-container [ngTemplateOutlet]="submitBtn"></ng-container>
     </div>
   </div>
-  <div class="overlay" (click)="onCancel()"></div>
+  <ng-container [ngTemplateOutlet]="overlay"></ng-container>
 </div>
+
+<ng-template #submitBtn>
+  <button (click)="onCreateNote()" [disabled]="title.invalid">
+    Create note
+  </button>
+</ng-template>
+
+<ng-template #overlay>
+  <div class="overlay" (click)="onCancel()"></div>
+</ng-template>
