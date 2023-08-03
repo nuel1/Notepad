@@ -13,7 +13,12 @@
 <ng-template #temp_tag>
   <label [for]="name">{{ inputTitle }}</label>
   <div class="tag-input">
-    <input type="text" [placeholder]="placeholder" [formControl]="formTag" />
+    <input
+      type="text"
+      [placeholder]="placeholder"
+      [formControl]="formTag"
+      #tagInput
+    />
     <button (click)="onAddNewTag()">
       <ng-icon name="ionAddOutline"></ng-icon>
     </button>

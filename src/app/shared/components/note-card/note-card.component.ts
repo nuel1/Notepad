@@ -33,13 +33,14 @@ export class NoteCardComponent implements OnInit {
       const parse = new DOMParser();
       const htmlDoc = parse.parseFromString(html, 'text/html');
       const anchorTags = htmlDoc.querySelectorAll('a');
-      anchorTags.forEach((a: HTMLElement) => {
-        a.parentNode?.replaceChild(
-          htmlDoc.createTextNode(a.textContent as string),
-          a
-        );
-      });
+      // anchorTags.forEach((a: HTMLElement) => {
+      //   a.parentNode?.replaceChild(
+      //     htmlDoc.createTextNode(a.textContent as string),
+      //     a
+      //   );
+      // });
 
+      console.log(htmlDoc);
       const textDoc = new XMLSerializer().serializeToString(htmlDoc);
       const jsonDoc: INgxEditorJson = toDoc(textDoc) as INgxEditorJson;
       return jsonDoc.content[0].content[0].text;

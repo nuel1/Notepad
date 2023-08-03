@@ -4,6 +4,8 @@ import {
   Input,
   Output,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -14,6 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./note-form-input.component.scss'],
 })
 export class NoteFormInputComponent implements OnDestroy {
+  @ViewChild('tagInput') inputEl: ElementRef | undefined;
   @Input() name = '';
   @Input() inputTitle = '';
   @Input() placeholder = '';
@@ -41,6 +44,7 @@ export class NoteFormInputComponent implements OnDestroy {
     if (this.formTag.value) {
       this.tags = [...this.tags, this.formTag.value];
       this.addTag.emit(this.tags);
+      if (this.inputEl !== undefined) this.inputEl.nativeElement.value = '';
     }
   }
 

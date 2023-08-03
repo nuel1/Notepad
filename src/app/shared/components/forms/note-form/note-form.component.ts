@@ -21,7 +21,6 @@ export class NoteFormComponent {
 
   @Output() createNote = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  @ViewChild('inputtag') inputTag: ElementRef = new ElementRef(null);
 
   title = new FormControl('', Validators.required);
   tags: string[] = [];
