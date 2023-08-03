@@ -5,9 +5,10 @@ p.content {
   overflow: hidden;
 }
 
-p.date {
-  text-transform: uppercase;
-  position: relative;
+.header {
+  span {
+    text-transform: uppercase;
+  }
 }
 
 h3 {
@@ -26,6 +27,7 @@ h3 {
 }
 
 .card {
+  .header *,
   p,
   h3,
   .tag {
@@ -34,6 +36,7 @@ h3 {
 }
 
 .card.active {
+  .header *,
   p,
   h3 {
     color: inherit;

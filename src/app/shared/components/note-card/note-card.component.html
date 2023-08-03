@@ -4,15 +4,15 @@
   [routerLink]="'/notes/note/preview/' + note.id"
   routerLinkActive="active"
 >
-  <p class="date flex align-c justify-between">
+  <div class="header flex align-c justify-between">
     <span
       ><b>{{ note.date }}</b></span
     >
     <button class="delete" (click)="onDelete(note)">Delete</button>
-  </p>
+  </div>
   <h3 class="title">{{ note.title | titlecase }}</h3>
-  <p class="content">{{ convertHtmlToText(note.content) }}</p>
-  <div class="tags flex">
+  <p class="content body">{{ convertHtmlToText(note.content) }}</p>
+  <div class="footer tags flex">
     <span class="tag" *ngFor="let tag of getAmtOfTags(2)">{{ tag }}</span>
     <span class="tag" *ngIf="tagReminder">+{{ tagReminder }} more</span>
   </div>
