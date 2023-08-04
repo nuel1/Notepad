@@ -180,3 +180,49 @@ a {
     }
   }
 }
+
+// Mobile styles for mobile
+.side-navbar--mobile {
+  position: fixed;
+  width: 400px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.side-navbar-profile-card--mobile {
+  justify-content: center;
+  img {
+    width: 35px;
+    height: 35px;
+  }
+
+  p {
+    display: none;
+  }
+}
+
+.side-navbar-navtab--mobile {
+  justify-content: center;
+  span {
+    display: none;
+  }
+}
+
+.side-navbar-search--mobile {
+  justify-content: center;
+
+  input {
+    display: none;
+  }
+}
+
+.side-navbar-footer--mobile {
+  a {
+    justify-content: center;
+  }
+
+  span {
+    display: none;
+  }
+}

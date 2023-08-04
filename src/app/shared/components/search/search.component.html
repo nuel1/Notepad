@@ -1,4 +1,7 @@
-<div class="search card bg-card--light flex align-c">
+<div
+  class="search card bg-card--light flex align-c"
+  [ngClass]="mobileCssClasses"
+>
   <ng-icon name="ionSearchOutline" [class]="!notHome ? 'hide' : ''"></ng-icon>
   <input
     type="search"

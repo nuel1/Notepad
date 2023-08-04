@@ -13,8 +13,6 @@ import { INote } from 'src/app/interface/note';
 import { NoteService } from 'src/app/core/services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
-const document = window;
-
 @Component({
   selector: 'app-note-editor',
   templateUrl: './note-editor.component.html',

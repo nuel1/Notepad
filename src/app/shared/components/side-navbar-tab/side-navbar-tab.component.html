@@ -1,4 +1,8 @@
-<a class="tab flex card align-c" routerLinkActive="active">
+<a
+  class="tab flex card align-c"
+  routerLinkActive="active"
+  [ngClass]="mobileCssClasses"
+>
   <ng-content></ng-content>
   <span>{{ tabName }}</span>
 </a>

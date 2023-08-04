@@ -1,5 +1,5 @@
 .page {
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 95px 1fr;
 }
 
 .side-navbar {
@@ -8,8 +8,13 @@
   top: 0;
   left: 0;
   height: 100vh;
+  position: relative;
 }
 
 .page-content {
   grid-column: 2/3;
 }
+
+// .page {
+//     grid-template-columns: auto 1fr;
+// }

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Input,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/services/globals.service';
 
@@ -8,6 +13,9 @@ import { GlobalsService } from 'src/app/core/services/globals.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  // For responsiveness
+  @Input() mobileCssClasses = '';
+
   constructor(private globals: GlobalsService, private router: Router) {
     globals.activeRoute().subscribe((path) => {
       if (path[path.length - 1] === 'home') {

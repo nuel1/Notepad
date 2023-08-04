@@ -7,4 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class SideNavbarTabComponent {
   @Input() tabName = '';
+  // For responsiveness
+  @Input() mobileCssClasses = '';
 }
