@@ -25,15 +25,17 @@
   </div>
 
   <div class="tags">
-    <ng-container *ngTemplateOutlet="temp_tags"></ng-container>
+    <ng-container *ngFor="let tag of tags; trackByTagName">
+      <ng-container
+        *ngTemplateOutlet="temp_tags; context: { tag: tag }"
+      ></ng-container>
+    </ng-container>
   </div>
 </ng-template>
 
-<ng-template #temp_tags let-tag>
-  <ng-container *ngFor="let tag of tags; trackByTagName">
-    <div class="flex tag align-c">
-      <span>{{ tag }}</span>
-      <ng-icon name="ionCloseCircle" (click)="onDeleteTag(tag)"></ng-icon>
-    </div>
-  </ng-container>
+<ng-template #temp_tags let-tag="tag">
+  <div class="flex tag align-c">
+    <span>{{ tag }}</span>
+    <ng-icon name="ionCloseCircle" (click)="onDeleteTag(tag)"></ng-icon>
+  </div>
 </ng-template>
