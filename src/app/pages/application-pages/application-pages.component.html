@@ -1,14 +1,14 @@
 <div class="page grid">
-  <div class="side-navbar">
+  <div class="side-navbar-container">
     <app-side-navbar
       [profileCssClasses]="'side-navbar-profile-card--mobile'"
       [navbarTabCssClasses]="'side-navbar-navtab--mobile'"
       [searchCssClasses]="'side-navbar-search--mobile'"
       [navbarFooterCssClasses]="'side-navbar-footer--mobile'"
     ></app-side-navbar>
-    <!-- <app-side-navbar
+    <app-side-navbar
       [sideNavbarCssClasses]="'side-navbar--mobile'"
-    ></app-side-navbar> -->
+    ></app-side-navbar>
   </div>
   <div class="page-content">
     <router-outlet></router-outlet>
