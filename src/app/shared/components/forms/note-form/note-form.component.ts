@@ -5,16 +5,15 @@ import {
   ViewChild,
   Input,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
-// import { iNote } from 'src/app/interface/model';
 
 @Component({
   selector: 'note-form',
   templateUrl: './note-form.component.html',
   styleUrls: ['./note-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteFormComponent {
   constructor() {}

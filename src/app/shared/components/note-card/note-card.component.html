@@ -1,9 +1,4 @@
-<div
-  class="card"
-  *ngIf="note"
-  [routerLink]="'/notes/note/preview/' + note.id"
-  routerLinkActive="active"
->
+<div class="card" *ngIf="note" routerLinkActive="active">
   <div class="header flex align-c justify-between">
     <span
       ><b>{{ note.date }}</b></span

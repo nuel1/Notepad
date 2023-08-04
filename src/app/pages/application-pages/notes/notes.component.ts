@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/services/globals.service';
 import { StorageService } from 'src/app/core/services/storage.service';
@@ -11,16 +12,20 @@ import { DefaultNote } from 'src/app/note.default';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
   providers: [NoteService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesComponent implements OnInit {
   constructor(
     private router: Router,
     public noteService: NoteService,
-    private globalService: GlobalsService
+    private globalService: GlobalsService,
+    private title: Title
   ) {}
 
   formOpen = false;
   async ngOnInit() {
+    this.title.setTitle('My Notes');
+
     const authorNote = new DefaultNote();
 
     /* 
@@ -39,9 +44,9 @@ export class NotesComponent implements OnInit {
 
   cancel(formCanceled: boolean) {}
 
-  async deleteNote(id: string) {
-    this.changeRoute(id, async () => {
-      await this.noteService.deleteNote(id);
+  deleteNote(id: string) {
+    this.changeRoute(id, () => {
+      this.noteService.deleteNote(id);
     });
   }
 
@@ -63,5 +68,9 @@ export class NotesComponent implements OnInit {
     note
       ? this.router.navigateByUrl(`/notes/note/preview/${note.id}`)
       : this.router.navigateByUrl('/notes');
+  }
+
+  trackById(index: number, note: INote) {
+    return note.id;
   }
 }

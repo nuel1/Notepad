@@ -9,8 +9,6 @@ import {
 import { INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
 import { INgxEditorJson } from 'src/app/interface/ngx-editor';
-import { GlobalsService } from 'src/app/core/services/globals.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'note-card',
@@ -24,7 +22,7 @@ export class NoteCardComponent implements OnInit {
 
   btnDisabled = true;
   tagReminder = 0;
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
   convertHtmlToText(html: string) {
@@ -40,7 +38,6 @@ export class NoteCardComponent implements OnInit {
       //   );
       // });
 
-      console.log(htmlDoc);
       const textDoc = new XMLSerializer().serializeToString(htmlDoc);
       const jsonDoc: INgxEditorJson = toDoc(textDoc) as INgxEditorJson;
       return jsonDoc.content[0].content[0].text;

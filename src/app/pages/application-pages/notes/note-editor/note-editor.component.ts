@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Validators } from 'ngx-editor';
 import { toolbar } from './editor.config';
@@ -18,12 +19,14 @@ const document = window;
   selector: 'app-note-editor',
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteEditorComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private browserTitle: Title
   ) {}
   editor = new Editor();
   note: INote | undefined;
@@ -39,6 +42,8 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   });
 
   async ngOnInit() {
+    this.browserTitle.setTitle('Note - Edit');
+
     try {
       const id = this.route.snapshot.paramMap.get('id') as string;
       this.note = this.noteService.getNote(id);

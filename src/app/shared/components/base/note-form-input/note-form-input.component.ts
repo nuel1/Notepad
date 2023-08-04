@@ -6,6 +6,7 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
   selector: 'note-form-input',
   templateUrl: './note-form-input.component.html',
   styleUrls: ['./note-form-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteFormInputComponent implements OnDestroy {
   @ViewChild('tagInput') inputEl: ElementRef | undefined;

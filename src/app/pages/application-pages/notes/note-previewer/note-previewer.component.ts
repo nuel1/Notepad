@@ -7,6 +7,7 @@ import {
   ViewChild,
   OnDestroy,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -23,6 +24,7 @@ import { INote } from 'src/app/interface/note';
   selector: 'app-note-previewer',
   templateUrl: './note-previewer.component.html',
   styleUrls: ['./note-previewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotePreviewerComponent
   implements OnInit, OnDestroy, AfterViewInit
@@ -33,13 +35,16 @@ export class NotePreviewerComponent
     private route: ActivatedRoute,
     private router: Router,
     private noteService: NoteService,
-    private globalService: GlobalsService
+    private globalService: GlobalsService,
+    private title: Title
   ) {}
 
   note: INote | undefined;
   notePreview: any;
 
   async ngOnInit() {
+    this.title.setTitle('Note - Preview');
+
     const id = this.route.snapshot.params['id'];
     this.note = this.noteService.getNote(id) as INote;
     this.notePreview = this.router.events.subscribe((e) => {
