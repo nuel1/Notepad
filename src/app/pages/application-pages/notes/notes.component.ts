@@ -1,11 +1,20 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+  Renderer2,
+  ElementRef,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/services/globals.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { INote } from 'src/app/interface/note';
 import { NoteService } from 'src/app/core/services/note.service';
 import { DefaultNote } from 'src/app/note.default';
+import { Subscription } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-notes',
@@ -14,17 +23,31 @@ import { DefaultNote } from 'src/app/note.default';
   providers: [NoteService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public noteService: NoteService,
-    private globalService: GlobalsService,
-    private title: Title
+    public globalService: GlobalsService,
+    private title: Title,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   formOpen = false;
+  subscription: Subscription | undefined;
+  isMobile: boolean | undefined;
+  currentRoutePathIsNotes: boolean | undefined;
+
   async ngOnInit() {
     this.title.setTitle('My Notes');
+
+    this.isMobile = this.breakpointObserver.isMatched('(max-width: 768px)');
+    if (this.isMobile) {
+      this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
+      this.subscription = this.router.events.subscribe((e) => {
+        if (e instanceof NavigationEnd)
+          this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
+      });
+    }
 
     const authorNote = new DefaultNote();
 
@@ -72,5 +95,9 @@ export class NotesComponent implements OnInit {
 
   trackById(index: number, note: INote) {
     return note.id;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

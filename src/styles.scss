@@ -111,18 +111,35 @@ a {
 }
 
 .main {
-  grid-template-columns: auto 1fr;
+  display: block;
+
+  .inactive {
+    display: none;
+  }
+
+  .sidebar {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 1rem;
+  }
 }
 
-.sidebar {
-  position: sticky;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  overflow-y: scroll;
-  grid-column: 1/2;
-  width: 23rem;
-  padding: 1rem;
+@media (min-width: 1024px) {
+  .main {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    .inactive {
+      display: block;
+    }
+  }
+
+  .sidebar {
+    width: 23rem;
+    position: sticky;
+    left: 0;
+    top: 0;
+  }
 }
 
 .editor {

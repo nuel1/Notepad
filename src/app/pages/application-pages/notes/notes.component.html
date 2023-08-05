@@ -1,5 +1,8 @@
 <div class="main grid">
-  <div class="sidebar">
+  <div
+    class="sidebar"
+    [ngClass]="{ inactive: !(isMobile && currentRoutePathIsNotes) }"
+  >
     <h1>My Notes</h1>
     <button
       class="form-modal-toggle-button flex align-c"
@@ -18,7 +21,11 @@
       </ng-container>
     </ng-container>
   </div>
-  <div class="editor-container">
+
+  <div
+    class="editor-container"
+    [ngClass]="{ inactive: isMobile && currentRoutePathIsNotes }"
+  >
     <router-outlet></router-outlet>
   </div>
   <ng-container *ngIf="formOpen">
