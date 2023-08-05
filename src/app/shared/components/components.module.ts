@@ -26,6 +26,7 @@ import {
   ionCloseCircle,
   ionChevronForward,
   ionPencil,
+  ionMenuOutline,
 } from '@ng-icons/ionicons';
 
 const components = [
@@ -57,6 +58,7 @@ const components = [
       ionCloseCircle,
       ionChevronForward,
       ionPencil,
+      ionMenuOutline,
     }),
     ReactiveFormsModule,
     FormsModule,

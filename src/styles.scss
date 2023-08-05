@@ -110,38 +110,6 @@ a {
   cursor: pointer;
 }
 
-.main {
-  display: block;
-
-  .inactive {
-    display: none;
-  }
-
-  .sidebar {
-    height: 100vh;
-    overflow-y: scroll;
-    padding: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .main {
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    .inactive {
-      display: block;
-    }
-  }
-
-  .sidebar {
-    width: 23rem;
-    position: sticky;
-    left: 0;
-    top: 0;
-  }
-}
-
 .editor {
   grid-column: 2/3;
 }
@@ -204,65 +172,158 @@ a {
 }
 
 // Mobile styles for mobile
+.main {
+  display: block;
+
+  .inactive {
+    display: none;
+  }
+
+  .sidebar {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 1rem;
+  }
+}
+
+.page-content {
+  grid-column: 1/2;
+}
+
+.side-navbar:not(.side-navbar--mobile) {
+  display: none;
+}
+
+.side-navbar--mobile {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
+  z-index: 4;
+  border-right: 1px solid #e7e7e7;
+}
+
+.page {
+  padding-top: 5rem;
+}
 
 .side-navbar-container {
+  isolation: isolate;
+  z-index: 2;
+}
+
+.menu {
+  padding: 1rem;
+  position: fixed;
+  background: var(--color-light);
+  inset-inline: 0;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  ng-icon {
+    font-size: 2rem;
+  }
+
   &:hover {
-    position: relative;
-    z-index: 2;
     .side-navbar--mobile {
-      transform: scaleX(1);
       opacity: 1;
+      display: block;
     }
   }
 }
 
-.side-navbar--mobile {
-  position: fixed;
-  width: 300px;
-  top: 0;
-  left: 0;
-  overflow-y: scroll;
-  transform: scaleX(0.2);
-  transform-origin: left;
-  opacity: 0;
-  transition: transform 0.3s, opacity 0.3s;
-  // display: none;
-}
-
-.side-navbar-profile-card--mobile {
-  justify-content: center;
-
-  p,
-  ng-icon {
-    display: none;
-  }
-}
-
-.side-navbar-navtab--mobile {
-  justify-content: center;
-  span {
-    display: none;
-  }
-}
-
-.side-navbar-search--mobile {
-  justify-content: center;
-
-  input {
+@media (min-width: 768px) {
+  .menu {
     display: none;
   }
 
-  ng-icon {
-    visibility: visible !important;
+  .page {
+    grid-template-columns: 95px 1fr;
+    padding-top: 0;
   }
-}
 
-.side-navbar-footer--mobile {
-  a {
+  .page-content {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  .side-navbar:not(.side-navbar--mobile) {
+    display: block;
+  }
+  .side-navbar-container:not(.side-navbar--mobile) {
+    &:hover {
+      position: relative;
+      z-index: 2;
+      .side-navbar--mobile {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  .side-navbar--mobile {
+    width: 300px;
+    transform: scaleX(0.2);
+    transform-origin: left;
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .side-navbar-profile-card--mobile {
     justify-content: center;
+
+    p,
+    ng-icon {
+      display: none;
+    }
   }
 
-  span {
-    display: none;
+  .side-navbar-navtab--mobile {
+    justify-content: center;
+    span {
+      display: none;
+    }
+  }
+
+  .side-navbar-search--mobile {
+    justify-content: center;
+
+    input {
+      display: none;
+    }
+
+    ng-icon {
+      visibility: visible !important;
+    }
+  }
+
+  .side-navbar-footer--mobile {
+    a {
+      justify-content: center;
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    .inactive {
+      display: block;
+    }
+  }
+
+  .sidebar {
+    width: 23rem;
+    position: sticky;
+    left: 0;
+    top: 0;
   }
 }
