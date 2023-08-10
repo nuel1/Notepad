@@ -41,8 +41,9 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.title.setTitle('My Notes');
 
     this.subscription = this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .subscribe(() => {
+      .observe(Breakpoints.Handset)
+      .subscribe((result) => {
+        console.log(result);
         this.isMobile = true;
         this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
         this.subscription = this.router.events.subscribe((e) => {
