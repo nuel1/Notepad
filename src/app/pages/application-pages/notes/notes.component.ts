@@ -14,7 +14,7 @@ import { INote } from 'src/app/interface/note';
 import { NoteService } from 'src/app/core/services/note.service';
 import { DefaultNote } from 'src/app/note.default';
 import { Subscription } from 'rxjs';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-notes',
@@ -40,14 +40,16 @@ export class NotesComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.title.setTitle('My Notes');
 
-    this.isMobile = this.breakpointObserver.isMatched('(max-width: 768px)');
-    if (this.isMobile) {
-      this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
-      this.subscription = this.router.events.subscribe((e) => {
-        if (e instanceof NavigationEnd)
-          this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
+    this.subscription = this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
+      .subscribe(() => {
+        this.isMobile = true;
+        this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
+        this.subscription = this.router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd)
+            this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
+        });
       });
-    }
 
     const authorNote = new DefaultNote();
 
