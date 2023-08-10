@@ -88,9 +88,10 @@ export class NotesComponent implements OnInit, OnDestroy {
       note = this.noteService.notes[prevIndex];
 
     await deleteFn();
-    note
-      ? this.router.navigateByUrl(`/notes/note/preview/${note.id}`)
-      : this.router.navigateByUrl('/notes');
+    if (!this.isMobile) {
+      if (note) this.router.navigateByUrl(`/notes/note/preview/${note.id}`);
+      else this.router.navigateByUrl('/notes');
+    }
   }
 
   trackById(index: number, note: INote) {
