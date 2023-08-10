@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostListener,
   Output,
+  Input,
 } from '@angular/core';
 
 @Directive({
@@ -11,6 +12,7 @@ import {
 })
 export class EventClickOutsideDirective {
   @Output() customBlur = new EventEmitter();
+  @Input() isTarget = false;
   constructor(private elementRef: ElementRef) {}
 
   @HostListener('document:click', ['$event.target'])
