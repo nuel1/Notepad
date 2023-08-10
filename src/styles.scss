@@ -235,6 +235,7 @@ a {
 }
 
 .main-container {
+  grid-template-columns: auto 1fr;
   padding-top: 5rem;
 }
 
@@ -243,7 +244,7 @@ a {
   z-index: 2;
 }
 
-.menu {
+.menu-toggle-icon-container {
   padding: 1rem;
   position: fixed;
   background: var(--color-light);
@@ -265,7 +266,7 @@ a {
 }
 
 @media (min-width: 768px) {
-  .menu {
+  .menu-toggle-icon-container {
     display: none;
   }
 

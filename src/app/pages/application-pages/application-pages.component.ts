@@ -42,6 +42,7 @@ export class ApplicationPagesComponent
   }
 
   ngOnDestroy(): void {
+    console.log('destroyed');
     this.subscription?.unsubscribe();
   }
 }
