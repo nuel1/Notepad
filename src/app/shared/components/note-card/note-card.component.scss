@@ -26,36 +26,6 @@ h3 {
   cursor: pointer;
 }
 
-.card {
-  .header *,
-  p,
-  h3,
-  .tag {
-    color: var(--color-medium);
-  }
-}
-
-.card.active {
-  .header *,
-  p,
-  h3 {
-    color: inherit;
-  }
-
-  .tag {
-    color: var(--color-dark-shade);
-  }
-
-  .delete {
-    border: 1px solid #524451;
-    color: inherit;
-
-    &:hover {
-      color: var(--color-danger);
-    }
-  }
-}
-
 .card .delete {
   padding: 0.2rem 0.7rem;
   border-radius: 5px;
@@ -68,4 +38,36 @@ h3 {
 button {
   border: transparent;
   cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .card {
+    .header *,
+    p,
+    h3,
+    .tag {
+      color: var(--color-medium);
+    }
+  }
+
+  .card.active {
+    .header *,
+    p,
+    h3 {
+      color: inherit;
+    }
+
+    .tag {
+      color: var(--color-dark-shade);
+    }
+
+    .delete {
+      border: 1px solid #524451;
+      color: inherit;
+
+      &:hover {
+        color: var(--color-danger);
+      }
+    }
+  }
 }
