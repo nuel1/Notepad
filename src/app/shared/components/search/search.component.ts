@@ -5,8 +5,7 @@ import {
   Input,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalsService } from 'src/app/core/services/globals.service';
-
+import { GlobalsService } from 'src/app/core/globals.service';
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',

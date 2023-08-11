@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalsService } from './services/globals.service';
-import { StorageService } from './services/storage.service';
-import { NoteService } from './services/note.service';
-import { UserService } from './services/user.service';
+import { GlobalsService } from './globals.service';
+import { StorageService } from './storage.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [GlobalsService, StorageService, UserService, NoteService],
+  providers: [GlobalsService, StorageService, UserService],
 })
 export class CoreModule {}

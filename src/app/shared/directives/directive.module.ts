@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventClickOutsideDirective } from './event-click-outside.directive';
 import { MenuToggleDirective } from './menu-toggle.directive';
 
 @NgModule({
-  declarations: [EventClickOutsideDirective, MenuToggleDirective],
+  declarations: [MenuToggleDirective],
   imports: [CommonModule],
-  exports: [EventClickOutsideDirective, MenuToggleDirective],
+  exports: [MenuToggleDirective],
 })
 export class DirectiveModule {}
