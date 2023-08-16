@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
 
   constructor(private globals: GlobalsService, private router: Router) {
     globals.activeRoute().subscribe((path) => {
-      if (path[path.length - 1] === 'home') {
+      if (!path.length) {
         this.placeholder = '📔📕📗📘📙📓📒';
         this.isDisabled = true;
         this.notHome = false;
