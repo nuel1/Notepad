@@ -71,10 +71,14 @@ p {
 
 .action-btns {
   margin-block: 1rem;
+  gap: 0.7rem;
 
   button {
     padding: 9px 12px;
     border-radius: 5px;
+    width: 100%;
+    color: var(--color-light);
+    border: transparent;
   }
 
   button:disabled {
@@ -84,13 +88,14 @@ p {
 
 .btn-preview {
   background: var(--color-tertiary);
-  border: transparent;
-  color: var(--color-light);
-  width: 100%;
 
   &:disabled {
     background: #4727a8bc;
   }
+}
+
+.btn-fullscreen {
+  background: var(--color-dark);
 }
 
 .add-tag {
@@ -143,4 +148,12 @@ ul {
 
 #tag-input {
   display: none;
+}
+
+@media (min-width: 1440px) {
+  ::ng-deep {
+    .NgxEditor__MenuBar {
+      justify-content: space-between;
+    }
+  }
 }

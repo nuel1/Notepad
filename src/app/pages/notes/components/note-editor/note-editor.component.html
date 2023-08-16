@@ -54,13 +54,24 @@
         [placeholder]="'Type here...'"
         formControlName="editorContent"
       ></ngx-editor>
-      <div class="action-btns">
+      <div class="action-btns flex">
         <button
-          class="btn-preview"
+          class="btn-preview flex align-c justify-c"
           [disabled]="form.invalid"
           (click)="previewNote()"
         >
-          Preview
+          <img src="assets/icon-svgs/iconmonstr-eye-filled.svg" />
+
+          <span> Preview </span>
+        </button>
+        <button
+          class="btn-fullscreen flex align-c justify-c"
+          [disabled]="form.invalid"
+          (click)="previewNote()"
+        >
+          <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
+
+          <span>Edit Fullscreen</span>
         </button>
       </div>
     </form>
