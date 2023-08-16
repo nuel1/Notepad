@@ -46,6 +46,12 @@ p {
   gap: 0.5rem;
 }
 
+.col-2 {
+  ul {
+    flex-wrap: wrap;
+  }
+}
+
 .custom {
   height: 300px;
 }
