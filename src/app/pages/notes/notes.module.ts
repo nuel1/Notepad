@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { NotesComponent } from './notes.component';
 import { NotesRoutingModule } from './notes-routing.module';
 import { NgxEditorModule } from 'ngx-editor';
-import { CoreModule } from 'src/app/core/core.module';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
@@ -15,9 +14,9 @@ import { NoteFormInputErrorComponent } from './components/note-form-input-error/
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 // Services
 import { NoteService } from './services/note.service';
+import { InputTagToggleDirective } from './directives/input-tag-toggle.directive';
 
 // Directives
-import { CustomClickDirective } from './directives/custom-click.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ import { CustomClickDirective } from './directives/custom-click.directive';
     NoteFormComponent,
     NoteFormInputComponent,
     NoteFormInputErrorComponent,
-    CustomClickDirective,
+    InputTagToggleDirective,
   ],
   imports: [
     CommonModule,
@@ -39,7 +38,6 @@ import { CustomClickDirective } from './directives/custom-click.directive';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    CoreModule,
   ],
   providers: [NoteService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

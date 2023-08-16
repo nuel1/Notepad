@@ -10,7 +10,7 @@ import { GlobalsService } from 'src/app/core/globals.service';
 import { INote } from 'src/app/interface/note';
 import { NoteService } from './services/note.service';
 import { DefaultNote } from 'src/app/note.default';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
@@ -31,8 +31,8 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   formOpen = false;
   subscription: Subscription | undefined;
-  isMobile: boolean | undefined;
   currentRoutePathIsNotes: boolean | undefined;
+  isMobile = new BehaviorSubject<boolean>(false);
 
   async ngOnInit() {
     this.title.setTitle('My Notes');
@@ -40,8 +40,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.subscription = this.breakpointObserver
       .observe(Breakpoints.Handset)
       .subscribe((result) => {
-        console.log(result);
-        this.isMobile = true;
+        this.isMobile.next(result.matches);
         this.currentRoutePathIsNotes = !!this.router.url.match(/notes$/);
         this.subscription = this.router.events.subscribe((e) => {
           if (e instanceof NavigationEnd)

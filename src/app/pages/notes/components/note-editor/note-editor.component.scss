@@ -94,7 +94,7 @@ p {
   border: 1px solid #c2c2c2;
   color: inherit;
   line-height: 2;
-  margin-left: 0.6;
+  margin-left: 0.6rem;
 
   ng-icon {
     margin-left: 0;
@@ -133,4 +133,8 @@ ul {
       opacity: 1;
     }
   }
+}
+
+#tag-input {
+  display: none;
 }

@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  Input,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { toolbar } from './editor.config';
 import { INote } from 'src/app/interface/note';
 import { NoteService } from '../../services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EventService } from 'src/app/core/event.service';
 
 @Component({
   selector: 'app-note-editor',
@@ -23,13 +25,13 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private noteService: NoteService,
-    private browserTitle: Title
+    private browserTitle: Title,
+    public eventService: EventService
   ) {}
   editor = new Editor();
   note: INote | undefined;
   title = '';
   editorToolbarConfig = toolbar;
-  showTagInputField = false;
   html = '';
 
   tagName = new FormControl('', Validators.required());
@@ -65,16 +67,10 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
-  clickOutside() {
-    this.showTagInputField = false;
-  }
-
   addTag() {
-    if (this.showTagInputField) {
-      const newTag = this.tagName.value as string;
-      this.note?.tags.push(newTag);
-      this.note && this.noteService.saveupdatedNote(this.note);
-    }
+    // const newTag = this.tagName.value as string;
+    // this.note?.tags.push(newTag);
+    // this.note && this.noteService.saveupdatedNote(this.note);
   }
 
   deleteTag(tag: string) {

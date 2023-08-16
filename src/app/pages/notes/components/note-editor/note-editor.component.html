@@ -23,22 +23,19 @@
               ></ng-icon>
             </li>
           </ul>
-          <form
-            CustomClickDirective
-            (customBlur)="showTagInputField = false"
-            class="flex align-c"
-          >
+          <form inputTagToggle class="flex align-c">
             <input
-              *ngIf="showTagInputField"
               type="text"
               class="tag-input"
+              id="tag-input"
               placeholder="Type tag here"
               [formControl]="tagName"
             />
+
             <button
               class="add-tag flex align-c"
-              [disabled]="showTagInputField && tagName.invalid"
-              (click)="addTag(); showTagInputField = true"
+              [disabled]="eventService.showTagInput && tagName.invalid"
+              (click)="addTag()"
             >
               <ng-icon name="ionAddOutline"></ng-icon>
               <span>Add new tag</span>

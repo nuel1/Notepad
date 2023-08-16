@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuToggleDirective } from './menu-toggle.directive';
+import { SideMenuToggleEvent } from './sidemenu-toggle-event.directive';
 
 @NgModule({
-  declarations: [MenuToggleDirective],
+  declarations: [SideMenuToggleEvent],
   imports: [CommonModule],
-  exports: [MenuToggleDirective],
+  exports: [SideMenuToggleEvent],
 })
 export class DirectiveModule {}

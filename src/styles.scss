@@ -58,6 +58,10 @@ h6 {
   line-height: 1.5;
 }
 
+ng-icon {
+  line-height: initial;
+}
+
 input {
   font-size: 1rem;
 }
@@ -200,8 +204,8 @@ a {
 .main {
   display: block;
 
-  .inactive {
-    display: none;
+  .side-navbar--mobile-active {
+    display: block;
   }
 
   .sidebar {
@@ -209,6 +213,10 @@ a {
     overflow-y: scroll;
     padding: 1rem;
   }
+}
+
+.mobile_view_single_display {
+  display: none;
 }
 
 .page-content {
@@ -230,7 +238,7 @@ a {
   display: none;
 }
 
-.side-navbar--mobile.isactive {
+.side-navbar--mobile-active {
   display: block;
 }
 
@@ -356,13 +364,17 @@ a {
 }
 
 @media (min-width: 1024px) {
+  .laptop_view_multi_display {
+    display: block;
+  }
+
   .main {
     display: grid;
     grid-template-columns: auto 1fr;
 
-    .inactive {
-      display: block;
-    }
+    // .inactive {
+    //   display: block;
+    // }
   }
 
   .sidebar {

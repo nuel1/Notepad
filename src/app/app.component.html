@@ -1,14 +1,14 @@
 <div
-  menuToggle
+  sideMenuToggleEvent
   [menuOpen]="false"
-  (closeSideNavbar)="closeSideNavbar()"
+  (closeMenu)="eventService.closeSideNavbar()"
   class="page"
 >
   <div class="menu-toggle-icon-container">
     <button
-      menuToggle
+      sideMenuToggleEvent
       [menuOpen]="true"
-      (openSideNavbar)="openSideNavbar()"
+      (openMenu)="eventService.openSideNavbar()"
       #menuBtn
     >
       <ng-icon name="ionMenuOutline"></ng-icon>
@@ -26,7 +26,7 @@
       <app-side-navbar
         #sideNavbar
         [sideNavbarCssClasses]="'side-navbar--mobile'"
-        menuToggle
+        sideMenuToggleEvent
         [menuOpen]="true"
       ></app-side-navbar>
     </div>

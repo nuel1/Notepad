@@ -1,7 +1,10 @@
 <div class="main grid">
   <div
     class="sidebar"
-    [ngClass]="{ inactive: !(isMobile && currentRoutePathIsNotes) }"
+    [ngClass]="{
+      mobile_view_single_display: !currentRoutePathIsNotes,
+      laptop_view_multi_display: !(isMobile | async) || currentRoutePathIsNotes
+    }"
   >
     <h1>My Notes</h1>
     <button
@@ -24,7 +27,10 @@
 
   <div
     class="editor-container"
-    [ngClass]="{ inactive: isMobile && currentRoutePathIsNotes }"
+    [ngClass]="{
+      mobile_view_single_display: currentRoutePathIsNotes,
+      laptop_view_multi_display: !(isMobile | async)
+    }"
   >
     <router-outlet></router-outlet>
   </div>
