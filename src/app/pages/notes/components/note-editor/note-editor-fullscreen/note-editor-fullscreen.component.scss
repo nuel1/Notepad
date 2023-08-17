@@ -1,0 +1,142 @@
+.fullscreen {
+  position: fixed;
+  inset: 0;
+  background: var(--color-dark-contrast);
+  z-index: 2;
+}
+
+.grid {
+  grid-template-rows: 1fr 131px;
+}
+
+.grid-row-1 {
+  margin-top: 1rem;
+}
+
+img {
+  width: 35px;
+  height: 35px;
+  margin-right: 0.7rem;
+}
+
+ul {
+  margin: 1rem;
+}
+
+::ng-deep {
+  .NgxEditor__Content {
+    background: transparent;
+    padding-inline: 1.6rem;
+  }
+
+  .NgxEditor,
+  .NgxEditor__MenuBar {
+    max-width: 320px;
+  }
+
+  .NgxEditor {
+    overflow-y: scroll;
+    border: transparent !important;
+    height: calc(100vh - 131px - 1rem);
+  }
+}
+
+.action-btns {
+  margin-block: 1rem;
+  gap: 0.7rem;
+  padding-inline: 0.5rem;
+
+  button {
+    padding: 9px 12px;
+    border-radius: 5px;
+    width: 100%;
+    color: var(--color-light);
+    border: transparent;
+  }
+
+  button:disabled {
+    cursor: not-allowed !important;
+  }
+}
+
+.btn-preview {
+  background: var(--color-tertiary);
+
+  &:disabled {
+    background: #4727a8bc;
+  }
+}
+
+.btn-fullscreen {
+  background: var(--color-dark);
+}
+
+::ng-deep {
+  .NgxEditor__MenuBar {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 360px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 360px;
+    }
+  }
+}
+
+@media (min-width: 375px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 375px;
+    }
+  }
+}
+
+@media (min-width: 393px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 393px;
+    }
+  }
+}
+
+@media (min-width: 412px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 412px;
+    }
+  }
+}
+
+@media (min-width: 414px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 414px;
+    }
+  }
+}
+
+@media (min-width: 425px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 425px;
+    }
+  }
+}
+
+@media (min-width: 428px) {
+  ::ng-deep {
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 428px;
+    }
+  }
+}

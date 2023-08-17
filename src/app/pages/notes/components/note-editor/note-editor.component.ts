@@ -13,6 +13,7 @@ import { INote } from 'src/app/interface/note';
 import { NoteService } from '../../services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/core/event.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-note-editor',
@@ -27,14 +28,22 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     private noteService: NoteService,
     private browserTitle: Title,
     public eventService: EventService
-  ) {}
+  ) {
+    this.subscription = this.form.valueChanges.subscribe(
+      ({ editorContent }) => {
+        this.contentChangeObserver$.next(editorContent as string);
+      }
+    );
+  }
+
   editor = new Editor();
   note: INote | undefined;
   title = '';
   editorToolbarConfig = toolbar;
   html = '';
-
+  contentChangeObserver$ = new BehaviorSubject<string>('');
   tagName = new FormControl('', Validators.required());
+  subscription: Subscription | undefined;
 
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
@@ -42,13 +51,15 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.browserTitle.setTitle('Note - Edit');
-
     try {
       const id = this.route.snapshot.paramMap.get('id') as string;
       this.note = this.noteService.getNote(id);
 
       if (this.note) {
         this.form.get('editorContent')!.patchValue(this.note.content);
+        this.contentChangeObserver$.next(
+          this.form.get('editorContent')?.value as string
+        );
         return;
       }
     } catch (e) {
@@ -65,6 +76,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.editor.destroy();
+    this.subscription?.unsubscribe();
   }
 
   addTag() {

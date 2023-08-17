@@ -12,11 +12,9 @@ import { NotePreviewerComponent } from './components/note-previewer/note-preview
 import { NoteFormInputComponent } from './components/note-form-input/note-form-input.component';
 import { NoteFormInputErrorComponent } from './components/note-form-input-error/note-form-input-error.component';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
-// Services
 import { NoteService } from './services/note.service';
 import { InputTagToggleDirective } from './directives/input-tag-toggle.directive';
-
-// Directives
+import { NoteEditorFullscreenComponent } from './components/note-editor/note-editor-fullscreen/note-editor-fullscreen.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +27,7 @@ import { InputTagToggleDirective } from './directives/input-tag-toggle.directive
     NoteFormInputComponent,
     NoteFormInputErrorComponent,
     InputTagToggleDirective,
+    NoteEditorFullscreenComponent,
   ],
   imports: [
     CommonModule,

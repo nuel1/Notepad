@@ -5,6 +5,7 @@
 
 :root {
   --color-light: #f4f5f8;
+  --color-dark-contrast: #ffffff;
   --color-lighter: #f3f3f3;
   --color-light-shade: #d7d8da;
   --color-light-tint: #f5f6f9;
@@ -72,6 +73,7 @@ button {
 
 .page {
   min-width: 320px;
+  overflow-x: hidden;
 }
 
 .card,
