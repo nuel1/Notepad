@@ -13,6 +13,12 @@
   margin-top: 1rem;
 }
 
+.grid-row-2 {
+  position: sticky;
+  bottom: 0;
+  inset-inline: 0;
+}
+
 img {
   width: 35px;
   height: 35px;
