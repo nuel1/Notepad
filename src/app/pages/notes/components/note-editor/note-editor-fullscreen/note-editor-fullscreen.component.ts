@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, catchError } from 'rxjs';
 
 @Component({
   selector: 'note-editor-fullscreen',
@@ -21,8 +21,9 @@ export class NoteEditorFullscreenComponent implements OnDestroy {
   @Output() onSave = new EventEmitter<string>();
 
   constructor() {
-    this.subscription = this.content$?.subscribe((value: string) =>
-      this.form.get('editorContent')?.patchValue(value)
+    this.subscription = this.content$?.subscribe(
+      (value: string) => this.form.get('editorContent')?.patchValue(value),
+      (e) => console.error(e)
     );
   }
 
