@@ -23,22 +23,24 @@ ul {
   margin: 1rem;
 }
 
-::ng-deep {
-  .NgxEditor__Content {
-    background: transparent;
-    padding-inline: 1.6rem;
-  }
+.fullscreen {
+  ::ng-deep {
+    .NgxEditor__Content {
+      background: transparent;
+      padding-inline: 1.6rem;
+    }
 
-  .NgxEditor,
-  .NgxEditor__MenuBar {
-    max-width: 320px;
-  }
+    .NgxEditor,
+    .NgxEditor__MenuBar {
+      max-width: 320px;
+    }
 
-  .NgxEditor {
-    overflow-y: scroll;
-    border: transparent !important;
-    //Reset to 1rem if adjusting to fit fullscreen.
-    height: calc(100vh - 131px - 2rem);
+    .NgxEditor {
+      overflow-y: scroll;
+      border: transparent !important;
+      //Reset to 1rem if adjusting to fit fullscreen.
+      height: calc(100vh - 131px - 2rem);
+    }
   }
 }
 
@@ -72,72 +74,88 @@ ul {
   background: var(--color-dark);
 }
 
-::ng-deep {
-  .NgxEditor__MenuBar {
-    overflow-x: scroll;
-    flex-wrap: nowrap;
+.fullscreen {
+  ::ng-deep {
+    .NgxEditor__MenuBar {
+      overflow-x: scroll;
+      flex-wrap: nowrap;
+    }
   }
 }
 
 @media (min-width: 360px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 360px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 360px;
+      }
     }
   }
 }
 
 @media (min-width: 375px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 375px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 375px;
+      }
     }
   }
 }
 
 @media (min-width: 393px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 393px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 393px;
+      }
     }
   }
 }
 
 @media (min-width: 412px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 412px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 412px;
+      }
     }
   }
 }
 
 @media (min-width: 414px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 414px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 414px;
+      }
     }
   }
 }
 
 @media (min-width: 425px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 425px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 425px;
+      }
     }
   }
 }
 
 @media (min-width: 428px) {
-  ::ng-deep {
-    .NgxEditor,
-    .NgxEditor__MenuBar {
-      max-width: 428px;
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor,
+      .NgxEditor__MenuBar {
+        max-width: 428px;
+      }
     }
   }
 }

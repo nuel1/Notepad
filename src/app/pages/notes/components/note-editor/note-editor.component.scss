@@ -56,16 +56,18 @@ p {
   height: 300px;
 }
 
-::ng-deep {
-  .NgxEditor {
-    height: 320px;
-    overflow-y: scroll;
-    border: transparent !important;
-  }
+.editor-container {
+  ::ng-deep {
+    .NgxEditor {
+      height: 320px;
+      overflow-y: scroll;
+      border: transparent !important;
+    }
 
-  .NgxEditor__Content {
-    min-height: 320px;
-    background: #80808014;
+    .NgxEditor__Content {
+      min-height: 320px;
+      background: #80808014;
+    }
   }
 }
 
@@ -151,9 +153,11 @@ ul {
 }
 
 @media (min-width: 1440px) {
-  ::ng-deep {
-    .NgxEditor__MenuBar {
-      justify-content: space-between;
+  .editor-container {
+    ::ng-deep {
+      .NgxEditor__MenuBar {
+        justify-content: space-between;
+      }
     }
   }
 }
