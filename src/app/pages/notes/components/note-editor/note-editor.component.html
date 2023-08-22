@@ -24,18 +24,19 @@
             </li>
           </ul>
           <form inputTagToggle class="flex align-c">
-            <input
-              type="text"
-              class="tag-input"
-              id="tag-input"
-              placeholder="Type tag here"
-              [formControl]="tagName"
-            />
+            <ng-container *ngIf="eventService.$showTagInput | async">
+              <input
+                type="text"
+                class="tag-input"
+                placeholder="Type tag here"
+                [formControl]="tagName"
+              />
+            </ng-container>
 
             <button
               class="add-tag flex align-c"
               [disabled]="tagName.invalid"
-              (click)="addTag()"
+              (click)="addTag(); eventService.$showTagInput.next(true)"
             >
               <ng-icon name="ionAddOutline"></ng-icon>
               <span>Add new tag</span>

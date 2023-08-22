@@ -4,10 +4,12 @@ import {
   OnInit,
   AfterViewInit,
   OnDestroy,
+  ViewChild,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventService } from './core/event.service';
+import { SideNavbarComponent } from './shared/components/side-navbar/side-navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,13 @@ import { EventService } from './core/event.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  constructor(public eventService: EventService, private router: Router) {
+  @ViewChild('sideNavbar') sideNavbar: SideNavbarComponent | undefined;
+  constructor(
+    public eventService: EventService,
+    private router: Router,
+    private renderer2: Renderer2
+  ) {
+    eventService.renderer2 = renderer2;
     this.subscription = router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) eventService.closeSideNavbar();
     });
@@ -24,9 +32,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   async ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.eventService.mobile_sideNavbar = document.querySelector(
-      '.side-navbar--mobile'
-    ) as HTMLElement;
+    this.eventService.mobile_sideNavbar =
+      this.sideNavbar?.sideNavbar?.nativeElement;
   }
 
   ngOnDestroy(): void {

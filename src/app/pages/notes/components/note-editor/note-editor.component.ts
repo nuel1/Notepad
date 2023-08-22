@@ -51,8 +51,6 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   });
 
   async ngOnInit() {
-    console.log(this.openFullScreen);
-
     this.browserTitle.setTitle('Note - Edit');
     try {
       const id = this.route.snapshot.paramMap.get('id') as string;

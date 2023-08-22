@@ -19,7 +19,6 @@ import { Observable, Subscription, catchError, combineLatestWith } from 'rxjs';
   styleUrls: ['./note-editor-fullscreen.component.scss'],
 })
 export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
-  @ViewChild('fullscreen') container: ElementRef | undefined;
   @Input() editorToolbarConfig: Toolbar | any;
   @Input() content$: Observable<string> | undefined;
   @Output() onExitFullScreen = new EventEmitter<string>();

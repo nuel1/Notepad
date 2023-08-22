@@ -14,13 +14,8 @@ import { Subscription } from 'rxjs';
 export class InputTagToggleDirective implements OnDestroy {
   constructor(
     private elementRef: ElementRef,
-    private eventService: EventService,
-    private renderer2: Renderer2
-  ) {
-    // this.subscriber = eventService.showTagInput$.subscribe((show) => {
-    //   if (!show) eventService.showInputField = true;
-    // });
-  }
+    private eventService: EventService
+  ) {}
 
   subscriber: Subscription | undefined;
 
@@ -30,11 +25,8 @@ export class InputTagToggleDirective implements OnDestroy {
 
   @HostListener('click', ['$event'])
   onClick($event: Event) {
-    const el = document.getElementById('tag-input');
-    if (el) {
-      this.eventService.tagInput = el;
-      this.eventService.openInputTag(this.renderer2);
-    }
+    this.eventService.$showTagInput.next(true);
+    this.eventService.$showTagInput.subscribe((value) => console.log(value));
     $event.stopPropagation();
   }
 }

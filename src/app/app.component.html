@@ -1,13 +1,13 @@
 <div
   sideMenuToggleEvent
-  [menuOpen]="false"
+  [menuOpen]="true"
   (closeMenu)="eventService.closeSideNavbar()"
   class="page"
 >
   <div class="menu-toggle-icon-container">
     <button
       sideMenuToggleEvent
-      [menuOpen]="true"
+      [menuOpen]="false"
       (openMenu)="eventService.openSideNavbar()"
       #menuBtn
     >
@@ -27,7 +27,7 @@
         #sideNavbar
         [sideNavbarCssClasses]="'side-navbar--mobile'"
         sideMenuToggleEvent
-        [menuOpen]="true"
+        [menuOpen]="false"
       ></app-side-navbar>
     </div>
     <div class="page-content">

@@ -24,40 +24,19 @@ export class SideMenuToggleEvent {
     private elementRef: ElementRef,
     private eventService: EventService,
     private renderer2: Renderer2
-  ) {
-    // this.subscriber = eventService.showTagInput$.subscribe((show) => {
-    //   eventService.showInputField = false;
-    // });
-  }
+  ) {}
 
   subscriber: Subscription | undefined;
 
   @HostListener('click', ['$event']) onclick($event: Event) {
-    const tagInput = document.getElementById('tag-input');
+    this.eventService.$showTagInput.next(false);
 
-    if (tagInput) {
-      this.eventService.tagInput = tagInput;
-      this.eventService.closeInputTag(this.renderer2);
-    }
-
-    if (
-      this.eventService.mobile_sideNavbar &&
-      !this.eventService.mobile_sideNavbar.classList.contains(
-        'side-navbar--mobile-active'
-      ) &&
-      this.menuOpen
-    ) {
-      this.openMenu.emit();
-    }
-
-    if (
-      this.eventService.mobile_sideNavbar &&
-      this.eventService.mobile_sideNavbar.classList.contains(
-        'side-navbar--mobile-active'
-      ) &&
-      !this.menuOpen
-    ) {
+    if (this.menuOpen) {
       this.closeMenu.emit();
+    }
+
+    if (!this.menuOpen) {
+      this.openMenu.emit();
     }
 
     $event.stopPropagation();
