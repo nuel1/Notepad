@@ -5,6 +5,9 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
@@ -16,15 +19,18 @@ import { Observable, Subscription, catchError, combineLatestWith } from 'rxjs';
   styleUrls: ['./note-editor-fullscreen.component.scss'],
 })
 export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
+  @ViewChild('fullscreen') container: ElementRef | undefined;
   @Input() editorToolbarConfig: Toolbar | any;
   @Input() content$: Observable<string> | undefined;
-  @Output() onSave = new EventEmitter<string>();
+  @Output() onExitFullScreen = new EventEmitter<string>();
+  @Output() onPreview = new EventEmitter<string>();
 
   constructor() {}
 
   subscription: Subscription | undefined;
   editor: Editor = new Editor();
   refinedEditorToolbarConfig: Array<string[]> | Toolbar | any = [];
+  content = '';
 
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
@@ -36,7 +42,6 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
       .removeColorTool()
       .cleanUpEmptyArray();
 
-    console.log(this.refinedEditorToolbarConfig);
     this.subscription = this.content$?.subscribe(
       (value: string) => this.form.get('editorContent')?.patchValue(value),
       (e) => console.error(e)
@@ -91,8 +96,17 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
   }
 
   saveChanges() {
-    const content = this.form.get('editorContent')?.value as string;
-    this.onSave.emit(content);
+    this.content = this.form.get('editorContent')?.value as string;
+  }
+
+  previewChanges() {
+    this.saveChanges();
+    this.onPreview.emit(this.content);
+  }
+
+  exitFullScreen() {
+    this.saveChanges();
+    this.onExitFullScreen.emit(this.content);
   }
 
   ngOnDestroy(): void {

@@ -67,19 +67,23 @@
         <button
           class="btn-fullscreen flex align-c justify-c"
           [disabled]="form.invalid"
-          (click)="previewNote()"
+          (click)="openFullScreen = true"
         >
           <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
 
-          <span>Edit Fullscreen</span>
+          <span>Open Fullscreen</span>
         </button>
       </div>
     </form>
   </div>
 </div>
-<ng-container>
+<ng-container *ngIf="openFullScreen">
   <note-editor-fullscreen
     [editorToolbarConfig]="editorToolbarConfig"
     [content$]="contentChangeObserver$"
+    (onPreview)="contentFromFullscreen_preview($event)"
+    (onExitFullScreen)="
+      this.form.get('editorContent')?.patchValue($event); openFullScreen = false
+    "
   ></note-editor-fullscreen>
 </ng-container>

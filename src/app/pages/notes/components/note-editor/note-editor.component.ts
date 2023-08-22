@@ -44,12 +44,15 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   contentChangeObserver$ = new BehaviorSubject<string>('');
   tagName = new FormControl('', Validators.required());
   subscription: Subscription | undefined;
+  openFullScreen = false;
 
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
   });
 
   async ngOnInit() {
+    console.log(this.openFullScreen);
+
     this.browserTitle.setTitle('Note - Edit');
     try {
       const id = this.route.snapshot.paramMap.get('id') as string;
@@ -77,6 +80,11 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.editor.destroy();
     this.subscription?.unsubscribe();
+  }
+
+  contentFromFullscreen_preview(content: string) {
+    this.form.get('editorContent')?.patchValue(content);
+    this.previewNote();
   }
 
   addTag() {
