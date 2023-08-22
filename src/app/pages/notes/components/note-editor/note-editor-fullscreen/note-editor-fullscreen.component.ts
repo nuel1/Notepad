@@ -31,7 +31,12 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    this.removeHeadingTool(this.editorToolbarConfig);
+    this.removeHeadingTool(this.editorToolbarConfig)
+      .removeImageToolAndLinkTool()
+      .removeColorTool()
+      .cleanUpEmptyArray();
+
+    console.log(this.refinedEditorToolbarConfig);
     this.subscription = this.content$?.subscribe(
       (value: string) => this.form.get('editorContent')?.patchValue(value),
       (e) => console.error(e)
@@ -52,6 +57,36 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
           []
         );
       }
+    );
+    return this;
+  }
+
+  removeImageToolAndLinkTool() {
+    this.refinedEditorToolbarConfig = this.refinedEditorToolbarConfig.filter(
+      (toolSet: Array<string>) => {
+        return !toolSet.includes('link') || !toolSet.includes('image');
+      }
+    );
+
+    return this;
+  }
+
+  removeColorTool() {
+    this.refinedEditorToolbarConfig = this.refinedEditorToolbarConfig.filter(
+      (toolSet: Array<string>) => {
+        return (
+          toolSet.length === 2 &&
+          !toolSet[0].match(/_color$/) &&
+          !toolSet[1].match(/_color$/)
+        );
+      }
+    );
+    return this;
+  }
+
+  cleanUpEmptyArray() {
+    this.refinedEditorToolbarConfig = this.refinedEditorToolbarConfig.filter(
+      (toolSet: Array<string>) => Boolean(toolSet.length)
     );
   }
 

@@ -77,8 +77,7 @@ ul {
 .fullscreen {
   ::ng-deep {
     .NgxEditor__MenuBar {
-      overflow-x: scroll;
-      flex-wrap: nowrap;
+      justify-content: space-between;
     }
   }
 }
