@@ -7,7 +7,7 @@ import {
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals.service';
-import { INote } from 'src/app/interface/note';
+import { IAuthor, INote } from 'src/app/interface/note';
 import { NoteService } from './services/note.service';
 import { DefaultNote } from 'src/app/note.default';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -48,13 +48,16 @@ export class NotesComponent implements OnInit, OnDestroy {
         });
       });
 
-    const authorNote = new DefaultNote();
+    const authorNote = new DefaultNote() satisfies IAuthor;
 
     /* 
     Author's note can only be saved once.
     */
     if (!localStorage.getItem('authorNoteSaved')) {
-      this.noteService.notes = [...this.noteService.notes, authorNote];
+      this.noteService.notes = [
+        ...this.noteService.notes,
+        authorNote,
+      ] satisfies Array<INote | IAuthor>;
       this.noteService.saveNotes();
       localStorage.setItem('authorNoteSaved', JSON.stringify(true));
     }
@@ -98,7 +101,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackById(index: number, note: INote) {
+  trackById(index: number, note: INote | IAuthor) {
     return note.id;
   }
 

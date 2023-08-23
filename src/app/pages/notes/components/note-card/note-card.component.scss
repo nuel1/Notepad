@@ -5,9 +5,26 @@ p.content {
   overflow: hidden;
 }
 
-.header {
+.flex-col-1 {
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.date {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge {
+  padding-inline: 0.4rem;
+  background: #4827a830;
+  border-color: transparent;
+
   span {
-    text-transform: uppercase;
+    color: var(--color-tertiary);
+    font-variant: all-small-caps;
+    font-size: 0.9rem;
+    font-weight: 900;
   }
 }
 

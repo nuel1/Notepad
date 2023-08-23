@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
-import { INote } from 'src/app/interface/note';
+import { IAuthor, INote } from 'src/app/interface/note';
 
 @Injectable()
 export class NoteService {
@@ -10,7 +10,7 @@ export class NoteService {
     private global: GlobalsService
   ) {}
 
-  public notes: INote[] = [];
+  public notes: Array<INote | IAuthor> = [];
   public openFullScreen = false;
 
   public createNote(formEntries: { title: string; tags: string[] }) {
@@ -23,7 +23,7 @@ export class NoteService {
         date: date,
         tags: formEntries.tags,
         content: '',
-      };
+      } satisfies INote;
 
       this.notes = [...this.notes, note];
       this.saveNotes();
@@ -35,14 +35,16 @@ export class NoteService {
   }
 
   public getNotes() {
-    this.notes = this.storage.getItems('notes');
+    this.notes = this.storage.getItems('notes') satisfies Array<
+      INote | IAuthor
+    >;
   }
 
-  public getNote(noteId: string): INote | undefined {
+  public getNote(noteId: string): INote | IAuthor | undefined {
     this.getNotes();
 
     if (this.notes.length) {
-      return this.notes.find((note: INote) => {
+      return this.notes.find((note: INote | IAuthor) => {
         return noteId === note.id;
       });
     }

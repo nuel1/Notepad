@@ -1,9 +1,18 @@
 <div class="card" *ngIf="note" routerLinkActive="active">
   <div class="header flex align-c justify-between">
-    <span
-      ><b>{{ note.date }}</b></span
-    >
-    <button class="delete" (click)="onDelete(note)">Delete</button>
+    <div class="flex-col-1 flex flex-column">
+      <ng-container *ngIf="note.badge">
+        <div class="badge flex">
+          <span>Developer</span>
+        </div>
+      </ng-container>
+      <span class="date">
+        <b>{{ note.date }}</b>
+      </span>
+    </div>
+    <div class="flex-col-2">
+      <button class="delete" (click)="onDelete(note)">Delete</button>
+    </div>
   </div>
   <h3 class="title">{{ note.title | titlecase }}</h3>
   <p class="content body">{{ convertHtmlToText(note.content) }}</p>

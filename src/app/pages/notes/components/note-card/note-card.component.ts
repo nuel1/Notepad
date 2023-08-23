@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { INote } from 'src/app/interface/note';
+import { IAuthor, INote } from 'src/app/interface/note';
 import { toHTML, toDoc } from 'ngx-editor';
 import { INgxEditorJson } from 'src/app/interface/ngx-editor';
 
@@ -17,7 +17,7 @@ import { INgxEditorJson } from 'src/app/interface/ngx-editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteCardComponent implements OnInit {
-  @Input() note: INote | undefined;
+  @Input() note: INote | IAuthor | any;
   @Output() deleteNote = new EventEmitter<string>();
 
   btnDisabled = true;
@@ -46,7 +46,7 @@ export class NoteCardComponent implements OnInit {
     }
   }
 
-  onDelete(note: INote) {
+  onDelete(note: INote | IAuthor) {
     this.deleteNote.emit(note.id);
   }
 
