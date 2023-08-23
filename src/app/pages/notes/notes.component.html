@@ -37,7 +37,7 @@
   <ng-container *ngIf="formOpen">
     <note-form
       (cancel)="formOpen = $event"
-      (createNote)="noteService.createNote($event); formOpen = false"
+      (createNote)="createNote($event); formOpen = false"
     ></note-form>
   </ng-container>
 </div>

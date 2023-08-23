@@ -13,20 +13,22 @@ export class NoteService {
   public notes: INote[] = [];
   public openFullScreen = false;
 
-  public createNote(formEntry: { title: string; tags: string[] }) {
+  public createNote(formEntries: { title: string; tags: string[] }) {
     try {
       const id = this.global.generateId();
       const date = this.global.date;
       const note = {
-        title: formEntry.title,
+        title: formEntries.title,
         id: id,
         date: date,
-        tags: formEntry.tags,
+        tags: formEntries.tags,
         content: '',
       };
 
       this.notes = [...this.notes, note];
       this.saveNotes();
+
+      return id;
     } catch (e) {
       throw e;
     }

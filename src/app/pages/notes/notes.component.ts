@@ -64,6 +64,11 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   async getNotes() {}
 
+  createNote(formEntries: { title: string; tags: string[] }) {
+    const id = this.noteService.createNote(formEntries) satisfies string;
+    this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
+  }
+
   cancel(formCanceled: boolean) {}
 
   deleteNote(id: string) {
