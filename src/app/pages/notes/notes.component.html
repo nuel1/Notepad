@@ -19,7 +19,8 @@
         <note-card
           [note]="note"
           (deleteNote)="deleteNote($event)"
-          [routerLink]="'/notes/note/preview/' + note.id"
+          [pinned]="notePinned(note)"
+          (onTogglePin)="togglePin($event)"
         ></note-card>
       </ng-container>
     </ng-container>

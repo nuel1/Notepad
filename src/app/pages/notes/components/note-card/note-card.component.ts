@@ -18,7 +18,9 @@ import { INgxEditorJson } from 'src/app/interface/ngx-editor';
 })
 export class NoteCardComponent implements OnInit {
   @Input() note: INote | IAuthor | any;
+  @Input() pinned: boolean | undefined;
   @Output() deleteNote = new EventEmitter<string>();
+  @Output() onTogglePin = new EventEmitter<INote | IAuthor>();
 
   btnDisabled = true;
   tagReminder = 0;

@@ -12,8 +12,13 @@ export class NoteService {
 
   public notes: Array<INote | IAuthor> = [];
   public openFullScreen = false;
+  public pinnedNotes: Array<INote | IAuthor> = [];
+  public pinned = false;
 
-  public createNote(formEntries: { title: string; tags: string[] }) {
+  public createNote(formEntries: {
+    title: string;
+    tags: string[];
+  }): string | Error {
     try {
       const id = this.global.generateId();
       const date = this.global.date;
@@ -32,6 +37,17 @@ export class NoteService {
     } catch (e) {
       throw e;
     }
+  }
+
+  pinNote(note: INote | IAuthor) {
+    this.pinnedNotes.unshift(note);
+    console.log(this.pinnedNotes);
+  }
+
+  unpinNote(noteId: string) {
+    this.pinnedNotes = this.pinnedNotes.filter(
+      (note: INote | IAuthor) => note.id !== noteId
+    );
   }
 
   public getNotes() {

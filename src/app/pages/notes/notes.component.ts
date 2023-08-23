@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -26,7 +27,8 @@ export class NotesComponent implements OnInit, OnDestroy {
     public noteService: NoteService,
     public globalService: GlobalsService,
     private title: Title,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private changeDectectorRef: ChangeDetectorRef
   ) {}
 
   formOpen = false;
@@ -68,8 +70,44 @@ export class NotesComponent implements OnInit, OnDestroy {
   async getNotes() {}
 
   createNote(formEntries: { title: string; tags: string[] }) {
-    const id = this.noteService.createNote(formEntries) satisfies string;
-    this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
+    try {
+      const id = this.noteService.createNote(formEntries) as string;
+      this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Updates the 'pinned' property value in the note service
+  // by comparing each note of the 'notes' array with the entries in the 'pinnedNote' array.
+  // If a note's content matches any of the pinned notes, the 'pinned'
+  // value is set to true for that note; otherwise, it's set to false.
+  notePinned(note: INote | IAuthor): boolean {
+    if (Boolean(this.noteService.pinnedNotes.length)) {
+      this.noteService.pinnedNotes.forEach((pinnedNote: INote | IAuthor) => {
+        if (pinnedNote.id === note.id) this.noteService.pinned = true;
+        else this.noteService.pinned = false;
+      });
+    }
+    return this.noteService.pinned;
+  }
+
+  togglePin(note: INote | IAuthor) {
+    if (Boolean(this.noteService.pinnedNotes.length)) {
+      const noteExistInPinnedNotes = this.noteService.pinnedNotes.find(
+        (pinnedNote: INote | IAuthor) => pinnedNote.id === note.id
+      ) satisfies INote | IAuthor | undefined;
+
+      if (Boolean(noteExistInPinnedNotes)) {
+        const exitingNote = noteExistInPinnedNotes as INote | IAuthor;
+        this.noteService.unpinNote(exitingNote.id);
+      } else {
+        this.noteService.pinNote(note);
+      }
+    } else {
+      this.noteService.pinNote(note);
+    }
+    this.changeDectectorRef.detectChanges();
   }
 
   cancel(formCanceled: boolean) {}
