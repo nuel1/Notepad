@@ -45,6 +45,10 @@ export class NotePreviewerComponent
     });
   }
 
+  get noteIsAuthor() {
+    return this.note?.hasOwnProperty('badge');
+  }
+
   ngAfterViewInit(): void {
     this.previewNote();
   }

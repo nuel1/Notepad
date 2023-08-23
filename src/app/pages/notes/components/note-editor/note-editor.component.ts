@@ -75,11 +75,6 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/notes/note/preview/' + note.id);
   }
 
-  ngOnDestroy(): void {
-    this.editor.destroy();
-    this.subscription?.unsubscribe();
-  }
-
   contentFromFullscreen_preview(content: string) {
     this.form?.get('editorContent')?.patchValue(content);
     this.previewNote();
@@ -94,5 +89,10 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   deleteTag(tag: string) {
     this.note?.tags.splice(this.note.tags.indexOf(tag), 1);
     this.noteService.saveupdatedNote(this.note as INote);
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+    this.subscription?.unsubscribe();
   }
 }

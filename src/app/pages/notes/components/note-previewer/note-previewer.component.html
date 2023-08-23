@@ -1,7 +1,9 @@
 <div #container class="previewer"></div>
-<div
-  class="icon"
-  [routerLink]="'/notes/note/preview/' + this.note?.id + '/edit'"
->
-  <img src="assets/icon-svgs/pencil.svg" />
-</div>
+<ng-container *ngIf="!noteIsAuthor">
+  <div
+    class="icon"
+    [routerLink]="'/notes/note/preview/' + this.note?.id + '/edit'"
+  >
+    <img src="assets/icon-svgs/pencil.svg" />
+  </div>
+</ng-container>

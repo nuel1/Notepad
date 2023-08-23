@@ -1,9 +1,9 @@
-import { INote } from './interface/note';
+import { IAuthor } from './interface/note';
 
-export class DefaultNote implements INote {
-  readonly title =
-    'Get Your Note-Taking Mojo Flowing: Meet Our Snazzy Note Editor!';
-  readonly content = `
+export class DefaultNote implements Readonly<IAuthor> {
+  badge: 'author' = 'author';
+  title = 'Get Your Note-Taking Mojo Flowing: Meet Our Snazzy Note Editor!';
+  content = `
         <h1>Get Your Note-Taking Mojo Flowing: Meet Our Snazzy Note Editor!</h1>
         <p>
             Welcome to our note editor! It's a versatile and user-friendly 
@@ -102,9 +102,9 @@ export class DefaultNote implements INote {
         </p>
     `;
 
-  readonly id = 'welcome-to-note-editor';
-  readonly tags = ['Note manuel'];
-  readonly date = new Date().toLocaleString('en-US', {
+  id = 'welcome-to-note-editor';
+  tags = ['Note manuel'];
+  date = new Date().toLocaleString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

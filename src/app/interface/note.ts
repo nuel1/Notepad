@@ -5,3 +5,7 @@ export interface INote {
   tags: string[];
   content: string;
 }
+
+export interface IAuthor extends INote {
+  badge: 'author';
+}
