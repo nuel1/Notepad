@@ -30,6 +30,11 @@ ul {
       padding-inline: 1.6rem;
     }
 
+    .NgxEditor__MenuBar {
+      overflow-x: scroll;
+      flex-wrap: nowrap;
+    }
+
     .NgxEditor,
     .NgxEditor__MenuBar {
       max-width: 320px;

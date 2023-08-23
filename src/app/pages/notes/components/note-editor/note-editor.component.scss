@@ -10,6 +10,11 @@
   gap: 1rem;
 }
 
+form {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .row {
   grid-template-columns: 120px 1fr;
   gap: 1rem;
@@ -49,6 +54,7 @@ p {
 .col-2 {
   ul {
     flex-wrap: wrap;
+    margin-right: 0.5rem;
   }
 }
 
@@ -107,7 +113,6 @@ p {
   border: 1px solid #c2c2c2;
   color: inherit;
   line-height: 2;
-  margin-left: 0.6rem;
 
   ng-icon {
     margin-left: 0;

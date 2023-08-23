@@ -10,8 +10,8 @@ import {
   ElementRef,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Editor, Toolbar, Validators } from 'ngx-editor';
-import { Observable, Subscription, catchError, combineLatestWith } from 'rxjs';
+import { Editor, Toolbar, ToolbarItem, Validators } from 'ngx-editor';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'note-editor-fullscreen',
@@ -24,37 +24,35 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
   @Output() onExitFullScreen = new EventEmitter<string>();
   @Output() onPreview = new EventEmitter<string>();
 
-  constructor() {}
+  constructor() {
+    this.form = new FormGroup({
+      editorContent: new FormControl('', Validators.required()),
+    });
+  }
 
   subscription: Subscription | undefined;
-  editor: Editor = new Editor();
+  editor = new Editor();
   refinedEditorToolbarConfig: Array<string[]> | Toolbar | any = [];
   content = '';
-
-  form = new FormGroup({
-    editorContent: new FormControl('', Validators.required()),
-  });
+  form: FormGroup | undefined;
 
   ngOnInit(): void {
     this.removeHeadingTool(this.editorToolbarConfig)
+      .cleanUpEmptyArray()
       .removeImageToolAndLinkTool()
-      .removeColorTool()
-      .cleanUpEmptyArray();
+      .removeColorTool();
 
     this.subscription = this.content$?.subscribe(
-      (value: string) => this.form.get('editorContent')?.patchValue(value),
+      (value: string) => this.form?.get('editorContent')?.patchValue(value),
       (e) => console.error(e)
     );
   }
 
   removeHeadingTool(editorToolbarConfig: Toolbar) {
     this.refinedEditorToolbarConfig = editorToolbarConfig.map(
-      (toolbarSet: Array<string[] | any>) => {
+      (toolbarSet: Array<string[] | ToolbarItem>) => {
         return toolbarSet.reduce(
-          (
-            tools: Array<string>,
-            tool: string | Record<string, string[]>
-          ): Array<string> => {
+          (tools: Array<string>, tool: Array<string> | ToolbarItem) => {
             if (typeof tool === 'string') tools = [...tools, tool];
             return tools;
           },
@@ -71,18 +69,13 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
         return !toolSet.includes('link') || !toolSet.includes('image');
       }
     );
-
     return this;
   }
 
   removeColorTool() {
     this.refinedEditorToolbarConfig = this.refinedEditorToolbarConfig.filter(
       (toolSet: Array<string>) => {
-        return (
-          toolSet.length === 2 &&
-          !toolSet[0].match(/_color$/) &&
-          !toolSet[1].match(/_color$/)
-        );
+        return !toolSet[0].match(/_color$/) && !toolSet[1].match(/_color$/);
       }
     );
     return this;
@@ -92,10 +85,11 @@ export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
     this.refinedEditorToolbarConfig = this.refinedEditorToolbarConfig.filter(
       (toolSet: Array<string>) => Boolean(toolSet.length)
     );
+    return this;
   }
 
   saveChanges() {
-    this.content = this.form.get('editorContent')?.value as string;
+    this.content = this.form?.get('editorContent')?.value as string;
   }
 
   previewChanges() {

@@ -1,42 +1,44 @@
 <div class="fullscreen">
-  <form [formGroup]="form">
-    <div class="grid">
-      <div class="grid-row-1">
-        <ngx-editor
-          [editor]="editor"
-          [placeholder]="'Type here...'"
-          formControlName="editorContent"
-        ></ngx-editor>
-      </div>
-      <div class="grid-row-2 flex flex-column justify-between">
-        <div class="editor-toolbar">
-          <ngx-editor-menu
+  <ng-container *ngIf="form">
+    <form [formGroup]="form">
+      <div class="grid">
+        <div class="grid-row-1">
+          <ngx-editor
             [editor]="editor"
-            [toolbar]="refinedEditorToolbarConfig"
-          >
-          </ngx-editor-menu>
+            [placeholder]="'Type here...'"
+            formControlName="editorContent"
+          ></ngx-editor>
         </div>
-        <div class="action-btns flex">
-          <button
-            class="btn-preview flex align-c justify-c"
-            [disabled]="form.invalid"
-            (click)="previewChanges()"
-          >
-            <img src="assets/icon-svgs/iconmonstr-eye-filled.svg" />
+        <div class="grid-row-2 flex flex-column justify-between">
+          <div class="editor-toolbar">
+            <ngx-editor-menu
+              [editor]="editor"
+              [toolbar]="refinedEditorToolbarConfig"
+            >
+            </ngx-editor-menu>
+          </div>
+          <div class="action-btns flex">
+            <button
+              class="btn-preview flex align-c justify-c"
+              [disabled]="form.invalid"
+              (click)="previewChanges()"
+            >
+              <img src="assets/icon-svgs/iconmonstr-eye-filled.svg" />
 
-            <span> Preview </span>
-          </button>
-          <button
-            class="btn-fullscreen flex align-c justify-c"
-            [disabled]="form.invalid"
-            (click)="exitFullScreen()"
-          >
-            <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
+              <span> Preview </span>
+            </button>
+            <button
+              class="btn-fullscreen flex align-c justify-c"
+              [disabled]="form.invalid"
+              (click)="exitFullScreen()"
+            >
+              <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
 
-            <span>Exit Fullscreen</span>
-          </button>
+              <span>Exit Fullscreen</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </ng-container>
 </div>

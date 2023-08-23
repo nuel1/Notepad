@@ -11,6 +11,7 @@ export class NoteService {
   ) {}
 
   public notes: INote[] = [];
+  public openFullScreen = false;
 
   public createNote(formEntry: { title: string; tags: string[] }) {
     try {

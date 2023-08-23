@@ -25,15 +25,13 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private noteService: NoteService,
+    public noteService: NoteService,
     private browserTitle: Title,
     public eventService: EventService
   ) {
-    this.subscription = this.form.valueChanges.subscribe(
-      ({ editorContent }) => {
-        this.contentChangeObserver$.next(editorContent as string);
-      }
-    );
+    this.form = new FormGroup({
+      editorContent: new FormControl('', Validators.required()),
+    });
   }
 
   editor = new Editor();
@@ -44,22 +42,24 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   contentChangeObserver$ = new BehaviorSubject<string>('');
   tagName = new FormControl('', Validators.required());
   subscription: Subscription | undefined;
-  openFullScreen = false;
-
-  form = new FormGroup({
-    editorContent: new FormControl('', Validators.required()),
-  });
+  form: FormGroup | undefined;
 
   async ngOnInit() {
+    this.subscription = this.form?.valueChanges.subscribe(
+      ({ editorContent }) => {
+        this.contentChangeObserver$.next(editorContent as string);
+      }
+    );
+
     this.browserTitle.setTitle('Note - Edit');
     try {
       const id = this.route.snapshot.paramMap.get('id') as string;
       this.note = this.noteService.getNote(id);
 
       if (this.note) {
-        this.form.get('editorContent')!.patchValue(this.note.content);
+        this.form?.get('editorContent')!.patchValue(this.note.content);
         this.contentChangeObserver$.next(
-          this.form.get('editorContent')?.value as string
+          this.form?.get('editorContent')?.value as string
         );
         return;
       }
@@ -70,7 +70,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
 
   previewNote() {
     const note = this.note as INote;
-    note.content = this.form.get('editorContent')!.value as string;
+    note.content = this.form?.get('editorContent')!.value as string;
     this.noteService.saveupdatedNote(note);
     this.router.navigateByUrl('/notes/note/preview/' + note.id);
   }
@@ -81,7 +81,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   }
 
   contentFromFullscreen_preview(content: string) {
-    this.form.get('editorContent')?.patchValue(content);
+    this.form?.get('editorContent')?.patchValue(content);
     this.previewNote();
   }
 

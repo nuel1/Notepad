@@ -13,16 +13,19 @@
       <div class="row-3 row grid align-c">
         <div class="col-1">Tags</div>
         <div class="col-2 flex align-c">
-          <ul class="flex">
-            <li *ngFor="let tag of note.tags" class="flex tag align-c">
-              <span>{{ tag }}</span>
-              <ng-icon
-                name="ionCloseCircle"
-                (click)="deleteTag(tag)"
-                class="close-icon"
-              ></ng-icon>
-            </li>
-          </ul>
+          <ng-container *ngIf="note.tags.length">
+            <ul class="flex">
+              <li *ngFor="let tag of note.tags" class="flex tag align-c">
+                <span>{{ tag }}</span>
+                <ng-icon
+                  name="ionCloseCircle"
+                  (click)="deleteTag(tag)"
+                  class="close-icon"
+                ></ng-icon>
+              </li>
+            </ul>
+          </ng-container>
+
           <form inputTagToggle class="flex align-c">
             <ng-container *ngIf="eventService.$showTagInput | async">
               <input
@@ -47,44 +50,47 @@
     </div>
   </div>
   <div class="editor">
-    <form [formGroup]="form">
-      <ngx-editor-menu [editor]="editor" [toolbar]="editorToolbarConfig">
-      </ngx-editor-menu>
-      <ngx-editor
-        [editor]="editor"
-        [placeholder]="'Type here...'"
-        formControlName="editorContent"
-      ></ngx-editor>
-      <div class="action-btns flex">
-        <button
-          class="btn-preview flex align-c justify-c"
-          [disabled]="form.invalid"
-          (click)="previewNote()"
-        >
-          <img src="assets/icon-svgs/iconmonstr-eye-filled.svg" />
+    <ng-container *ngIf="form">
+      <form [formGroup]="form">
+        <ngx-editor-menu [editor]="editor" [toolbar]="editorToolbarConfig">
+        </ngx-editor-menu>
+        <ngx-editor
+          [editor]="editor"
+          [placeholder]="'Type here...'"
+          formControlName="editorContent"
+        ></ngx-editor>
+        <div class="action-btns flex">
+          <button
+            class="btn-preview flex align-c justify-c"
+            [disabled]="form.invalid"
+            (click)="previewNote()"
+          >
+            <img src="assets/icon-svgs/iconmonstr-eye-filled.svg" />
 
-          <span> Preview </span>
-        </button>
-        <button
-          class="btn-fullscreen flex align-c justify-c"
-          [disabled]="form.invalid"
-          (click)="openFullScreen = true"
-        >
-          <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
+            <span> Preview </span>
+          </button>
+          <button
+            class="btn-fullscreen flex align-c justify-c"
+            [disabled]="form.invalid"
+            (click)="noteService.openFullScreen = true"
+          >
+            <img src="assets/icon-svgs/iconmonstr-full-screen-filled.svg" />
 
-          <span>Open Fullscreen</span>
-        </button>
-      </div>
-    </form>
+            <span>Open Fullscreen</span>
+          </button>
+        </div>
+      </form>
+    </ng-container>
   </div>
 </div>
-<ng-container *ngIf="openFullScreen">
+<ng-container *ngIf="noteService.openFullScreen">
   <note-editor-fullscreen
     [editorToolbarConfig]="editorToolbarConfig"
     [content$]="contentChangeObserver$"
     (onPreview)="contentFromFullscreen_preview($event)"
     (onExitFullScreen)="
-      this.form.get('editorContent')?.patchValue($event); openFullScreen = false
+      this.form?.get('editorContent')?.patchValue($event);
+      noteService.openFullScreen = false
     "
   ></note-editor-fullscreen>
 </ng-container>

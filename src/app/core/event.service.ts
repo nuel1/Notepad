@@ -9,7 +9,6 @@ export class EventService {
   public tagInput: Element | undefined;
   public $showTagInput = new BehaviorSubject<boolean>(false);
   public renderer2: Renderer2 | undefined;
-  // public $showSideNavbar;
 
   constructor() {}
 
