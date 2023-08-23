@@ -57,10 +57,11 @@ export class NoteService {
   }
 
   public saveupdatedNote(note: INote) {
-    this.notes.forEach(
-      (storedNote: INote, index: number) =>
-        storedNote.id === note.id && (this.notes[index] = note)
-    );
+    this.notes = this.notes.filter((storedNote: INote | IAuthor) => {
+      return storedNote.id !== note.id;
+    }) satisfies Array<INote | IAuthor>;
+
+    this.notes.unshift(note);
     this.saveNotes();
   }
 

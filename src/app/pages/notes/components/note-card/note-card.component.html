@@ -10,8 +10,14 @@
         <b>{{ note.date }}</b>
       </span>
     </div>
-    <div class="flex-col-2">
-      <button class="delete" (click)="onDelete(note)">Delete</button>
+    <div class="flex-col-2 flex">
+      <div class="pin">
+        <img src="assets/icon-svgs/pin.svg" />
+      </div>
+      <div class="menu">
+        <img src="assets/icon-svgs/menu-dot-vertical-filled.svg" />
+      </div>
+      <!-- <button class="delete" (click)="onDelete(note)">Delete</button> -->
     </div>
   </div>
   <h3 class="title">{{ note.title | titlecase }}</h3>
