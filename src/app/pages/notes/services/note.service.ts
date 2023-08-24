@@ -41,12 +41,71 @@ export class NoteService {
 
   pinNote(note: INote | IAuthor) {
     this.pinnedNotes.unshift(note);
+    this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
   }
 
   unpinNote(noteId: string) {
     this.pinnedNotes = this.pinnedNotes.filter(
       (note: INote | IAuthor) => note.id !== noteId
     );
+
+    this.notes = this.unstackUnpinnedNote_getNewArrangementOfNotes(
+      noteId,
+      this.notes
+    );
+  }
+
+  // Stacks pinned notes at the beginning of the notes array.
+  //@returns a new arrangement of notes.
+  stackPinnedNotes_getNewArrangementOfNotes(
+    notes: Array<INote | IAuthor>
+  ): Array<INote | IAuthor> {
+    const mapIndex: Record<string, number> = {};
+
+    // Mapping the index of pinned note in notes
+    notes.forEach((note: INote | IAuthor, index: number) => {
+      this.pinnedNotes.forEach((pinnedNote: INote | IAuthor) => {
+        if (pinnedNote.id === note.id)
+          // Get pinned note id and map it to its index
+          mapIndex[note.id] = index;
+      });
+    });
+
+    // Filtering out pinned notes from notes
+    const unpinnedNotes = notes.filter(
+      (note: INote | IAuthor) => notes.indexOf(note) !== mapIndex[note.id]
+    ) satisfies Array<INote | IAuthor>;
+
+    // Indexes of pinned notes in notes
+    const indexes = Object.values(mapIndex) satisfies Array<number>;
+    const sortedIndexes = indexes.sort(
+      (min: number, max: number) => min - max
+    ) satisfies Array<number>;
+
+    // Starting from the end of the sortedIndexes array, pick each note
+    // and prepend it to the begining of unpinnedNotes array.
+    for (let index = sortedIndexes.length - 1; index >= 0; index--) {
+      unpinnedNotes.unshift(notes[index]);
+    }
+
+    return unpinnedNotes;
+  }
+
+  // Pushes unpinned note to the end of the notes array.
+  unstackUnpinnedNote_getNewArrangementOfNotes(
+    unpinnedNoteId: string,
+    notes: Array<INote | IAuthor>
+  ): Array<INote | IAuthor> {
+    const unpinnedNote = notes.find(
+      (note: INote | IAuthor) => note.id === unpinnedNoteId
+    ) satisfies INote | IAuthor | undefined;
+
+    const filteredNote = notes.filter(
+      (note: INote | IAuthor) => note.id !== unpinnedNoteId
+    ) satisfies Array<INote | IAuthor>;
+
+    filteredNote.push(unpinnedNote as INote | IAuthor);
+    return filteredNote;
   }
 
   public getNotes() {

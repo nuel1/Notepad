@@ -52,12 +52,12 @@ export class NoteCardComponent implements OnInit {
     this.deleteNote.emit(note.id);
   }
 
-  getAmtOfTags(amt: number) {
+  getNumberOfTags(qty: number) {
     if (this.note) {
-      if (amt === this.note.tags.length || amt > this.note.tags.length)
+      if (qty === this.note.tags.length || qty > this.note.tags.length)
         return this.note.tags;
-      this.tagReminder = this.note.tags.length - amt;
-      return this.note.tags.slice(0, amt);
+      this.tagReminder = this.note.tags.length - qty;
+      return this.note.tags.slice(0, qty);
     }
     return [];
   }
