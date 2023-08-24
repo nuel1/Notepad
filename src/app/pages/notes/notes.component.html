@@ -19,8 +19,8 @@
         <note-card
           [note]="note"
           (deleteNote)="deleteNote($event)"
-          [pinned]="notePinned(note)"
           (onTogglePin)="togglePin($event)"
+          [pinned]="notePinned(note)"
         ></note-card>
       </ng-container>
     </ng-container>

@@ -41,7 +41,6 @@ export class NoteService {
 
   pinNote(note: INote | IAuthor) {
     this.pinnedNotes.unshift(note);
-    console.log(this.pinnedNotes);
   }
 
   unpinNote(noteId: string) {

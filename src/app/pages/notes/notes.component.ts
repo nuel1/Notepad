@@ -3,7 +3,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -27,8 +26,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     public noteService: NoteService,
     public globalService: GlobalsService,
     private title: Title,
-    private breakpointObserver: BreakpointObserver,
-    private changeDectectorRef: ChangeDetectorRef
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   formOpen = false;
@@ -83,11 +81,20 @@ export class NotesComponent implements OnInit, OnDestroy {
   // If a note's content matches any of the pinned notes, the 'pinned'
   // value is set to true for that note; otherwise, it's set to false.
   notePinned(note: INote | IAuthor): boolean {
+    let mapIndex: Record<string, number> = {};
+
     if (Boolean(this.noteService.pinnedNotes.length)) {
-      this.noteService.pinnedNotes.forEach((pinnedNote: INote | IAuthor) => {
-        if (pinnedNote.id === note.id) this.noteService.pinned = true;
-        else this.noteService.pinned = false;
-      });
+      this.noteService.pinnedNotes.forEach(
+        (pinnedNote: INote | IAuthor, index: number) => {
+          mapIndex[pinnedNote.id] = index;
+        }
+      );
+
+      const index = mapIndex[note.id] satisfies number | undefined;
+      if (index !== undefined) this.noteService.pinned = true;
+      else this.noteService.pinned = false;
+    } else {
+      this.noteService.pinned = false;
     }
     return this.noteService.pinned;
   }
@@ -107,7 +114,6 @@ export class NotesComponent implements OnInit, OnDestroy {
     } else {
       this.noteService.pinNote(note);
     }
-    this.changeDectectorRef.detectChanges();
   }
 
   cancel(formCanceled: boolean) {}
