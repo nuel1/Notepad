@@ -41,7 +41,7 @@ export class NoteService {
 
   pinNote(note: INote | IAuthor) {
     this.pinnedNotes.unshift(note);
-    this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+    this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
   }
 
   unpinNote(noteId: string) {
@@ -49,10 +49,7 @@ export class NoteService {
       (note: INote | IAuthor) => note.id !== noteId
     );
 
-    this.notes = this.unstackUnpinnedNote_getNewArrangementOfNotes(
-      noteId,
-      this.notes
-    );
+    this.unstackUnpinnedNote_getNewArrangementOfNotes(noteId, this.notes);
   }
 
   // Stacks pinned notes at the beginning of the notes array.
@@ -71,10 +68,13 @@ export class NoteService {
       });
     });
 
+    console.log(mapIndex);
     // Filtering out pinned notes from notes
     const unpinnedNotes = notes.filter(
-      (note: INote | IAuthor) => notes.indexOf(note) !== mapIndex[note.id]
+      (note: INote | IAuthor) => !mapIndex.hasOwnProperty(note.id)
     ) satisfies Array<INote | IAuthor>;
+
+    console.log(unpinnedNotes);
 
     // Indexes of pinned notes in notes
     const indexes = Object.values(mapIndex) satisfies Array<number>;
