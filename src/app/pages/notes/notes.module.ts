@@ -15,6 +15,7 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { NoteService } from './services/note.service';
 import { InputTagToggleDirective } from './directives/input-tag-toggle.directive';
 import { NoteEditorFullscreenComponent } from './components/note-editor/note-editor-fullscreen/note-editor-fullscreen.component';
+import { NoteOptionsComponent } from './components/note-options/note-options.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NoteEditorFullscreenComponent } from './components/note-editor/note-edi
     NoteFormInputErrorComponent,
     InputTagToggleDirective,
     NoteEditorFullscreenComponent,
+    NoteOptionsComponent,
   ],
   imports: [
     CommonModule,
