@@ -130,12 +130,15 @@ export class NoteService {
     this.getNotes();
   }
 
-  public saveupdatedNote(note: INote) {
+  public saveUpdatedNote(note: INote) {
     this.notes = this.notes.filter((storedNote: INote | IAuthor) => {
       return storedNote.id !== note.id;
     }) satisfies Array<INote | IAuthor>;
 
     this.notes.unshift(note);
+    if (Boolean(this.pinnedNotes.length)) {
+      this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+    }
     this.saveNotes();
   }
 
