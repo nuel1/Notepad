@@ -76,6 +76,13 @@ button {
   overflow-x: hidden;
 }
 
+.modal {
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+}
+
 .card,
 .form-modal-toggle-button {
   padding-block: 0.8rem;

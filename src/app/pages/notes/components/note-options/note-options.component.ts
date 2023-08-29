@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-note-options',
+  selector: 'note-options',
   templateUrl: './note-options.component.html',
-  styleUrls: ['./note-options.component.scss']
+  styleUrls: ['./note-options.component.scss'],
 })
-export class NoteOptionsComponent {
-
-}
+export class NoteOptionsComponent {}

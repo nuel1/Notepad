@@ -35,10 +35,15 @@
   >
     <router-outlet></router-outlet>
   </div>
-  <ng-container *ngIf="formOpen">
-    <note-form
-      (cancel)="formOpen = $event"
-      (createNote)="createNote($event); formOpen = false"
-    ></note-form>
-  </ng-container>
 </div>
+
+<ng-container *ngIf="formOpen">
+  <note-form
+    (cancel)="formOpen = $event"
+    (createNote)="createNote($event); formOpen = false"
+  ></note-form>
+</ng-container>
+
+<ng-container>
+  <note-options></note-options>
+</ng-container>

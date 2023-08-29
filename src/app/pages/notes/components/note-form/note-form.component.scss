@@ -7,11 +7,7 @@ h2 {
   text-align: center;
 }
 
-.modal-backdrop {
-  overflow: hidden;
-  position: fixed;
-  inset: 0;
-
+.form-modal {
   .overlay {
     z-index: -1;
     cursor: pointer;
