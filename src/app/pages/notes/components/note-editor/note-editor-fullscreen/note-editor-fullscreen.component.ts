@@ -8,6 +8,7 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Editor, Toolbar, ToolbarItem, Validators } from 'ngx-editor';
@@ -17,6 +18,7 @@ import { Observable, Subscription } from 'rxjs';
   selector: 'note-editor-fullscreen',
   templateUrl: './note-editor-fullscreen.component.html',
   styleUrls: ['./note-editor-fullscreen.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteEditorFullscreenComponent implements OnInit, OnDestroy {
   @Input() editorToolbarConfig: Toolbar | any;

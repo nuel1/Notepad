@@ -84,7 +84,7 @@ export class NoteService {
 
     // Starting from the end of the sortedIndexes array, pick each note
     // and prepend it to the begining of unpinnedNotes array.
-    for (let index = sortedIndexes.length - 1; index >= 0; index--) {
+    for (let index = 0; index < sortedIndexes.length; index++) {
       unpinnedNotes.unshift(notes[sortedIndexes[index]]);
     }
 
