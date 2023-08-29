@@ -30,7 +30,11 @@ export class NoteService {
         content: '',
       } satisfies INote;
 
-      this.notes = [...this.notes, note];
+      this.notes = [note, ...this.notes];
+      if (Boolean(this.pinnedNotes.length)) {
+        this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+      }
+
       this.saveNotes();
 
       return id;
