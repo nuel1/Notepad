@@ -3,6 +3,9 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  ElementRef,
+  ViewChild,
+  AfterContentInit,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -10,8 +13,9 @@ import { GlobalsService } from 'src/app/core/globals.service';
 import { IAuthor, INote } from 'src/app/interface/note';
 import { NoteService } from './services/note.service';
 import { DefaultNote } from 'src/app/note.default';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, from, fromEvent } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: 'app-notes',
@@ -20,7 +24,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   providers: [NoteService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotesComponent implements OnInit, OnDestroy {
+export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
+  @ViewChild('title', { static: true }) heading: ElementRef | undefined;
   constructor(
     private router: Router,
     public noteService: NoteService,
@@ -64,6 +69,8 @@ export class NotesComponent implements OnInit, OnDestroy {
 
     this.noteService.getNotes();
   }
+
+  ngAfterContentInit(): void {}
 
   async getNotes() {}
 

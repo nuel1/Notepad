@@ -6,7 +6,7 @@
       laptop_view_multi_display: !(isMobile | async) || currentRoutePathIsNotes
     }"
   >
-    <h1>My Notes</h1>
+    <h1 #title>My Notes</h1>
     <button
       class="form-modal-toggle-button flex align-c"
       (click)="formOpen = true"
@@ -44,6 +44,6 @@
   ></note-form>
 </ng-container>
 
-<ng-container>
+<!-- <ng-container>
   <note-options></note-options>
-</ng-container>
+</ng-container> -->
