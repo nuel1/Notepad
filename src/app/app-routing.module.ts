@@ -41,10 +41,17 @@ const routes: Routes = [
         (m) => m.TodoListModule
       ),
   },
+  {
+    path: 'error404',
+    loadChildren: () =>
+      import('./pages/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
+  },
 
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'error404',
   },
 ];
 
