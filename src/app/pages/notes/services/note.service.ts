@@ -1,24 +1,32 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import {
+  Injectable,
+  WritableSignal,
+  signal,
+  effect,
+  Signal,
+  computed,
+} from '@angular/core';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
 import { IAuthor, INote } from 'src/app/interface/note';
 
 @Injectable()
 export class NoteService {
-  constructor(
-    private storage: StorageService,
-    private global: GlobalsService
-  ) {}
+  constructor(private storage: StorageService, private global: GlobalsService) {
+    this.getNotes();
+    effect(() => {
+      this.saveNotes();
+    });
+  }
 
   public notes: WritableSignal<Array<INote | IAuthor>> = signal([]);
   public openFullScreen = false;
   public pinnedNotes: Array<INote | IAuthor> = [];
   public pinned = false;
 
-  public createNote(formEntries: {
-    title: string;
-    tags: string[];
-  }): string | Error {
+  public createNote(
+    formEntries: Pick<INote, 'title' | 'tags'>
+  ): string | Error {
     try {
       const id = this.global.generateId();
       const date = this.global.date;
@@ -36,8 +44,6 @@ export class NoteService {
           this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
         );
       }
-
-      this.saveNotes();
 
       return id;
     } catch (e) {
@@ -123,8 +129,6 @@ export class NoteService {
   }
 
   public getNote(noteId: string): INote | IAuthor | undefined {
-    this.getNotes();
-
     if (this.notes.length) {
       return this.notes().find((note: INote | IAuthor) => {
         return noteId === note.id;
@@ -135,7 +139,6 @@ export class NoteService {
 
   public saveNotes() {
     this.storage.saveItem('notes', this.notes());
-    this.getNotes();
   }
 
   public saveEditedNote(editedNote: INote) {
@@ -151,7 +154,6 @@ export class NoteService {
         this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
       );
     }
-    this.saveNotes();
   }
 
   public deleteNote(noteId: string) {
@@ -160,7 +162,5 @@ export class NoteService {
     );
 
     this.notes.set([...filteredNotes]);
-    this.saveNotes();
-    this.getNotes();
   }
 }

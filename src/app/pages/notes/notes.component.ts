@@ -71,17 +71,9 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
     Author's note can only be saved once.
     */
     if (!localStorage.getItem('authorNoteSaved')) {
-      this.noteService.notes.set([
-        ...this.noteService.notes(),
-        authorNote,
-      ]) satisfies void;
-
-      this.noteService.saveNotes();
+      this.noteService.notes.set([authorNote]) satisfies void;
       localStorage.setItem('authorNoteSaved', JSON.stringify(true));
     }
-
-    this.noteService.getNotes();
-    console.log(this.noteService.notes());
   }
 
   ngAfterContentInit(): void {}
