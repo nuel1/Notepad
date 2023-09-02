@@ -6,6 +6,11 @@ import {
   ElementRef,
   ViewChild,
   AfterContentInit,
+  Signal,
+  computed,
+  Inject,
+  ViewContainerRef,
+  TemplateRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -15,7 +20,7 @@ import { NoteService } from './services/note.service';
 import { DefaultNote } from 'src/app/note.default';
 import { BehaviorSubject, Subscription, from, fromEvent } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ConstantPool } from '@angular/compiler';
+import { NoteFormComponent } from './components/note-form/note-form.component';
 
 @Component({
   selector: 'app-notes',
@@ -26,17 +31,24 @@ import { ConstantPool } from '@angular/compiler';
 })
 export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
   @ViewChild('title', { static: true }) heading: ElementRef | undefined;
+  @ViewChild('form') formTemplate: TemplateRef<NoteFormComponent> | undefined;
   constructor(
     private router: Router,
     public noteService: NoteService,
     public globalService: GlobalsService,
     private title: Title,
-    private breakpointObserver: BreakpointObserver
-  ) {}
+    private breakpointObserver: BreakpointObserver,
+    private viewContainerRef: ViewContainerRef
+  ) {
+    this.notes();
+  }
 
   formOpen = false;
   subscription: Subscription | undefined;
   currentRoutePathIsNotes: boolean | undefined;
+  notes: Signal<Array<INote | IAuthor>> = computed(() =>
+    this.noteService.notes()
+  );
   isMobile = new BehaviorSubject<boolean>(false);
 
   async ngOnInit() {
@@ -59,15 +71,17 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
     Author's note can only be saved once.
     */
     if (!localStorage.getItem('authorNoteSaved')) {
-      this.noteService.notes = [
-        ...this.noteService.notes,
+      this.noteService.notes.set([
+        ...this.noteService.notes(),
         authorNote,
-      ] satisfies Array<INote | IAuthor>;
+      ]) satisfies void;
+
       this.noteService.saveNotes();
       localStorage.setItem('authorNoteSaved', JSON.stringify(true));
     }
 
     this.noteService.getNotes();
+    console.log(this.noteService.notes());
   }
 
   ngAfterContentInit(): void {}
@@ -132,18 +146,20 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   async changeRoute(id: string, deleteFn: Function) {
-    const [prevIndex, nextIndex] = this.noteService.notes.reduce(
-      (result: number[], note: INote, index: number) =>
-        note.id === id ? result.concat(index - 1, index + 1) : result,
-      []
-    );
+    const [prevIndex, nextIndex] = this.noteService
+      .notes()
+      .reduce(
+        (result: number[], note: INote, index: number) =>
+          note.id === id ? result.concat(index - 1, index + 1) : result,
+        []
+      );
 
     let note;
-    if (this.noteService.notes[nextIndex])
-      note = this.noteService.notes[nextIndex];
+    if (this.noteService.notes()[nextIndex])
+      note = this.noteService.notes()[nextIndex];
 
-    if (!note && this.noteService.notes[prevIndex])
-      note = this.noteService.notes[prevIndex];
+    if (!note && this.noteService.notes()[prevIndex])
+      note = this.noteService.notes()[prevIndex];
 
     await deleteFn();
     if (!this.isMobile) {

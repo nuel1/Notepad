@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
 import { IAuthor, INote } from 'src/app/interface/note';
@@ -10,7 +10,7 @@ export class NoteService {
     private global: GlobalsService
   ) {}
 
-  public notes: Array<INote | IAuthor> = [];
+  public notes: WritableSignal<Array<INote | IAuthor>> = signal([]);
   public openFullScreen = false;
   public pinnedNotes: Array<INote | IAuthor> = [];
   public pinned = false;
@@ -30,9 +30,11 @@ export class NoteService {
         content: '',
       } satisfies INote;
 
-      this.notes = [note, ...this.notes];
+      this.notes.set([note, ...this.notes()]);
       if (Boolean(this.pinnedNotes.length)) {
-        this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+        this.notes.set(
+          this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+        );
       }
 
       this.saveNotes();
@@ -45,7 +47,9 @@ export class NoteService {
 
   pinNote(note: INote | IAuthor) {
     this.pinnedNotes.unshift(note);
-    this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+    this.notes.set(
+      this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+    );
   }
 
   unpinNote(noteId: string) {
@@ -53,9 +57,8 @@ export class NoteService {
       (note: INote | IAuthor) => note.id !== noteId
     );
 
-    this.notes = this.unstackUnpinnedNote_getNewArrangementOfNotes(
-      noteId,
-      this.notes
+    this.notes.set(
+      this.unstackUnpinnedNote_getNewArrangementOfNotes(noteId, this.notes())
     );
   }
 
@@ -113,16 +116,17 @@ export class NoteService {
   }
 
   public getNotes() {
-    this.notes = this.storage.getItems('notes') satisfies Array<
+    let savedNotes = this.storage.getItems('notes') satisfies Array<
       INote | IAuthor
     >;
+    this.notes.set(savedNotes);
   }
 
   public getNote(noteId: string): INote | IAuthor | undefined {
     this.getNotes();
 
     if (this.notes.length) {
-      return this.notes.find((note: INote | IAuthor) => {
+      return this.notes().find((note: INote | IAuthor) => {
         return noteId === note.id;
       });
     }
@@ -130,28 +134,32 @@ export class NoteService {
   }
 
   public saveNotes() {
-    this.storage.saveItem('notes', this.notes);
+    this.storage.saveItem('notes', this.notes());
     this.getNotes();
   }
 
-  public saveUpdatedNote(note: INote) {
-    this.notes = this.notes.filter((storedNote: INote | IAuthor) => {
-      return storedNote.id !== note.id;
+  public saveEditedNote(editedNote: INote) {
+    const unEditedNotes = this.notes().filter((note: INote | IAuthor) => {
+      return note.id !== editedNote.id;
     }) satisfies Array<INote | IAuthor>;
 
-    this.notes.unshift(note);
+    unEditedNotes.unshift(editedNote);
+    this.notes.set(unEditedNotes);
+
     if (Boolean(this.pinnedNotes.length)) {
-      this.notes = this.stackPinnedNotes_getNewArrangementOfNotes(this.notes);
+      this.notes.set(
+        this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+      );
     }
     this.saveNotes();
   }
 
   public deleteNote(noteId: string) {
-    const filteredNotes = this.notes.filter(
+    const filteredNotes = this.notes().filter(
       (note: INote) => note.id !== noteId
     );
 
-    this.notes = [...filteredNotes];
+    this.notes.set([...filteredNotes]);
     this.saveNotes();
     this.getNotes();
   }

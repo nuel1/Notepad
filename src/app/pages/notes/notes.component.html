@@ -15,7 +15,7 @@
       <span>Add new note</span>
     </button>
     <ng-container *ngIf="noteService.notes">
-      <ng-container *ngFor="let note of noteService.notes; trackById">
+      <ng-container *ngFor="let note of notes(); trackById">
         <note-card
           [note]="note"
           (deleteNote)="deleteNote($event)"

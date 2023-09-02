@@ -71,7 +71,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   previewNote() {
     const note = this.note as INote;
     note.content = this.form?.get('editorContent')!.value as string;
-    this.noteService.saveUpdatedNote(note);
+    this.noteService.saveEditedNote(note);
     this.router.navigateByUrl('/notes/note/preview/' + note.id);
   }
 
@@ -83,12 +83,12 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   addTag() {
     const newTag = this.tagName.value as string;
     this.note?.tags.push(newTag);
-    this.note && this.noteService.saveUpdatedNote(this.note);
+    this.note && this.noteService.saveEditedNote(this.note);
   }
 
   deleteTag(tag: string) {
     this.note?.tags.splice(this.note.tags.indexOf(tag), 1);
-    this.noteService.saveUpdatedNote(this.note as INote);
+    this.noteService.saveEditedNote(this.note as INote);
   }
 
   ngOnDestroy(): void {
