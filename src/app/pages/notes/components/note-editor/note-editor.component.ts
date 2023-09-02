@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Validators } from 'ngx-editor';
 import { toolbar } from './editor.config';
-import { INote } from 'src/app/interface/note';
+import { IAuthor, INote } from 'src/app/interface/note';
 import { NoteService } from '../../services/note.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EventService } from 'src/app/core/event.service';
@@ -55,9 +55,14 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     try {
       const id = this.route.snapshot.paramMap.get('id') satisfies null | string;
       if (!id) throw Error('Id not found');
-      this.note = this.noteService.getNote(id);
+      const note = this.noteService.getNote(id) satisfies
+        | INote
+        | IAuthor
+        | null
+        | Error;
 
-      if (this.note) {
+      if (note && !(note instanceof Error)) {
+        this.note = note satisfies INote | IAuthor;
         this.form?.get('editorContent')!.patchValue(this.note.content);
         this.contentChangeObserver$.next(
           this.form?.get('editorContent')?.value satisfies string

@@ -35,12 +35,26 @@ export class NotePreviewerComponent
     this.title.setTitle('Note - Preview');
 
     const id = this.route.snapshot.params['id'];
+    try {
+    } catch (e) {}
     this.note = this.noteService.getNote(id) as INote | IAuthor;
     this.notePreview = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        const id = this.route.snapshot.params['id'];
-        this.note = this.noteService.getNote(id) as INote | IAuthor;
-        this.previewNote();
+        try {
+          const id = this.route.snapshot.params['id'];
+          const note = this.noteService.getNote(id) satisfies
+            | INote
+            | IAuthor
+            | Error
+            | null;
+
+          if (note && !(note instanceof Error)) {
+            this.note = note;
+            this.previewNote();
+          }
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
   }

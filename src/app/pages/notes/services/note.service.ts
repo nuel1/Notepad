@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import {
   Injectable,
   WritableSignal,
@@ -13,15 +14,17 @@ import { IAuthor, INote } from 'src/app/interface/note';
 @Injectable()
 export class NoteService {
   constructor(private storage: StorageService, private global: GlobalsService) {
-    this.getNotes();
+    this.getPinnedNotes().getNotes();
+
     effect(() => {
       this.saveNotes();
+      this.savePinnedNotes();
     });
   }
 
   public notes: WritableSignal<Array<INote | IAuthor>> = signal([]);
   public openFullScreen = false;
-  public pinnedNotes: Array<INote | IAuthor> = [];
+  public pinnedNotes: WritableSignal<Array<INote | IAuthor>> = signal([]);
   public pinned = false;
 
   public createNote(
@@ -40,7 +43,7 @@ export class NoteService {
 
       this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
 
-      if (Boolean(this.pinnedNotes.length)) {
+      if (Boolean(this.pinnedNotes().length)) {
         this.notes.update(
           this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
         );
@@ -52,17 +55,23 @@ export class NoteService {
     }
   }
 
-  pinNote(note: INote | IAuthor) {
-    this.pinnedNotes.unshift(note);
+  pinNote(pinnedNote: INote | IAuthor) {
+    this.pinnedNotes.update((notes: Array<INote | IAuthor>) => {
+      const filtered = notes.filter(
+        (note: INote | IAuthor) => note.id !== pinnedNote.id
+      );
+      return [pinnedNote, ...filtered];
+    });
+
     this.notes.update(
       this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
     );
   }
 
   unpinNote(noteId: string) {
-    this.pinnedNotes = this.pinnedNotes.filter(
-      (note: INote | IAuthor) => note.id !== noteId
-    );
+    this.pinnedNotes.update((notes: Array<INote | IAuthor>) => {
+      return notes.filter((note: INote | IAuthor) => note.id !== noteId);
+    });
 
     this.notes.update((notes) =>
       this.unstackUnpinnedNote_getNewArrangementOfNotes.call(
@@ -82,7 +91,7 @@ export class NoteService {
 
     // Mapping the index of pinned note in notes
     notes.forEach((note: INote | IAuthor, index: number) => {
-      this.pinnedNotes.forEach((pinnedNote: INote | IAuthor) => {
+      this.pinnedNotes().forEach((pinnedNote: INote | IAuthor) => {
         if (pinnedNote.id === note.id)
           // Get pinned note id and map it to its index
           mapIndex[note.id] = index;
@@ -133,13 +142,16 @@ export class NoteService {
     this.notes.set(savedNotes);
   }
 
-  public getNote(noteId: string): INote | IAuthor | undefined {
-    if (this.notes().length) {
-      return this.notes().find((note: INote | IAuthor) => {
+  public getNote(noteId: string): INote | IAuthor | Error | null {
+    if (Boolean(this.notes().length)) {
+      const note = this.notes().find((note: INote | IAuthor) => {
         return noteId === note.id;
-      });
+      }) satisfies INote | IAuthor | undefined;
+
+      if (!note) throw Error('Cannot find note with the provided id');
+      return note;
     }
-    return undefined;
+    return null;
   }
 
   public saveNotes() {
@@ -153,7 +165,7 @@ export class NoteService {
 
     this.notes.update(() => [editedNote, ...unEditedNotes]);
 
-    if (Boolean(this.pinnedNotes.length)) {
+    if (Boolean(this.pinnedNotes().length)) {
       this.notes.update(
         this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
       );
@@ -166,5 +178,19 @@ export class NoteService {
     );
 
     this.notes.update(() => [...filteredNotes]);
+  }
+
+  /**
+   * Saves the pinnedNotes array to storage.
+   */
+  savePinnedNotes() {
+    localStorage.setItem('pinnedNotes', JSON.stringify(this.pinnedNotes()));
+  }
+
+  getPinnedNotes() {
+    const jsonStr = localStorage.getItem('pinnedNotes') satisfies string | null;
+    if (jsonStr) this.pinnedNotes.set(JSON.parse(jsonStr));
+
+    return this;
   }
 }

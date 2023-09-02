@@ -96,12 +96,12 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
   notePinned(note: INote | IAuthor): boolean {
     let mapIndex: Record<string, number> = {};
 
-    if (Boolean(this.noteService.pinnedNotes.length)) {
-      this.noteService.pinnedNotes.forEach(
-        (pinnedNote: INote | IAuthor, index: number) => {
+    if (Boolean(this.noteService.pinnedNotes().length)) {
+      this.noteService
+        .pinnedNotes()
+        .forEach((pinnedNote: INote | IAuthor, index: number) => {
           mapIndex[pinnedNote.id] = index;
-        }
-      );
+        });
 
       const index = mapIndex[note.id] satisfies number | undefined;
       if (index !== undefined) this.noteService.pinned = true;
@@ -113,10 +113,12 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   togglePin(note: INote | IAuthor) {
-    if (Boolean(this.noteService.pinnedNotes.length)) {
-      const noteExistInPinnedNotes = this.noteService.pinnedNotes.find(
-        (pinnedNote: INote | IAuthor) => pinnedNote.id === note.id
-      ) satisfies INote | IAuthor | undefined;
+    if (Boolean(this.noteService.pinnedNotes().length)) {
+      const noteExistInPinnedNotes = this.noteService
+        .pinnedNotes()
+        .find(
+          (pinnedNote: INote | IAuthor) => pinnedNote.id === note.id
+        ) satisfies INote | IAuthor | undefined;
 
       if (Boolean(noteExistInPinnedNotes)) {
         const exitingNote = noteExistInPinnedNotes as INote | IAuthor;
