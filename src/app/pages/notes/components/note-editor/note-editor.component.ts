@@ -47,19 +47,20 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.subscription = this.form?.valueChanges.subscribe(
       ({ editorContent }) => {
-        this.contentChangeObserver$.next(editorContent as string);
+        this.contentChangeObserver$.next(editorContent satisfies string);
       }
     );
 
     this.browserTitle.setTitle('Note - Edit');
     try {
-      const id = this.route.snapshot.paramMap.get('id') as string;
+      const id = this.route.snapshot.paramMap.get('id') satisfies null | string;
+      if (!id) throw Error('Id not found');
       this.note = this.noteService.getNote(id);
 
       if (this.note) {
         this.form?.get('editorContent')!.patchValue(this.note.content);
         this.contentChangeObserver$.next(
-          this.form?.get('editorContent')?.value as string
+          this.form?.get('editorContent')?.value satisfies string
         );
         return;
       }
