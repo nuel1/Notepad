@@ -38,10 +38,11 @@ export class NoteService {
         content: '',
       } satisfies INote;
 
-      this.notes.set([note, ...this.notes()]);
+      this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
+
       if (Boolean(this.pinnedNotes.length)) {
-        this.notes.set(
-          this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+        this.notes.update(
+          this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
         );
       }
 
@@ -53,8 +54,8 @@ export class NoteService {
 
   pinNote(note: INote | IAuthor) {
     this.pinnedNotes.unshift(note);
-    this.notes.set(
-      this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+    this.notes.update(
+      this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
     );
   }
 
@@ -63,8 +64,12 @@ export class NoteService {
       (note: INote | IAuthor) => note.id !== noteId
     );
 
-    this.notes.set(
-      this.unstackUnpinnedNote_getNewArrangementOfNotes(noteId, this.notes())
+    this.notes.update((notes) =>
+      this.unstackUnpinnedNote_getNewArrangementOfNotes.call(
+        this,
+        noteId,
+        notes
+      )
     );
   }
 
@@ -146,12 +151,11 @@ export class NoteService {
       return note.id !== editedNote.id;
     }) satisfies Array<INote | IAuthor>;
 
-    unEditedNotes.unshift(editedNote);
-    this.notes.set(unEditedNotes);
+    this.notes.update(() => [editedNote, ...unEditedNotes]);
 
     if (Boolean(this.pinnedNotes.length)) {
-      this.notes.set(
-        this.stackPinnedNotes_getNewArrangementOfNotes(this.notes())
+      this.notes.update(
+        this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
       );
     }
   }
@@ -161,6 +165,6 @@ export class NoteService {
       (note: INote) => note.id !== noteId
     );
 
-    this.notes.set([...filteredNotes]);
+    this.notes.update(() => [...filteredNotes]);
   }
 }
