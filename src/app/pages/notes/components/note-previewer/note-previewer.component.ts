@@ -9,7 +9,7 @@ import {
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NoteService } from '../../services/note.service';
-import { INote } from 'src/app/interface/note';
+import { IAuthor, INote } from 'src/app/interface/note';
 
 @Component({
   selector: 'app-note-previewer',
@@ -35,11 +35,11 @@ export class NotePreviewerComponent
     this.title.setTitle('Note - Preview');
 
     const id = this.route.snapshot.params['id'];
-    this.note = this.noteService.getNote(id) as INote;
+    this.note = this.noteService.getNote(id) as INote | IAuthor;
     this.notePreview = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         const id = this.route.snapshot.params['id'];
-        this.note = this.noteService.getNote(id) as INote;
+        this.note = this.noteService.getNote(id) as INote | IAuthor;
         this.previewNote();
       }
     });

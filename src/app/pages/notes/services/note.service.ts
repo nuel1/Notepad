@@ -129,7 +129,7 @@ export class NoteService {
   }
 
   public getNote(noteId: string): INote | IAuthor | undefined {
-    if (this.notes.length) {
+    if (this.notes().length) {
       return this.notes().find((note: INote | IAuthor) => {
         return noteId === note.id;
       });
