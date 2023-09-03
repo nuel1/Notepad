@@ -14,7 +14,11 @@ export const noteResolver: ResolveFn<boolean | null> = (
   const noteService = inject(NoteService);
   const id = route.paramMap.get('id') satisfies string | null;
   if (!(typeof id === 'string')) return errorResolver();
-  if (noteService.getNote(id) instanceof Error) return errorResolver();
+  if (
+    noteService.getNote(id) instanceof Error ||
+    noteService.getNote(id) === null
+  )
+    return errorResolver();
   else return true;
 };
 
