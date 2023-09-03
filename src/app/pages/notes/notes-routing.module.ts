@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotePreviewerComponent } from './components/note-previewer/note-previewer.component';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 import { NotesComponent } from './notes.component';
+import { noteResolver } from './resolver/note.resolver';
 
 const routes: Routes = [
   {
@@ -12,10 +13,16 @@ const routes: Routes = [
       {
         path: 'note/preview/:id',
         component: NotePreviewerComponent,
+        resolve: {
+          note: noteResolver,
+        },
       },
       {
         path: 'note/preview/:id/edit',
         component: NoteEditorComponent,
+        resolve: {
+          note: noteResolver,
+        },
       },
     ],
   },
