@@ -1,6 +1,6 @@
 <div class="main grid">
   <div
-    class="sidebar"
+    class="sidebar grid"
     [ngClass]="{
       mobile_view_single_display: !currentRoutePathIsNotes,
       laptop_view_multi_display: !(isMobile | async) || currentRoutePathIsNotes
@@ -39,16 +39,18 @@
       <p class="directory">root/</p>
     </div>
 
-    <ng-container *ngIf="noteService.notes">
-      <ng-container *ngFor="let note of notes(); trackById">
-        <note-card
-          [note]="note"
-          (deleteNote)="deleteNote($event)"
-          (onTogglePin)="togglePin($event)"
-          [pinned]="notePinned(note)"
-        ></note-card>
+    <div class="notes">
+      <ng-container *ngIf="noteService.notes">
+        <ng-container *ngFor="let note of notes(); trackById">
+          <note-card
+            [note]="note"
+            (deleteNote)="deleteNote($event)"
+            (onTogglePin)="togglePin($event)"
+            [pinned]="notePinned(note)"
+          ></note-card>
+        </ng-container>
       </ng-container>
-    </ng-container>
+    </div>
   </div>
 
   <div
