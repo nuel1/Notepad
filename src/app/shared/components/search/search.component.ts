@@ -13,29 +13,8 @@ import { GlobalsService } from 'src/app/core/globals.service';
 })
 export class SearchComponent implements OnInit {
   // For responsiveness
-  @Input() mobileCssClasses = '';
 
-  constructor(private globals: GlobalsService, private router: Router) {
-    globals.activeRoute().subscribe((path) => {
-      if (!path.length) {
-        this.placeholder = '📔📕📗📘📙📓📒';
-        this.isDisabled = true;
-        this.notHome = false;
-      } else {
-        if (path.includes('editor')) {
-          this.placeholder = `Search ${path[0]}...`;
-        } else {
-          this.placeholder = `Search ${path[0]}...`;
-        }
-        this.isDisabled = false;
-        this.notHome = true;
-      }
-    });
-  }
-
-  placeholder = '';
-  notHome = true;
-  isDisabled = true;
+  constructor() {}
 
   ngOnInit(): void {}
 }

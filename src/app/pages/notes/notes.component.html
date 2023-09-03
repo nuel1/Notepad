@@ -6,14 +6,39 @@
       laptop_view_multi_display: !(isMobile | async) || currentRoutePathIsNotes
     }"
   >
-    <h1 #title>My Notes</h1>
-    <button
-      class="form-modal-toggle-button flex align-c"
-      (click)="formOpen = true"
-    >
-      <ng-icon name="ionAddOutline"></ng-icon>
-      <span>Add new note</span>
-    </button>
+    <div class="heading">
+      <h1 #title>My Notes</h1>
+      <div class="flex align-c">
+        <div class="search">
+          <search></search>
+        </div>
+        <div class="flex action-btns">
+          <div role="button" class="icon">
+            <img
+              src="assets/icon-svgs/add-file.svg"
+              alt="Add file"
+              title="Add file"
+            />
+          </div>
+          <div role="button" class="icon">
+            <img
+              src="assets/icon-svgs/add-folder.svg"
+              alt="Add folder"
+              title="Add folder"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <button
+        class="form-modal-toggle-button flex align-c"
+        (click)="formOpen = true"
+      >
+        <ng-icon name="ionAddOutline"></ng-icon>
+        <span>Add new note</span>
+      </button> -->
+      <p class="directory">root/project/career</p>
+    </div>
+
     <ng-container *ngIf="noteService.notes">
       <ng-container *ngFor="let note of notes(); trackById">
         <note-card

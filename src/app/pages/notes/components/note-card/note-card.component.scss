@@ -42,11 +42,6 @@ p.content {
   }
 }
 
-.pin {
-  width: 24px;
-  height: 24px;
-}
-
 .menu {
   width: 20px;
   height: 20px;
@@ -68,10 +63,10 @@ p.content {
   line-height: 2;
 }
 
-button {
-  border: transparent;
-  cursor: pointer;
-}
+// button {
+//   border: transparent;
+//   cursor: pointer;
+// }
 
 @media (min-width: 1024px) {
   .card {

@@ -1,12 +1,25 @@
 .search {
-  margin-bottom: 0.7rem;
   overflow: hidden;
+  position: relative;
+}
+
+ng-icon {
+  position: absolute;
+  left: 1rem;
 }
 
 input {
-  border: none;
+  padding-block: 0.5rem;
+  padding-inline: 2.5rem;
+  border: 1px solid var(--color-medium);
+  transition: border-color 0.3s;
+  width: 100%;
   outline: none;
-  margin-left: 1rem;
+  border-radius: 4px;
+
+  &:focus {
+    border-color: var(--color-dark);
+  }
 }
 
 .hide {

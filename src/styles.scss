@@ -71,6 +71,15 @@ button {
   cursor: pointer;
 }
 
+[role="button"] {
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
 .page {
   min-width: 320px;
   overflow-x: hidden;
