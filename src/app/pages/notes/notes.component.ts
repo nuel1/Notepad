@@ -11,6 +11,7 @@ import {
   Inject,
   ViewContainerRef,
   TemplateRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -38,7 +39,8 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
     public globalService: GlobalsService,
     private title: Title,
     private breakpointObserver: BreakpointObserver,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private changeDectionRef: ChangeDetectorRef
   ) {
     this.notes();
   }
@@ -83,6 +85,7 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
   createNote(formEntries: { title: string; tags: string[] }) {
     try {
       const id = this.noteService.createNote(formEntries) as string;
+      this.changeDectionRef.detectChanges();
       this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
     } catch (e) {
       console.error(e);

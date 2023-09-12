@@ -15,11 +15,16 @@ export const noteResolver: ResolveFn<Promise<boolean>> = (
     try {
       const noteService = inject(NoteService);
       const id = route.paramMap.get('id') satisfies string | null;
-      const note = noteService.getNote(id as string);
-      if (note === null) {
+      if (typeof id === 'string') {
+        const note = noteService.getNote(id);
+        if (note === null) {
+          reject(false);
+          errorResolver();
+        } else resolve(true);
+      } else {
         reject(false);
         errorResolver();
-      } else resolve(true);
+      }
     } catch (e) {
       reject(false);
       errorResolver();
