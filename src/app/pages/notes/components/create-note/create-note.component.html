@@ -4,7 +4,7 @@
   buttonText="Create Note"
   headingText="Create Note"
 >
-  <ng-template body>
+  <ng-container body>
     <note-form-input
       [inputTitle]="'Title'"
       [name]="'title'"
@@ -18,5 +18,5 @@
       (addTag)="newTags($event)"
       (deleteTag)="newTags($event)"
     ></note-form-input>
-  </ng-template>
+  </ng-container>
 </note-form>

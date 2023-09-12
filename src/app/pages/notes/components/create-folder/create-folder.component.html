@@ -1,27 +1,10 @@
-<div class="modal form-modal flex align-c justify-c">
-  <div class="form-container card">
-    <h2>Create note</h2>
-    <div class="form">
-      <note-form-input
-        [inputTitle]="'Title'"
-        [name]="'title'"
-        [placeholder]="'Title'"
-      ></note-form-input>
-      <note-form-input
-        [inputTitle]="'Add tag'"
-        [name]="'tag'"
-        [placeholder]="'Tag'"
-      ></note-form-input>
-      <ng-container [ngTemplateOutlet]="submitBtn"></ng-container>
-    </div>
-  </div>
-  <ng-container [ngTemplateOutlet]="overlay"></ng-container>
-</div>
-
-<ng-template #submitBtn>
-  <button>Create note</button>
-</ng-template>
-
-<ng-template #overlay>
-  <div class="overlay"></div>
-</ng-template>
+<!-- <note-form>
+    <ng-container body>
+        <note-form-input
+      [inputTitle]="'Title'"
+      [name]="'title'"
+      [placeholder]="'Title'"
+      (inputChange)="onInputChange($event)"
+    ></note-form-input>
+    </ng-container>
+</note-form> -->

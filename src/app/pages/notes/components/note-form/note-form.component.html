@@ -2,32 +2,11 @@
   <div class="form-container card">
     <h2>{{ headingText }}</h2>
     <div class="form">
-      <ng-container ngProjectAs="[body]"></ng-container>
-      <note-form-input
-        [inputTitle]="'Title'"
-        [name]="'title'"
-        [placeholder]="'Title'"
-        (inputChange)="onInputChange($event)"
-      ></note-form-input>
-      <note-form-input
-        [inputTitle]="'Add tag'"
-        [name]="'tag'"
-        [placeholder]="'Tag'"
-        (addTag)="newTags($event)"
-        (deleteTag)="newTags($event)"
-      ></note-form-input>
-      <ng-container [ngTemplateOutlet]="submitBtn"></ng-container>
+      <ng-content select="[body]"></ng-content>
+      <button (click)="onCreate()" [disabled]="title.invalid">
+        {{ buttonText }}
+      </button>
     </div>
   </div>
-  <ng-container [ngTemplateOutlet]="overlay"></ng-container>
-</div>
-
-<ng-template #submitBtn>
-  <button (click)="onCreate()" [disabled]="title.invalid">
-    {{ buttonText }}
-  </button>
-</ng-template>
-
-<ng-template #overlay>
   <div class="overlay" (click)="onCancel()"></div>
-</ng-template>
+</div>
