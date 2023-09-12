@@ -16,6 +16,8 @@ import { NoteService } from './services/note.service';
 import { InputTagToggleDirective } from './directives/input-tag-toggle.directive';
 import { NoteEditorFullscreenComponent } from './components/note-editor/note-editor-fullscreen/note-editor-fullscreen.component';
 import { NoteOptionsComponent } from './components/note-options/note-options.component';
+import { CreateFolderComponent } from './components/create-folder/create-folder.component';
+import { CreateNoteComponent } from './components/create-note/create-note.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NoteOptionsComponent } from './components/note-options/note-options.com
     InputTagToggleDirective,
     NoteEditorFullscreenComponent,
     NoteOptionsComponent,
+    CreateFolderComponent,
+    CreateNoteComponent,
   ],
   imports: [
     CommonModule,

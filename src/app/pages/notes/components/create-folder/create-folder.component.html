@@ -1,20 +1,16 @@
 <div class="modal form-modal flex align-c justify-c">
   <div class="form-container card">
-    <h2>{{ headingText }}</h2>
+    <h2>Create note</h2>
     <div class="form">
-      <ng-container ngProjectAs="[body]"></ng-container>
       <note-form-input
         [inputTitle]="'Title'"
         [name]="'title'"
         [placeholder]="'Title'"
-        (inputChange)="onInputChange($event)"
       ></note-form-input>
       <note-form-input
         [inputTitle]="'Add tag'"
         [name]="'tag'"
         [placeholder]="'Tag'"
-        (addTag)="newTags($event)"
-        (deleteTag)="newTags($event)"
       ></note-form-input>
       <ng-container [ngTemplateOutlet]="submitBtn"></ng-container>
     </div>
@@ -23,11 +19,9 @@
 </div>
 
 <ng-template #submitBtn>
-  <button (click)="onCreate()" [disabled]="title.invalid">
-    {{ buttonText }}
-  </button>
+  <button>Create note</button>
 </ng-template>
 
 <ng-template #overlay>
-  <div class="overlay" (click)="onCancel()"></div>
+  <div class="overlay"></div>
 </ng-template>

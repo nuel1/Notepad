@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Output,
   ChangeDetectionStrategy,
+  Input,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -15,15 +16,17 @@ import { FormControl, Validators } from '@angular/forms';
 export class NoteFormComponent {
   constructor() {}
 
-  @Output() createNote = new EventEmitter();
+  @Input() buttonText = '';
+  @Input() headingText = '';
+  @Output() create = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
   title = new FormControl('', Validators.required);
   tags: string[] = [];
   tag = '';
 
-  async onCreateNote() {
-    this.createNote.emit({
+  async onCreate() {
+    this.create.emit({
       title: this.title.value,
       tags: this.tags,
     });

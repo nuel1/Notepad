@@ -42,7 +42,6 @@ export class NoteService {
       } satisfies INote;
 
       this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
-
       if (Boolean(this.pinnedNotes().length)) {
         this.notes.update(
           this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
@@ -147,7 +146,6 @@ export class NoteService {
       const note = this.notes().find((note: INote | IAuthor) => {
         return noteId === note.id;
       }) satisfies INote | IAuthor | undefined;
-
       if (!note) throw Error('Cannot find note with the provided id');
       return note;
     }

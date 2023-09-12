@@ -91,7 +91,7 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
 
   // Updates the 'pinned' property value in the note service
   // by comparing each note of the 'notes' array with the entries in the 'pinnedNote' array.
-  // If a note's content matches any of the pinned notes, the 'pinned'
+  // If a note's id matches any of the pinned notes id, the 'pinned'
   // value is set to true for that note; otherwise, it's set to false.
   notePinned(note: INote | IAuthor): boolean {
     let mapIndex: Record<string, number> = {};

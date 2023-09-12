@@ -13,7 +13,7 @@
           <search></search>
         </div>
         <div class="flex action-btns">
-          <div role="button" class="icon">
+          <div role="button" class="icon" (click)="formOpen = true">
             <img
               src="assets/icon-svgs/add-file.svg"
               alt="Add file"
@@ -65,10 +65,10 @@
 </div>
 
 <ng-container *ngIf="formOpen">
-  <note-form
+  <create-note
     (cancel)="formOpen = $event"
     (createNote)="createNote($event); formOpen = false"
-  ></note-form>
+  ></create-note>
 </ng-container>
 
 <!-- <ng-container>

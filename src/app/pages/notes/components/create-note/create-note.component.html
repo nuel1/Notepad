@@ -1,0 +1,22 @@
+<note-form
+  (create)="onCreateNote($event)"
+  (cancel)="onCancel()"
+  buttonText="Create Note"
+  headingText="Create Note"
+>
+  <ng-template body>
+    <note-form-input
+      [inputTitle]="'Title'"
+      [name]="'title'"
+      [placeholder]="'Title'"
+      (inputChange)="onInputChange($event)"
+    ></note-form-input>
+    <note-form-input
+      [inputTitle]="'Add tag'"
+      [name]="'tag'"
+      [placeholder]="'Tag'"
+      (addTag)="newTags($event)"
+      (deleteTag)="newTags($event)"
+    ></note-form-input>
+  </ng-template>
+</note-form>
