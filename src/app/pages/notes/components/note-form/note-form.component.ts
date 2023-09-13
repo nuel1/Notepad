@@ -21,12 +21,14 @@ export class NoteFormComponent {
   @Input() set inputChanges(value: string) {
     this.title.setValue(value);
   }
+  @Input() set addTag(tags: Array<string>) {
+    this.tags = tags;
+  }
   @Output() create = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
   title = new FormControl('', Validators.required);
   tags: string[] = [];
-  tag = '';
 
   async onCreate() {
     this.create.emit({

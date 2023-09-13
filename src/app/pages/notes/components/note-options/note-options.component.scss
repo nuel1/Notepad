@@ -14,4 +14,5 @@
   position: fixed;
   inset-inline: 0;
   bottom: 0;
+  grid-template-columns: repeat(3, auto);
 }
