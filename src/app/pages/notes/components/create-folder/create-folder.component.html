@@ -1,10 +1,14 @@
-<!-- <note-form>
-    <ng-container body>
-        <note-form-input
+<note-form
+  headingText="Create Folder"
+  buttonText="Create folder"
+  (cancel)="onCancel($event)"
+>
+  <ng-container body>
+    <note-form-input
       [inputTitle]="'Title'"
       [name]="'title'"
       [placeholder]="'Title'"
       (inputChange)="onInputChange($event)"
     ></note-form-input>
-    </ng-container>
-</note-form> -->
+  </ng-container>
+</note-form>

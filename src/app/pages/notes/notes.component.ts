@@ -45,7 +45,8 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
     this.notes();
   }
 
-  formOpen = false;
+  createNoteFormIsOpen = false;
+  createFolderFormIsOpen = false;
   subscription: Subscription | undefined;
   currentRoutePathIsNotes: boolean | undefined;
   notes: Signal<Array<INote | IAuthor>> = computed(() =>

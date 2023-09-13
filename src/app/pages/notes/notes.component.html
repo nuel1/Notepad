@@ -13,14 +13,18 @@
           <search></search>
         </div>
         <div class="flex action-btns">
-          <div role="button" class="icon" (click)="formOpen = true">
+          <div role="button" class="icon" (click)="createNoteFormIsOpen = true">
             <img
               src="assets/icon-svgs/add-file.svg"
               alt="Add file"
               title="Add file"
             />
           </div>
-          <div role="button" class="icon">
+          <div
+            role="button"
+            class="icon"
+            (click)="createFolderFormIsOpen = true"
+          >
             <img
               src="assets/icon-svgs/add-folder.svg"
               alt="Add folder"
@@ -64,11 +68,15 @@
   </div>
 </div>
 
-<ng-container *ngIf="formOpen">
+<ng-container *ngIf="createNoteFormIsOpen">
   <create-note
-    (cancel)="formOpen = $event"
-    (createNote)="createNote($event); formOpen = false"
+    (cancel)="createNoteFormIsOpen = $event"
+    (createNote)="createNote($event); createNoteFormIsOpen = false"
   ></create-note>
+</ng-container>
+
+<ng-container *ngIf="createFolderFormIsOpen">
+  <create-folder (cancel)="createFolderFormIsOpen = $event"></create-folder>
 </ng-container>
 
 <!-- <ng-container>

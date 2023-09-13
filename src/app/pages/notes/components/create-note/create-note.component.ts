@@ -12,7 +12,7 @@ export class CreateNoteComponent {
   @Output() createNote = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
-  title = new FormControl('', Validators.required);
+  title = '';
   tags: string[] = [];
   tag = '';
 
@@ -20,8 +20,8 @@ export class CreateNoteComponent {
     this.createNote.emit(formEntries);
   }
 
-  onCancel() {
-    this.cancel.emit(false);
+  onCancel(bool: boolean) {
+    this.cancel.emit(bool);
   }
 
   newTags(tags: string[]) {
@@ -29,6 +29,6 @@ export class CreateNoteComponent {
   }
 
   onInputChange(text: string) {
-    this.title.setValue(text);
+    this.title = text;
   }
 }
