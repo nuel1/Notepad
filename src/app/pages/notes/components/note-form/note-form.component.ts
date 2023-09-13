@@ -18,6 +18,9 @@ export class NoteFormComponent {
 
   @Input() buttonText = '';
   @Input() headingText = '';
+  @Input() set inputChanges(value: string) {
+    this.title.setValue(value);
+  }
   @Output() create = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
@@ -38,9 +41,5 @@ export class NoteFormComponent {
 
   newTags(tags: string[]) {
     this.tags = tags;
-  }
-
-  onInputChange(text: string) {
-    this.title.setValue(text);
   }
 }

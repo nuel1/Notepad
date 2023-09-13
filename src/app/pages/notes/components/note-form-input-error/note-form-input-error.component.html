@@ -1,5 +1,3 @@
-<ng-container *ngIf="input && input.touched && input.invalid; then error">
-</ng-container>
-<ng-template #error>
+<ng-container *ngIf="input && input.touched && input.invalid">
   <p class="validation-message--error">Title is required</p>
-</ng-template>
+</ng-container>
