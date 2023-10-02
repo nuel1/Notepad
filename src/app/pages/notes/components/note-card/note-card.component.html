@@ -19,10 +19,9 @@
           <img src="assets/icon-svgs/pin-filled.svg" />
         </ng-container>
       </div>
-      <div class="menu">
+      <div class="menu" role="button" (click)="openOptions.emit(true)">
         <img src="assets/icon-svgs/menu-dot-vertical-filled.svg" />
       </div>
-      <!-- <button class="delete" (click)="onDelete(note)">Delete</button> -->
     </div>
   </div>
   <div

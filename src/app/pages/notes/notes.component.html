@@ -13,18 +13,14 @@
           <search></search>
         </div>
         <div class="flex action-btns">
-          <div role="button" class="icon" (click)="createNoteFormIsOpen = true">
+          <div role="button" class="icon" (click)="createNoteFormOpen = true">
             <img
               src="assets/icon-svgs/add-file.svg"
               alt="Add file"
               title="Add file"
             />
           </div>
-          <div
-            role="button"
-            class="icon"
-            (click)="createFolderFormIsOpen = true"
-          >
+          <div role="button" class="icon" (click)="createFolderFormOpen = true">
             <img
               src="assets/icon-svgs/add-folder.svg"
               alt="Add folder"
@@ -33,13 +29,6 @@
           </div>
         </div>
       </div>
-      <!-- <button
-        class="form-modal-toggle-button flex align-c"
-        (click)="formOpen = true"
-      >
-        <ng-icon name="ionAddOutline"></ng-icon>
-        <span>Add new note</span>
-      </button> -->
       <p class="directory">root/</p>
     </div>
 
@@ -51,6 +40,7 @@
             (deleteNote)="deleteNote($event)"
             (onTogglePin)="noteService.togglePin($event)"
             [pinned]="noteService.notePinned(note)"
+            (openOptions)="optionsModalOpen = true"
           ></note-card>
         </ng-container>
       </ng-container>
@@ -68,17 +58,17 @@
   </div>
 </div>
 
-<ng-container *ngIf="createNoteFormIsOpen">
+<ng-container *ngIf="createNoteFormOpen">
   <create-note
-    (cancel)="createNoteFormIsOpen = $event"
-    (createNote)="noteService.createNote($event); createNoteFormIsOpen = false"
+    (close)="createNoteFormOpen = false"
+    (submit)="noteService.createNote($event); createNoteFormOpen = false"
   ></create-note>
 </ng-container>
 
-<ng-container *ngIf="createFolderFormIsOpen">
-  <create-folder (cancel)="createFolderFormIsOpen = $event"></create-folder>
+<ng-container *ngIf="createFolderFormOpen">
+  <create-folder (close)="createFolderFormOpen = false"></create-folder>
 </ng-container>
 
-<ng-container>
-  <note-options></note-options>
+<ng-container *ngIf="optionsModalOpen">
+  <note-options (onClose)="optionsModalOpen = false"></note-options>
 </ng-container>

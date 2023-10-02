@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   background: var(--color-dark-contrast);
+  z-index: 2;
 
   .flex:not(:last-child) {
     gap: 2rem;

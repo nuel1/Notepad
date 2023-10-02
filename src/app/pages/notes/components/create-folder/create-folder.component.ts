@@ -6,14 +6,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./create-folder.component.scss'],
 })
 export class CreateFolderComponent {
-  @Output() cancel = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter();
   title = '';
-
-  onInputChange(text: string) {
-    this.title = text;
-  }
-
-  onCancel(bool: boolean) {
-    this.cancel.emit(bool);
-  }
 }

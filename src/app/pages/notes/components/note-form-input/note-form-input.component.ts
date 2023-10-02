@@ -22,9 +22,9 @@ export class NoteFormInputComponent implements OnDestroy {
   @Input() name = '';
   @Input() inputTitle = '';
   @Input() placeholder = '';
-  @Output() inputChange = new EventEmitter<string>();
-  @Output() addTag = new EventEmitter<string[]>();
-  @Output() deleteTag = new EventEmitter<string[]>();
+  @Output() onInputChange = new EventEmitter<string>();
+  @Output() onAddTag = new EventEmitter<string[]>();
+  @Output() onDeleteTag = new EventEmitter<string[]>();
 
   tags: string[] = [];
   subscription: Subscription | undefined;
@@ -34,7 +34,7 @@ export class NoteFormInputComponent implements OnDestroy {
 
   constructor() {
     this.subscription = this.formTitle.valueChanges.subscribe((input) =>
-      this.inputChange.emit(input as string)
+      this.onInputChange.emit(input as string)
     );
   }
 
@@ -42,17 +42,17 @@ export class NoteFormInputComponent implements OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  onAddNewTag() {
+  addTag() {
     if (this.formTag.value) {
       this.tags = [...this.tags, this.formTag.value];
-      this.addTag.emit(this.tags);
+      this.onAddTag.emit(this.tags);
       if (this.inputEl !== undefined) this.inputEl.nativeElement.value = '';
     }
   }
 
-  onDeleteTag(tag: string) {
+  deleteTag(tag: string) {
     this.tags.splice(this.tags.indexOf(tag), 1);
-    this.deleteTag.emit(this.tags);
+    this.onDeleteTag.emit(this.tags);
   }
 
   trackByTagName(index: number, tag: string): string {

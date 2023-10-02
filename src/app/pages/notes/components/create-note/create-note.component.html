@@ -1,6 +1,6 @@
 <note-form
-  (create)="onCreateNote($event)"
-  (cancel)="onCancel($event)"
+  (onSubmit)="submit.emit($event)"
+  (onClose)="close.emit()"
   buttonText="Create note"
   headingText="Create Note"
   [inputChanges]="title"
@@ -11,14 +11,14 @@
       [inputTitle]="'Title'"
       [name]="'title'"
       [placeholder]="'Title'"
-      (inputChange)="onInputChange($event)"
+      (onInputChange)="title = $event"
     ></note-form-input>
     <note-form-input
       [inputTitle]="'Add tag'"
       [name]="'tag'"
       [placeholder]="'Tag'"
-      (addTag)="newTags($event)"
-      (deleteTag)="newTags($event)"
+      (onAddTag)="tags = $event"
+      (onDeleteTag)="tags = $event"
     ></note-form-input>
   </ng-container>
 </note-form>

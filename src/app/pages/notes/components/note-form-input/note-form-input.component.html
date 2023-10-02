@@ -19,7 +19,7 @@
       [formControl]="formTag"
       #tagInput
     />
-    <button (click)="onAddNewTag()">
+    <button (click)="addTag()">
       <ng-icon name="ionAddOutline"></ng-icon>
     </button>
   </div>
@@ -36,6 +36,6 @@
 <ng-template #temp_tags let-tag="tag">
   <div class="flex tag align-c">
     <span>{{ tag }}</span>
-    <ng-icon name="ionCloseCircle" (click)="onDeleteTag(tag)"></ng-icon>
+    <ng-icon name="ionCloseCircle" (click)="deleteTag(tag)"></ng-icon>
   </div>
 </ng-template>

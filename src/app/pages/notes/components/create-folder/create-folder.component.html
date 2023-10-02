@@ -2,14 +2,14 @@
   headingText="Create Folder"
   buttonText="Create folder"
   [inputChanges]="title"
-  (cancel)="onCancel($event)"
+  (onClose)="close.emit()"
 >
   <ng-container body>
     <note-form-input
       [inputTitle]="'Title'"
       [name]="'title'"
       [placeholder]="'Title'"
-      (inputChange)="onInputChange($event)"
+      (onInputChange)="title = $event"
     ></note-form-input>
   </ng-container>
 </note-form>

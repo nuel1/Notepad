@@ -9,26 +9,9 @@ import { FormControl, Validators } from '@angular/forms';
 export class CreateNoteComponent {
   constructor() {}
 
-  @Output() createNote = new EventEmitter();
-  @Output() cancel = new EventEmitter();
+  @Output() submit = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   title = '';
   tags: string[] = [];
-  tag = '';
-
-  onCreateNote(formEntries: { title: string; tags: Array<string> }) {
-    this.createNote.emit(formEntries);
-  }
-
-  onCancel(bool: boolean) {
-    this.cancel.emit(bool);
-  }
-
-  newTags(tags: string[]) {
-    this.tags = tags;
-  }
-
-  onInputChange(text: string) {
-    this.title = text;
-  }
 }

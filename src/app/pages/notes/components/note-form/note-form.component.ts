@@ -24,21 +24,17 @@ export class NoteFormComponent {
   @Input() set addTag(tags: Array<string>) {
     this.tags = tags;
   }
-  @Output() create = new EventEmitter();
-  @Output() cancel = new EventEmitter();
+  @Output() onSubmit = new EventEmitter();
+  @Output() onClose = new EventEmitter();
 
   title = new FormControl('', Validators.required);
   tags: string[] = [];
 
-  async onCreate() {
-    this.create.emit({
+  async submit() {
+    this.onSubmit.emit({
       title: this.title.value,
       tags: this.tags,
     });
-  }
-
-  onCancel() {
-    this.cancel.emit(false);
   }
 
   newTags(tags: string[]) {

@@ -18,6 +18,7 @@ import { NoteEditorFullscreenComponent } from './components/note-editor/note-edi
 import { NoteOptionsComponent } from './components/note-options/note-options.component';
 import { CreateFolderComponent } from './components/create-folder/create-folder.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
+import { EditTitleComponent } from './components/edit-title/edit-title.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CreateNoteComponent } from './components/create-note/create-note.compon
     NoteOptionsComponent,
     CreateFolderComponent,
     CreateNoteComponent,
+    EditTitleComponent,
   ],
   imports: [
     CommonModule,

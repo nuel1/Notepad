@@ -3,10 +3,10 @@
     <h2>{{ headingText }}</h2>
     <div class="form">
       <ng-content select="[body]"></ng-content>
-      <button (click)="onCreate()" [disabled]="title.invalid">
+      <button (click)="submit()" [disabled]="title.invalid">
         {{ buttonText }}
       </button>
     </div>
   </div>
-  <div class="overlay" (click)="onCancel()"></div>
+  <div class="overlay" (click)="onClose.emit()"></div>
 </div>

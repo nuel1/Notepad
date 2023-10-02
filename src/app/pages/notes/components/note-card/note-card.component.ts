@@ -21,6 +21,7 @@ export class NoteCardComponent implements OnInit {
   @Input() pinned: boolean | undefined;
   @Output() deleteNote = new EventEmitter<string>();
   @Output() onTogglePin = new EventEmitter<INote | IAuthor>();
+  @Output() openOptions = new EventEmitter<boolean>();
 
   btnDisabled = true;
   tagReminder = 0;
