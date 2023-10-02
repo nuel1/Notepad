@@ -36,8 +36,4 @@ export class NoteFormComponent {
       tags: this.tags,
     });
   }
-
-  newTags(tags: string[]) {
-    this.tags = tags;
-  }
 }

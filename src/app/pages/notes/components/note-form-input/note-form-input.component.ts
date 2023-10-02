@@ -19,9 +19,12 @@ import { Subscription } from 'rxjs';
 })
 export class NoteFormInputComponent implements OnDestroy {
   @ViewChild('tagInput') inputEl: ElementRef | undefined;
-  @Input() name = '';
+  @Input() name?: 'title' | 'tag' = 'title';
   @Input() inputTitle = '';
   @Input() placeholder = '';
+  @Input() set initialTitle(value: string) {
+    if (value) this.formTitle.setValue(value);
+  }
   @Output() onInputChange = new EventEmitter<string>();
   @Output() onAddTag = new EventEmitter<string[]>();
   @Output() onDeleteTag = new EventEmitter<string[]>();
