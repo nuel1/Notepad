@@ -9,3 +9,8 @@ export interface INote {
 export interface IAuthor extends INote {
   badge: 'author';
 }
+
+export interface ICreateNote {
+  title: string;
+  tags: string[];
+}

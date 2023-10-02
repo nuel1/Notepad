@@ -1,18 +1,37 @@
-.options-modal {
+.overlay {
   background: rgba(0, 0, 0, 0.519);
+  z-index: -1;
 }
 
 .options-container {
   position: relative;
-  height: 100vh;
-  width: 100%;
+  padding: 1rem;
+  grid-template-rows: repeat(2, auto);
 }
 
 .options {
-  height: 300px;
+  height: 173px;
   background: var(--color-dark-shade);
   position: fixed;
   inset-inline: 0;
   bottom: 0;
-  grid-template-columns: repeat(3, auto);
+}
+
+img {
+  filter: invert(1);
+}
+
+p.icon-name {
+  color: var(--color-light);
+  font-size: 0.9rem;
+}
+
+div.iconx2 {
+  width: 30px;
+  height: 30px;
+}
+
+.row {
+  grid-template-columns: repeat(4, auto);
+  gap: 2rem;
 }

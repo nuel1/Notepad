@@ -49,8 +49,8 @@
           <note-card
             [note]="note"
             (deleteNote)="deleteNote($event)"
-            (onTogglePin)="togglePin($event)"
-            [pinned]="notePinned(note)"
+            (onTogglePin)="noteService.togglePin($event)"
+            [pinned]="noteService.notePinned(note)"
           ></note-card>
         </ng-container>
       </ng-container>
@@ -71,7 +71,7 @@
 <ng-container *ngIf="createNoteFormIsOpen">
   <create-note
     (cancel)="createNoteFormIsOpen = $event"
-    (createNote)="createNote($event); createNoteFormIsOpen = false"
+    (createNote)="noteService.createNote($event); createNoteFormIsOpen = false"
   ></create-note>
 </ng-container>
 
@@ -79,6 +79,6 @@
   <create-folder (cancel)="createFolderFormIsOpen = $event"></create-folder>
 </ng-container>
 
-<!-- <ng-container>
+<ng-container>
   <note-options></note-options>
-</ng-container> -->
+</ng-container>

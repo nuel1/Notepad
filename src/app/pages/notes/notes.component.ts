@@ -11,12 +11,11 @@ import {
   Inject,
   ViewContainerRef,
   TemplateRef,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals.service';
-import { IAuthor, INote } from 'src/app/interface/note';
+import { IAuthor, ICreateNote, INote } from 'src/app/interface/note';
 import { NoteService } from './services/note.service';
 import { DefaultNote } from 'src/app/note.default';
 import { BehaviorSubject, Subscription, from, fromEvent } from 'rxjs';
@@ -30,7 +29,7 @@ import { NoteFormComponent } from './components/note-form/note-form.component';
   providers: [NoteService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
+export class NotesComponent implements OnInit, OnDestroy {
   @ViewChild('title', { static: true }) heading: ElementRef | undefined;
   @ViewChild('form') formTemplate: TemplateRef<NoteFormComponent> | undefined;
   constructor(
@@ -38,9 +37,7 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
     public noteService: NoteService,
     public globalService: GlobalsService,
     private title: Title,
-    private breakpointObserver: BreakpointObserver,
-    private viewContainerRef: ViewContainerRef,
-    private changeDectionRef: ChangeDetectorRef
+    private breakpointObserver: BreakpointObserver
   ) {
     this.notes();
   }
@@ -78,64 +75,6 @@ export class NotesComponent implements OnInit, OnDestroy, AfterContentInit {
       localStorage.setItem('authorNoteSaved', JSON.stringify(true));
     }
   }
-
-  ngAfterContentInit(): void {}
-
-  async getNotes() {}
-
-  createNote(formEntries: { title: string; tags: string[] }) {
-    try {
-      const id = this.noteService.createNote(formEntries) as string;
-      this.changeDectionRef.detectChanges();
-      this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  // Updates the 'pinned' property value in the note service
-  // by comparing each note of the 'notes' array with the entries in the 'pinnedNote' array.
-  // If a note's id matches any of the pinned notes id, the 'pinned'
-  // value is set to true for that note; otherwise, it's set to false.
-  notePinned(note: INote | IAuthor): boolean {
-    let mapIndex: Record<string, number> = {};
-
-    if (Boolean(this.noteService.pinnedNotes().length)) {
-      this.noteService
-        .pinnedNotes()
-        .forEach((pinnedNote: INote | IAuthor, index: number) => {
-          mapIndex[pinnedNote.id] = index;
-        });
-
-      const index = mapIndex[note.id] satisfies number | undefined;
-      if (index !== undefined) this.noteService.pinned = true;
-      else this.noteService.pinned = false;
-    } else {
-      this.noteService.pinned = false;
-    }
-    return this.noteService.pinned;
-  }
-
-  togglePin(note: INote | IAuthor) {
-    if (Boolean(this.noteService.pinnedNotes().length)) {
-      const noteExistInPinnedNotes = this.noteService
-        .pinnedNotes()
-        .find(
-          (pinnedNote: INote | IAuthor) => pinnedNote.id === note.id
-        ) satisfies INote | IAuthor | undefined;
-
-      if (Boolean(noteExistInPinnedNotes)) {
-        const exitingNote = noteExistInPinnedNotes as INote | IAuthor;
-        this.noteService.unpinNote(exitingNote.id);
-      } else {
-        this.noteService.pinNote(note);
-      }
-    } else {
-      this.noteService.pinNote(note);
-    }
-  }
-
-  cancel(formCanceled: boolean) {}
 
   deleteNote(id: string) {
     this.changeRoute(id, () => {

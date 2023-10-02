@@ -1,11 +1,79 @@
-<div class="modal options-modal flex flex-column">
-  <div class="options-container">
-    <div class="options grid">
-      <div class="col-1">
-        <div role="button" aria-label="edit-title" class="iconx2">
-          <img src="assets/icon-svgs/pencil-with-line.svg" alt="" />
+<div class="modal options-modal">
+  <div class="options">
+    <div class="options-container grid">
+      <div class="grid row">
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onEditTitle.emit(true)"
+        >
+          <div aria-label="edit-title" class="iconx2">
+            <img src="assets/icon-svgs/pencil-with-line.svg" alt="" />
+          </div>
+          <p class="icon-name">Edit title</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onExport.emit()"
+        >
+          <div aria-label="export" class="iconx2">
+            <img src="assets/icon-svgs/export.svg" alt="" />
+          </div>
+          <p class="icon-name">Export</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onClone.emit()"
+        >
+          <div aria-label="clone" class="iconx2">
+            <img src="assets/icon-svgs/clone.svg" alt="" />
+          </div>
+          <p class="icon-name">Clone</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onCopy.emit()"
+        >
+          <div aria-label="edit-title" class="iconx2">
+            <img src="assets/icon-svgs/copy.svg" alt="" />
+          </div>
+          <p class="icon-name">Copy</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onChart.emit()"
+        >
+          <div aria-label="chart" class="iconx2">
+            <img src="assets/icon-svgs/chart.svg" alt="" />
+          </div>
+          <p class="icon-name">Chart</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onShare.emit()"
+        >
+          <div aria-label="chart" class="iconx2">
+            <img src="assets/icon-svgs/share.svg" alt="" />
+          </div>
+          <p class="icon-name">Share</p>
+        </div>
+        <div
+          class="col flex-column flex align-c"
+          role="button"
+          (click)="onDelete.emit(true)"
+        >
+          <div aria-label="trash" class="iconx2">
+            <img src="assets/icon-svgs/trash.svg" alt="" />
+          </div>
+          <p class="icon-name">Delete</p>
         </div>
       </div>
     </div>
   </div>
+  <div class="overlay" role="button" (click)="onClose.emit()"></div>
 </div>

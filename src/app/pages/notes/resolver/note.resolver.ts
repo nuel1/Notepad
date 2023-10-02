@@ -5,7 +5,8 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { NoteService } from '../services/note.service';
-import { inject } from '@angular/core';
+import { inject, ChangeDetectorRef } from '@angular/core';
+import { INote, IAuthor } from 'src/app/interface/note';
 
 export const noteResolver: ResolveFn<Promise<boolean>> = (
   route: ActivatedRouteSnapshot,
@@ -15,12 +16,14 @@ export const noteResolver: ResolveFn<Promise<boolean>> = (
     try {
       const noteService = inject(NoteService);
       const id = route.paramMap.get('id') satisfies string | null;
-      if (typeof id === 'string') {
-        const note = noteService.getNote(id);
-        if (note === null) {
-          reject(false);
-          errorResolver();
-        } else resolve(true);
+
+      console.log(noteService.notes());
+      const note = noteService.notes().find((note: INote | IAuthor) => {
+        return id === note.id;
+      }) satisfies INote | IAuthor | undefined;
+
+      if (note) {
+        resolve(true);
       } else {
         reject(false);
         errorResolver();

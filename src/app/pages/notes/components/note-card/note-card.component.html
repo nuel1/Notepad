@@ -33,7 +33,9 @@
     <h3 class="title">{{ note.title | titlecase }}</h3>
     <p class="content body">{{ convertHtmlToText(note.content) }}</p>
     <div class="footer tags flex">
-      <span class="tag" *ngFor="let tag of getNumberOfTags(2)">{{ tag }}</span>
+      <span class="tag" *ngFor="let tag of getNumberOfTags(2)">{{
+        tag | titlecase
+      }}</span>
       <span class="tag" *ngIf="tagReminder">+{{ tagReminder }} more</span>
     </div>
   </div>

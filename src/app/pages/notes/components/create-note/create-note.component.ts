@@ -16,7 +16,7 @@ export class CreateNoteComponent {
   tags: string[] = [];
   tag = '';
 
-  async onCreateNote(formEntries: { title: string; tags: Array<string> }) {
+  onCreateNote(formEntries: { title: string; tags: Array<string> }) {
     this.createNote.emit(formEntries);
   }
 
