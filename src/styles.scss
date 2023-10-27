@@ -96,7 +96,7 @@ button {
   overflow: hidden;
   position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 .card,
@@ -193,11 +193,12 @@ a {
   background: #fff;
   max-width: 450px;
   width: 90%;
+  border-radius: 7px;
+  padding-bottom: 1rem;
 }
 
 .modal-card-body {
   padding: 1rem;
-  text-align: center;
 }
 
 .overlay,
@@ -294,7 +295,7 @@ a {
 
 .side-navbar-container {
   isolation: isolate;
-  z-index: 2;
+  z-index: 3;
 }
 
 .menu-toggle-icon-container {
@@ -304,7 +305,7 @@ a {
   inset-inline: 0;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 
   ng-icon {
     font-size: 2rem;

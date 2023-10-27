@@ -21,6 +21,7 @@ import { DefaultNote } from 'src/app/note.default';
 import { BehaviorSubject, Subscription, from, fromEvent } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { NoteFormComponent } from './components/note-form/note-form.component';
+import { EventService } from 'src/app/core/event.service';
 
 @Component({
   selector: 'app-notes',
@@ -36,6 +37,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     private router: Router,
     public noteService: NoteService,
     public globalService: GlobalsService,
+    public eventService: EventService,
     private title: Title,
     private breakpointObserver: BreakpointObserver
   ) {

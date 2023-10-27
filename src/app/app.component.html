@@ -3,6 +3,11 @@
   [menuOpen]="true"
   (closeMenu)="eventService.closeSideNavbar()"
   class="page"
+  [ngStyle]="
+    eventService.documentIsScrollable
+      ? { position: 'relative' }
+      : { position: 'fixed' }
+  "
 >
   <div class="menu-toggle-icon-container">
     <button

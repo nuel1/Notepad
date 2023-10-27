@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   OnDestroy,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   subscription: Subscription | undefined;
+
   async ngOnInit() {}
 
   ngAfterViewInit(): void {

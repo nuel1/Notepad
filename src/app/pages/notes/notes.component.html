@@ -13,14 +13,26 @@
           <search></search>
         </div>
         <div class="flex action-btns">
-          <div role="button" class="icon" (click)="isNoteFormOpen = true">
+          <div
+            role="button"
+            class="icon"
+            (click)="
+              isNoteFormOpen = true; eventService.documentIsScrollable = false
+            "
+          >
             <img
               src="assets/icon-svgs/add-file.svg"
               alt="Add file"
               title="Add file"
             />
           </div>
-          <div role="button" class="icon" (click)="isFolderFormOpen = true">
+          <div
+            role="button"
+            class="icon"
+            (click)="
+              isFolderFormOpen = true; eventService.documentIsScrollable = false
+            "
+          >
             <img
               src="assets/icon-svgs/add-folder.svg"
               alt="Add folder"
@@ -40,7 +52,10 @@
             (deleteNote)="deleteNote($event)"
             (onTogglePin)="noteService.togglePin($event)"
             [pinned]="noteService.notePinned(note)"
-            (openOptions)="isOptionsModalOpen = true"
+            (openOptions)="
+              isOptionsModalOpen = true;
+              eventService.documentIsScrollable = false
+            "
           ></note-card>
         </ng-container>
       </ng-container>
@@ -60,19 +75,31 @@
 
 <ng-container *ngIf="isNoteFormOpen">
   <create-note
-    (close)="isNoteFormOpen = false"
-    (submit)="noteService.createNote($event); isNoteFormOpen = false"
+    (close)="isNoteFormOpen = false; eventService.documentIsScrollable = true"
+    (submit)="
+      noteService.createNote($event);
+      isNoteFormOpen = false;
+      eventService.documentIsScrollable = true
+    "
   ></create-note>
 </ng-container>
 
 <ng-container *ngIf="isFolderFormOpen">
-  <create-folder (close)="isFolderFormOpen = false"></create-folder>
+  <create-folder
+    (close)="isFolderFormOpen = false; eventService.documentIsScrollable = true"
+  ></create-folder>
 </ng-container>
 
 <ng-container *ngIf="isOptionsModalOpen">
   <note-options
-    (onClose)="isOptionsModalOpen = false"
-    (onDelete)="isDeleteModalOpen = true; isOptionsModalOpen = false"
+    (onClose)="
+      isOptionsModalOpen = false; eventService.documentIsScrollable = true
+    "
+    (onDelete)="
+      isDeleteModalOpen = true;
+      isOptionsModalOpen = false;
+      eventService.documentIsScrollable = false
+    "
   ></note-options>
 </ng-container>
 
@@ -80,5 +107,7 @@
   *ngIf="isDeleteModalOpen"
   btnDeleteText="Delete note"
   warningText="If you delete this note, you can still find it in the bin"
-  (onClose)="isDeleteModalOpen = false"
+  (onClose)="
+    isDeleteModalOpen = false; eventService.documentIsScrollable = true
+  "
 ></modal-delete>

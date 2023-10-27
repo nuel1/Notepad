@@ -10,6 +10,8 @@ export class EventService {
   public $showTagInput = new BehaviorSubject<boolean>(false);
   public renderer2: Renderer2 | undefined;
 
+  public documentIsScrollable = true;
+
   constructor() {}
 
   public openSideNavbar() {

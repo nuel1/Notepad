@@ -5,12 +5,14 @@
   aria-labelledby="dialog-title"
 >
   <div class="modal-card">
-    <h2 id="dialog-title">{{ headingText }}</h2>
-    <div class="form">
-      <ng-content select="[body]"></ng-content>
-      <button (click)="submit()" [disabled]="title.invalid">
-        {{ buttonText }}
-      </button>
+    <div class="modal-card-body">
+      <h2 id="dialog-title">{{ headingText }}</h2>
+      <div class="form" role="form">
+        <ng-content select="[body]"></ng-content>
+        <button (click)="submit()" [disabled]="title.invalid">
+          {{ buttonText }}
+        </button>
+      </div>
     </div>
   </div>
   <div class="modal-overlay" (click)="onClose.emit()"></div>
