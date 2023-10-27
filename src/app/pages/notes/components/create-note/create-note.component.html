@@ -8,13 +8,13 @@
 >
   <ng-container body>
     <note-form-input
-      [inputTitle]="'Title'"
+      [label]="'Title'"
       [name]="'title'"
       [placeholder]="'Title'"
       (onInputChange)="title = $event"
     ></note-form-input>
     <note-form-input
-      [inputTitle]="'Add tag'"
+      [label]="'Add tag'"
       [name]="'tag'"
       [placeholder]="'Tag'"
       (onAddTag)="tags = $event"

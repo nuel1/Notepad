@@ -24,6 +24,7 @@ export class NoteService {
     []
   );
   public readonly selectedNoteId: WritableSignal<string> = signal('');
+  public readonly selectedNoteTitle: WritableSignal<string> = signal('');
 
   public openFullScreen = false;
   public pinned = false;
@@ -51,6 +52,15 @@ export class NoteService {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  public editNoteTitle(noteId: string, noteTitle: string) {
+    this.notes.update((notes: Array<INote | IAuthor>) =>
+      notes.map((note: INote | IAuthor) => {
+        if (note.id === noteId) note.title = noteTitle;
+        return note;
+      })
+    );
   }
 
   public pinNote(pinnedNote: INote | IAuthor) {

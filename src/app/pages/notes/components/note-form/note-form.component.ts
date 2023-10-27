@@ -18,6 +18,7 @@ export class NoteFormComponent {
 
   @Input() buttonText = '';
   @Input() headingText = '';
+  @Input() formState: 'edit' | 'create' = 'create';
   @Input() set inputChanges(value: string) {
     this.title.setValue(value);
   }
@@ -31,9 +32,13 @@ export class NoteFormComponent {
   tags: string[] = [];
 
   async submit() {
-    this.onSubmit.emit({
-      title: this.title.value,
-      tags: this.tags,
-    });
+    if (this.formState === 'create') {
+      this.onSubmit.emit({
+        title: this.title.value,
+        tags: this.tags,
+      });
+    } else {
+      this.onSubmit.emit(this.title.value);
+    }
   }
 }

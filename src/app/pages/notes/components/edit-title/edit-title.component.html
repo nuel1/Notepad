@@ -1,17 +1,18 @@
-<!-- <note-form
+<note-form
   (onSubmit)="submit.emit($event)"
   (onClose)="close.emit()"
-  buttonText="Create note"
-  headingText="Create Note"
+  buttonText="Edit"
+  headingText="Edit title"
   [inputChanges]="title"
-  [addTag]="tags"
+  [formState]="formState"
 >
   <ng-container body>
     <note-form-input
-      [inputTitle]="'Title'"
+      [label]="'Title'"
       [name]="'title'"
       [placeholder]="'Title'"
       (onInputChange)="title = $event"
+      [initialTitle]="title"
     ></note-form-input>
   </ng-container>
-</note-form> -->
+</note-form>

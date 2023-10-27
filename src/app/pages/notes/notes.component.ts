@@ -44,10 +44,11 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.notes();
   }
 
-  isNoteFormOpen = false;
-  isFolderFormOpen = false;
+  isCreateNoteFormOpen = false;
+  isCreateFolderFormOpen = false;
   isOptionsModalOpen = false;
   isDeleteModalOpen = false;
+  isEditNoteTitleFormOpen = false;
 
   subscription: Subscription | undefined;
   currentRoutePathIsNotes: boolean | undefined;
