@@ -14,8 +14,8 @@ export const noteResolver: ResolveFn<Promise<boolean>> = (
 ): Promise<boolean> => {
   return new Promise((resolve, reject) => {
     try {
-      const noteService = inject(NoteService);
-      const id = route.paramMap.get('id') satisfies string | null;
+      // const noteService = inject(NoteService);
+      // const id = route.paramMap.get('id') satisfies string | null;
       // if (typeof id === 'string') noteService.getNote(id);
       resolve(true);
     } catch (e) {

@@ -10,7 +10,9 @@
       <h2 id="dialog-title">Are you sure?</h2>
       <p id="dialog-description">{{ warningText }}</p>
       <div class="action-btns flex flex-column align-c">
-        <button class="btn btn-danger">{{ btnDeleteText }}</button>
+        <button class="btn btn-danger" (click)="onDelete.emit()">
+          {{ btnDeleteText }}
+        </button>
         <button class="btn btn-light" (click)="onClose.emit()">Cancel</button>
       </div>
     </div>

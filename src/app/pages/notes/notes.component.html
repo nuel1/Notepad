@@ -54,7 +54,8 @@
             [pinned]="noteService.notePinned(note)"
             (openOptions)="
               isOptionsModalOpen = true;
-              eventService.documentIsScrollable = false
+              eventService.documentIsScrollable = false;
+              noteService.selectedNoteId.set(note.id)
             "
           ></note-card>
         </ng-container>
@@ -109,5 +110,10 @@
   warningText="If you delete this note, you can still find it in the bin"
   (onClose)="
     isDeleteModalOpen = false; eventService.documentIsScrollable = true
+  "
+  (onDelete)="
+    noteService.deleteNote(noteService.selectedNoteId());
+    isDeleteModalOpen = false;
+    eventService.documentIsScrollable = true
   "
 ></modal-delete>

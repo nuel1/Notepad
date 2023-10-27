@@ -19,9 +19,13 @@ export class NoteService {
     });
   }
 
-  public notes: WritableSignal<Array<INote | IAuthor>> = signal([]);
+  public readonly notes: WritableSignal<Array<INote | IAuthor>> = signal([]);
+  public readonly pinnedNotes: WritableSignal<Array<INote | IAuthor>> = signal(
+    []
+  );
+  public readonly selectedNoteId: WritableSignal<string> = signal('');
+
   public openFullScreen = false;
-  public pinnedNotes: WritableSignal<Array<INote | IAuthor>> = signal([]);
   public pinned = false;
 
   public createNote(data: ICreateNote) {
@@ -150,7 +154,8 @@ export class NoteService {
     return null;
   }
 
-  public saveNotes() {
+  private saveNotes() {
+    console.log(this.notes());
     this.storage.saveItem('notes', this.notes());
   }
 
@@ -179,7 +184,7 @@ export class NoteService {
   /**
    * Saves the pinnedNotes array to storage.
    */
-  public savePinnedNotes() {
+  private savePinnedNotes() {
     localStorage.setItem('pinnedNotes', JSON.stringify(this.pinnedNotes()));
   }
 
