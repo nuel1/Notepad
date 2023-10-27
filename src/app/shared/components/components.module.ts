@@ -7,6 +7,7 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { SideNavbarTabComponent } from './side-navbar-tab/side-navbar-tab.component';
 import { SearchComponent } from './search/search.component';
+import { ModalDeleteComponent } from './modal/modal-delete/modal-delete.component';
 import {
   ionNewspaperOutline,
   ionCheckmarkOutline,
@@ -29,6 +30,7 @@ const components = [
   SideNavbarComponent,
   SideNavbarTabComponent,
   SearchComponent,
+  ModalDeleteComponent,
 ];
 @NgModule({
   declarations: components,

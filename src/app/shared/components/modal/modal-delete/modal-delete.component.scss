@@ -1,0 +1,32 @@
+h2 {
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+p {
+  color: var(--color-dark-tint);
+  font-size: 0.9rem;
+}
+
+.action-btns {
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding-block: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  border: transparent;
+  color: var(--color-light);
+}
+
+.btn-light {
+  background-color: transparent;
+  border: 1px solid var(--color-medium);
+}

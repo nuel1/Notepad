@@ -13,16 +13,16 @@ const routes: Routes = [
       {
         path: 'note/preview/:id',
         component: NotePreviewerComponent,
-        // resolve: {
-        //   note: noteResolver,
-        // },
+        resolve: {
+          note: noteResolver,
+        },
       },
       {
         path: 'note/preview/:id/edit',
         component: NoteEditorComponent,
-        // resolve: {
-        //   note: noteResolver,
-        // },
+        resolve: {
+          note: noteResolver,
+        },
       },
     ],
   },

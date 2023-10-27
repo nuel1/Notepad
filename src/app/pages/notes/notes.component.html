@@ -13,14 +13,14 @@
           <search></search>
         </div>
         <div class="flex action-btns">
-          <div role="button" class="icon" (click)="createNoteFormOpen = true">
+          <div role="button" class="icon" (click)="isNoteFormOpen = true">
             <img
               src="assets/icon-svgs/add-file.svg"
               alt="Add file"
               title="Add file"
             />
           </div>
-          <div role="button" class="icon" (click)="createFolderFormOpen = true">
+          <div role="button" class="icon" (click)="isFolderFormOpen = true">
             <img
               src="assets/icon-svgs/add-folder.svg"
               alt="Add folder"
@@ -40,7 +40,7 @@
             (deleteNote)="deleteNote($event)"
             (onTogglePin)="noteService.togglePin($event)"
             [pinned]="noteService.notePinned(note)"
-            (openOptions)="optionsModalOpen = true"
+            (openOptions)="isOptionsModalOpen = true"
           ></note-card>
         </ng-container>
       </ng-container>
@@ -58,17 +58,27 @@
   </div>
 </div>
 
-<ng-container *ngIf="createNoteFormOpen">
+<ng-container *ngIf="isNoteFormOpen">
   <create-note
-    (close)="createNoteFormOpen = false"
-    (submit)="noteService.createNote($event); createNoteFormOpen = false"
+    (close)="isNoteFormOpen = false"
+    (submit)="noteService.createNote($event); isNoteFormOpen = false"
   ></create-note>
 </ng-container>
 
-<ng-container *ngIf="createFolderFormOpen">
-  <create-folder (close)="createFolderFormOpen = false"></create-folder>
+<ng-container *ngIf="isFolderFormOpen">
+  <create-folder (close)="isFolderFormOpen = false"></create-folder>
 </ng-container>
 
-<ng-container *ngIf="optionsModalOpen">
-  <note-options (onClose)="optionsModalOpen = false"></note-options>
+<ng-container *ngIf="isOptionsModalOpen">
+  <note-options
+    (onClose)="isOptionsModalOpen = false"
+    (onDelete)="isDeleteModalOpen = true; isOptionsModalOpen = false"
+  ></note-options>
 </ng-container>
+
+<modal-delete
+  *ngIf="isDeleteModalOpen"
+  btnDeleteText="Delete note"
+  warningText="If you delete this note, you can still find it in the bin"
+  (onClose)="isDeleteModalOpen = false"
+></modal-delete>

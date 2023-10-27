@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&family=Montserrat&display=swap");
 
 :root {
@@ -39,8 +37,8 @@ img {
 }
 
 * {
-  font-family: Montserrat, Poppins, "Alegreya Sans", "Segoe UI", Tahoma, Geneva,
-    Verdana, sans-serif;
+  font-family: Montserrat, "Alegreya Sans", "Segoe UI", Tahoma, Geneva, Verdana,
+    sans-serif;
 
   line-height: 1.7;
 }
@@ -186,12 +184,32 @@ a {
   }
 }
 
-.overlay {
+.modal-overlay {
+  z-index: -1;
+  cursor: pointer;
+}
+
+.modal-card {
+  background: #fff;
+  max-width: 450px;
+  width: 90%;
+}
+
+.modal-card-body {
+  padding: 1rem;
+  text-align: center;
+}
+
+.overlay,
+.modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1;
   background: var(--color-light-shade);
   opacity: 0.5;
+}
+
+.overlay {
+  z-index: 1;
 }
 
 .tags {

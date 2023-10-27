@@ -16,18 +16,8 @@ export const noteResolver: ResolveFn<Promise<boolean>> = (
     try {
       const noteService = inject(NoteService);
       const id = route.paramMap.get('id') satisfies string | null;
-
-      console.log(noteService.notes());
-      const note = noteService.notes().find((note: INote | IAuthor) => {
-        return id === note.id;
-      }) satisfies INote | IAuthor | undefined;
-
-      if (note) {
-        resolve(true);
-      } else {
-        reject(false);
-        errorResolver();
-      }
+      // if (typeof id === 'string') noteService.getNote(id);
+      resolve(true);
     } catch (e) {
       reject(false);
       errorResolver();

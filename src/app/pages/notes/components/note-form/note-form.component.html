@@ -1,6 +1,11 @@
-<div class="modal form-modal flex align-c justify-c">
-  <div class="form-container card">
-    <h2>{{ headingText }}</h2>
+<div
+  class="modal flex align-c justify-c"
+  aria-modal="true"
+  role="dialog"
+  aria-labelledby="dialog-title"
+>
+  <div class="modal-card">
+    <h2 id="dialog-title">{{ headingText }}</h2>
     <div class="form">
       <ng-content select="[body]"></ng-content>
       <button (click)="submit()" [disabled]="title.invalid">
@@ -8,5 +13,5 @@
       </button>
     </div>
   </div>
-  <div class="overlay" (click)="onClose.emit()"></div>
+  <div class="modal-overlay" (click)="onClose.emit()"></div>
 </div>

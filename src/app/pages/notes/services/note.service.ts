@@ -1,12 +1,4 @@
-import { JsonPipe } from '@angular/common';
-import {
-  Injectable,
-  WritableSignal,
-  signal,
-  effect,
-  Signal,
-  computed,
-} from '@angular/core';
+import { Injectable, WritableSignal, signal, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
