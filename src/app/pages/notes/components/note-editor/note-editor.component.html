@@ -38,7 +38,6 @@
 
             <button
               class="add-tag flex align-c"
-              [disabled]="tagName.invalid"
               (click)="addTag(); eventService.$showTagInput.next(true)"
             >
               <ng-icon name="ionAddOutline"></ng-icon>

@@ -88,8 +88,11 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
 
   addTag() {
     const newTag = this.tagName.value as string;
-    this.note?.tags.push(newTag);
-    this.note && this.noteService.saveEditedNote(this.note);
+    if (newTag) {
+      this.note?.tags.push(newTag);
+      this.note && this.noteService.saveEditedNote(this.note);
+      this.tagName.setValue('');
+    }
   }
 
   deleteTag(tag: string) {
