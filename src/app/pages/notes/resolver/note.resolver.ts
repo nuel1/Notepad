@@ -7,6 +7,7 @@ import {
 import { NoteService } from '../services/note.service';
 import { inject, ChangeDetectorRef } from '@angular/core';
 import { INote, IAuthor } from 'src/app/interface/note';
+import { StorageService } from 'src/app/core/storage.service';
 
 export const noteResolver: ResolveFn<Promise<boolean>> = (
   route: ActivatedRouteSnapshot,
@@ -14,9 +15,9 @@ export const noteResolver: ResolveFn<Promise<boolean>> = (
 ): Promise<boolean> => {
   return new Promise((resolve, reject) => {
     try {
-      // const noteService = inject(NoteService);
-      // const id = route.paramMap.get('id') satisfies string | null;
-      // if (typeof id === 'string') noteService.getNote(id);
+      // const notes = JSON.parse(localStorage.getItem('notes') as string);
+
+      // console.log(notes);
       resolve(true);
     } catch (e) {
       reject(false);

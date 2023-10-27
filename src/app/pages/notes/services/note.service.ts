@@ -40,15 +40,14 @@ export class NoteService {
         content: '',
       } satisfies INote;
 
-      this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
-
+      this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
       if (Boolean(this.pinnedNotes().length)) {
         this.notes.update(
           this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
         );
+      } else {
+        this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
       }
-
-      this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
     } catch (e) {
       console.log(e);
     }
@@ -155,7 +154,6 @@ export class NoteService {
   }
 
   private saveNotes() {
-    console.log(this.notes());
     this.storage.saveItem('notes', this.notes());
   }
 
