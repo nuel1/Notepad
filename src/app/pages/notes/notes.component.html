@@ -2,8 +2,8 @@
   <div
     class="sidebar grid"
     [ngClass]="{
-      mobile_view_single_display: !currentRoutePathIsNotes,
-      laptop_view_multi_display: !(isMobile | async) || currentRoutePathIsNotes
+      mobile_view: !currentRoutePathIsNotes,
+      laptop_view: !(isMobile | async) || currentRoutePathIsNotes
     }"
   >
     <div class="heading">
@@ -69,8 +69,8 @@
   <div
     class="editor-container"
     [ngClass]="{
-      mobile_view_single_display: currentRoutePathIsNotes,
-      laptop_view_multi_display: !(isMobile | async)
+      mobile_view: currentRoutePathIsNotes,
+      laptop_view: !(isMobile | async)
     }"
   >
     <router-outlet></router-outlet>

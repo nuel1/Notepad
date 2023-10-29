@@ -1,4 +1,10 @@
-import { Injectable, WritableSignal, signal, effect } from '@angular/core';
+import {
+  Injectable,
+  WritableSignal,
+  signal,
+  effect,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
@@ -55,12 +61,12 @@ export class NoteService {
   }
 
   public editNoteTitle(noteId: string, noteTitle: string) {
-    this.notes.update((notes: Array<INote | IAuthor>) =>
-      notes.map((note: INote | IAuthor) => {
-        if (note.id === noteId) note.title = noteTitle;
-        return note;
-      })
-    );
+    this.notes.mutate((notes: Array<INote | IAuthor>) => {
+      notes.forEach(
+        (note: INote | IAuthor) =>
+          note.id === noteId && (note.title = noteTitle)
+      );
+    });
   }
 
   public pinNote(pinnedNote: INote | IAuthor) {

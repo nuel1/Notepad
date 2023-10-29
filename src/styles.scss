@@ -261,7 +261,7 @@ a {
   }
 }
 
-.mobile_view_single_display {
+.mobile_view {
   display: none;
 }
 
@@ -410,7 +410,7 @@ a {
 }
 
 @media (min-width: 1024px) {
-  .laptop_view_multi_display {
+  .laptop_view {
     display: block;
   }
 
