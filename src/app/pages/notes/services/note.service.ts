@@ -29,11 +29,10 @@ export class NoteService {
   public readonly pinnedNotes: WritableSignal<Array<INote | IAuthor>> = signal(
     []
   );
-  public readonly selectedNoteId: WritableSignal<string> = signal('');
-  public readonly selectedNoteTitle: WritableSignal<string> = signal('');
 
   public openFullScreen = false;
   public pinned = false;
+  public selectedNote: INote | IAuthor | undefined;
 
   public createNote(data: ICreateNote) {
     try {
@@ -60,13 +59,20 @@ export class NoteService {
     }
   }
 
-  public editNoteTitle(noteId: string, noteTitle: string) {
-    this.notes.mutate((notes: Array<INote | IAuthor>) => {
-      notes.forEach(
-        (note: INote | IAuthor) =>
-          note.id === noteId && (note.title = noteTitle)
-      );
-    });
+  public editNoteTitle(data: { id: string; title: string }) {
+    this.notes.update((notes: Array<INote | IAuthor>) =>
+      notes.reduce((result: Array<INote | IAuthor>, note: INote | IAuthor) => {
+        if (note.id === data.id) {
+          let edited = {
+            ...note,
+          } satisfies INote;
+          edited.title = data.title;
+
+          return result.concat(edited);
+        }
+        return result.concat(note);
+      }, [])
+    );
   }
 
   public pinNote(pinnedNote: INote | IAuthor) {

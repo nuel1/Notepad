@@ -57,8 +57,7 @@
             (openOptions)="
               isOptionsModalOpen = true;
               eventService.documentIsScrollable = false;
-              noteService.selectedNoteId.set(note.id);
-              noteService.selectedNoteTitle.set(note.title)
+              noteService.selectedNote = note
             "
           ></note-card>
         </ng-container>
@@ -77,63 +76,56 @@
   </div>
 </div>
 
-<ng-container *ngIf="isCreateNoteFormOpen">
-  <create-note
-    (close)="
-      isCreateNoteFormOpen = false; eventService.documentIsScrollable = true
-    "
-    (submit)="
-      noteService.createNote($event);
-      isCreateNoteFormOpen = false;
-      eventService.documentIsScrollable = true
-    "
-  ></create-note>
-</ng-container>
+<create-note
+  *ngIf="isCreateNoteFormOpen"
+  (close)="
+    isCreateNoteFormOpen = false; eventService.documentIsScrollable = true
+  "
+  (submit)="
+    noteService.createNote($event);
+    isCreateNoteFormOpen = false;
+    eventService.documentIsScrollable = true
+  "
+></create-note>
 
-<ng-container *ngIf="isCreateFolderFormOpen">
-  <create-folder
-    (close)="
-      isCreateFolderFormOpen = false; eventService.documentIsScrollable = true
-    "
-  ></create-folder>
-</ng-container>
+<create-folder
+  *ngIf="isCreateFolderFormOpen"
+  (close)="
+    isCreateFolderFormOpen = false; eventService.documentIsScrollable = true
+  "
+></create-folder>
 
-<ng-container *ngIf="isOptionsModalOpen">
-  <note-options
-    (onClose)="
-      isOptionsModalOpen = false; eventService.documentIsScrollable = true
-    "
-    (onDelete)="
-      isDeleteModalOpen = true;
-      isOptionsModalOpen = false;
-      eventService.documentIsScrollable = false
-    "
-    (onEditTitle)="
-      isEditNoteTitleFormOpen = true;
-      isOptionsModalOpen = false;
-      eventService.documentIsScrollable = false
-    "
-  ></note-options>
-</ng-container>
+<note-options
+  *ngIf="isOptionsModalOpen"
+  (onClose)="
+    isOptionsModalOpen = false; eventService.documentIsScrollable = true
+  "
+  (onDelete)="
+    isDeleteModalOpen = true;
+    isOptionsModalOpen = false;
+    eventService.documentIsScrollable = false
+  "
+  (onEditTitle)="
+    isEditNoteTitleFormOpen = true;
+    isOptionsModalOpen = false;
+    eventService.documentIsScrollable = false
+  "
+></note-options>
 
-<ng-container *ngIf="isEditNoteTitleFormOpen">
-  <edit-title
-    formState="edit"
-    [initialTitle]="noteService.selectedNoteTitle()"
-    (close)="
-      isEditNoteTitleFormOpen = false; eventService.documentIsScrollable = true
-    "
-    (submit)="
-      noteService.selectedNoteTitle.set($event);
-      noteService.editNoteTitle(
-        noteService.selectedNoteId(),
-        noteService.selectedNoteTitle()
-      );
-      isEditNoteTitleFormOpen = false;
-      eventService.documentIsScrollable = true
-    "
-  ></edit-title>
-</ng-container>
+<edit-title
+  *ngIf="isEditNoteTitleFormOpen"
+  formState="edit"
+  [initialTitle]="noteService.selectedNote?.title"
+  [noteId]="noteService.selectedNote?.id"
+  (close)="
+    isEditNoteTitleFormOpen = false; eventService.documentIsScrollable = true
+  "
+  (submit)="
+    noteService.editNoteTitle($event);
+    isEditNoteTitleFormOpen = false;
+    eventService.documentIsScrollable = true
+  "
+></edit-title>
 
 <modal-delete
   *ngIf="isDeleteModalOpen"
@@ -143,7 +135,7 @@
     isDeleteModalOpen = false; eventService.documentIsScrollable = true
   "
   (onDelete)="
-    noteService.deleteNote(noteService.selectedNoteId());
+    noteService.deleteNote(noteService.selectedNote?.id || '');
     isDeleteModalOpen = false;
     eventService.documentIsScrollable = true
   "

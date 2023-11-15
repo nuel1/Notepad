@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
   OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -15,6 +16,7 @@ import { IAuthor, INote } from 'src/app/interface/note';
   selector: 'app-note-previewer',
   templateUrl: './note-previewer.component.html',
   styleUrls: ['./note-previewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotePreviewerComponent
   implements OnInit, OnDestroy, AfterViewInit

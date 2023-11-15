@@ -1,5 +1,5 @@
 <note-form
-  (onSubmit)="submit.emit($event)"
+  (onSubmit)="onSubmit($event)"
   (onClose)="close.emit()"
   buttonText="Edit"
   headingText="Edit title"
@@ -12,7 +12,7 @@
       [name]="'title'"
       [placeholder]="'Title'"
       (onInputChange)="title = $event"
-      [initialTitle]="title"
+      [initialTitle]="initialTitle || ''"
     ></note-form-input>
   </ng-container>
 </note-form>

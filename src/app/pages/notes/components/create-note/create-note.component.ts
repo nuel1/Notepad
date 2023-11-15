@@ -1,10 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'create-note',
   templateUrl: './create-note.component.html',
   styleUrls: ['./create-note.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateNoteComponent {
   constructor() {}
