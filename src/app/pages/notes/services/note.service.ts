@@ -65,7 +65,7 @@ export class NoteService {
         if (note.id === data.id) {
           let edited = {
             ...note,
-          } satisfies INote;
+          } satisfies INote | IAuthor;
           edited.title = data.title;
 
           return result.concat(edited);
