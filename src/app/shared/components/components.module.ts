@@ -8,6 +8,7 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { SideNavbarTabComponent } from './side-navbar-tab/side-navbar-tab.component';
 import { SearchComponent } from './search/search.component';
 import { ModalDeleteComponent } from './modal/modal-delete/modal-delete.component';
+import { FabButtonComponent } from './fab-button/fab-button.component';
 import {
   ionNewspaperOutline,
   ionCheckmarkOutline,
@@ -31,6 +32,7 @@ const components = [
   SideNavbarTabComponent,
   SearchComponent,
   ModalDeleteComponent,
+  FabButtonComponent,
 ];
 @NgModule({
   declarations: components,
