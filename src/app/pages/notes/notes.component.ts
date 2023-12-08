@@ -58,6 +58,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   isMobile = new BehaviorSubject<boolean>(false);
 
   async ngOnInit() {
+    console.log(this.router.url);
     this.title.setTitle('My Notes');
 
     this.subscription = this.breakpointObserver

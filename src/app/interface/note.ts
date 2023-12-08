@@ -4,6 +4,7 @@ export interface INote {
   date: string;
   tags: string[];
   content: string;
+  // note_id: string;
 }
 
 export interface IAuthor extends INote {

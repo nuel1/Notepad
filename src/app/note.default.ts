@@ -109,4 +109,6 @@ export class DefaultNote implements Readonly<IAuthor> {
     month: 'long',
     day: 'numeric',
   });
+
+  //   note_id: 'root'
 }
