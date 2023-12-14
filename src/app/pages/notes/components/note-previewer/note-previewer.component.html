@@ -1,9 +1,31 @@
 <div #container class="previewer"></div>
-<ng-container *ngIf="!noteIsAuthor">
-  <div
-    class="icon-container"
-    [routerLink]="'/notes/note/preview/' + this.note?.id + '/edit'"
-  >
-    <img src="assets/icon-svgs/pencil.svg" class="icon" />
+<div class="fab-group" *ngIf="noteIsAuthor">
+  <div class="fab">
+    <div class="fab-item" role="button" style="opacity: 1">
+      <img src="assets/icon-svgs/speaker.svg" class="icon icon-speaker" />
+    </div>
   </div>
-</ng-container>
+</div>
+
+<div class="fab-group" *ngIf="!noteIsAuthor">
+  <div class="fab" [ariaPressed]="fabOpen">
+    <div
+      class="fab-item"
+      role="button"
+      style="--fab-item-delay: 0s; --fab-item-distance: -4rem"
+      [routerLink]="'/notes/note/preview/' + this.note?.id + '/edit'"
+    >
+      <img src="assets/icon-svgs/pencil.svg" class="icon" />
+    </div>
+    <div
+      class="fab-item"
+      role="button"
+      style="--fab-item-delay: 0.1s; --fab-item-distance: -8rem"
+    >
+      <img src="assets/icon-svgs/speaker.svg" class="icon icon-speaker" />
+    </div>
+    <div class="fab-drawer" role="button" (click)="toggleFab()">
+      <img src="assets/icon-svgs/fab-plus.svg" class="icon" />
+    </div>
+  </div>
+</div>

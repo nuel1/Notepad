@@ -6,11 +6,14 @@ import {
   ViewChild,
   OnDestroy,
   ChangeDetectionStrategy,
+  AfterViewChecked,
+  AfterContentChecked,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NoteService } from '../../services/note.service';
 import { IAuthor, INote } from 'src/app/interface/note';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-note-previewer',
@@ -19,7 +22,7 @@ import { IAuthor, INote } from 'src/app/interface/note';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotePreviewerComponent
-  implements OnInit, OnDestroy, AfterViewInit
+  implements OnInit, OnDestroy, AfterViewChecked
 {
   @ViewChild('container') container: ElementRef = new ElementRef(null);
 
@@ -32,49 +35,28 @@ export class NotePreviewerComponent
 
   note: INote | undefined;
   notePreview: any;
+  fabOpen = false;
+  noteIsAuthor = false;
 
   async ngOnInit() {
     this.title.setTitle('Note - Preview');
 
     const id = this.route.snapshot.params['id'];
-    try {
-    } catch (e) {}
     this.note = this.noteService.getNote(id) as INote | IAuthor;
-    this.notePreview = this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        try {
-          const id = this.route.snapshot.params['id'];
-          const note = this.noteService.getNote(id) satisfies
-            | INote
-            | IAuthor
-            | Error
-            | null;
-
-          if (note && !(note instanceof Error)) {
-            this.note = note;
-            this.previewNote();
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    });
   }
 
-  get noteIsAuthor() {
-    return this.note?.hasOwnProperty('badge');
-  }
+  ngAfterViewChecked(): void {
+    const id = this.route.snapshot.params['id'];
+    this.note = this.noteService.getNote(id) as INote | IAuthor;
 
-  ngAfterViewInit(): void {
-    this.previewNote();
-  }
-
-  async previewNote() {
+    this.noteIsAuthor = this.note?.hasOwnProperty('badge');
     const html = this.container.nativeElement;
     html.innerHTML = this.note!.content;
   }
 
-  ngOnDestroy(): void {
-    this.notePreview.unsubscribe();
+  toggleFab() {
+    this.fabOpen = !this.fabOpen;
   }
+
+  ngOnDestroy(): void {}
 }

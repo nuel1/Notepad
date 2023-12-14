@@ -35,28 +35,24 @@ export class NoteService {
   public selectedNote: INote | IAuthor | undefined;
 
   public createNote(data: ICreateNote) {
-    try {
-      const id = this.global.generateId();
-      const date = this.global.date;
-      const note = {
-        title: data.title,
-        id: id,
-        date: date,
-        tags: data.tags,
-        content: '',
-      } satisfies INote;
+    const id = this.global.generateId();
+    const date = this.global.date;
+    const note = {
+      title: data.title,
+      id: id,
+      date: date,
+      tags: data.tags,
+      content: '',
+    } satisfies INote;
 
-      this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
-      if (Boolean(this.pinnedNotes().length)) {
-        this.notes.update(
-          this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
-        );
-      } else {
-        this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
-      }
-    } catch (e) {
-      console.log(e);
+    this.notes.update((notes: Array<INote | IAuthor>) => [note, ...notes]);
+    if (Boolean(this.pinnedNotes().length)) {
+      this.notes.update(
+        this.stackPinnedNotes_getNewArrangementOfNotes.bind(this)
+      );
     }
+
+    this.router.navigateByUrl(`/notes/note/preview/${id}/edit`);
   }
 
   public editNoteTitle(data: { id: string; title: string }) {
@@ -162,17 +158,15 @@ export class NoteService {
     this.notes.set(savedNotes);
   }
 
-  public getNote(noteId: string): INote | IAuthor | Error | null {
-    if (Boolean(this.notes().length)) {
-      const note = this.notes().find((note: INote | IAuthor) => {
-        return noteId === note.id;
-      }) satisfies INote | IAuthor | undefined;
-      if (!note) {
-        throw Error('Cannot find note with the provided id');
-      }
-      return note;
+  public getNote(noteId: string): INote | IAuthor {
+    const note = this.notes().find((note: INote | IAuthor) => {
+      return noteId === note.id;
+    }) satisfies INote | IAuthor | undefined;
+
+    if (!note) {
+      throw Error('Cannot find note with the provided id');
     }
-    return null;
+    return note;
   }
 
   private saveNotes() {

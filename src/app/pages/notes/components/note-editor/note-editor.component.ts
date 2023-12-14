@@ -52,26 +52,9 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     );
 
     this.browserTitle.setTitle('Note - Edit');
-    try {
-      const id = this.route.snapshot.paramMap.get('id') satisfies null | string;
-      if (!id) throw Error('Id not found');
-      const note = this.noteService.getNote(id) satisfies
-        | INote
-        | IAuthor
-        | null
-        | Error;
 
-      if (note && !(note instanceof Error)) {
-        this.note = note satisfies INote | IAuthor;
-        this.form?.get('editorContent')!.patchValue(this.note.content);
-        this.contentChangeObserver$.next(
-          this.form?.get('editorContent')?.value satisfies string
-        );
-        return;
-      }
-    } catch (e) {
-      console.log('error:', e);
-    }
+    const id = this.route.snapshot.paramMap.get('id') as string;
+    this.note = this.noteService.getNote(id) as INote | IAuthor;
   }
 
   previewNote() {
