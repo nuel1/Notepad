@@ -50,7 +50,7 @@
   }
 
   .icon-speaker {
-    rotate: -180deg;
+    transform: rotate(-180deg);
   }
 
   .fab-drawer {
@@ -107,10 +107,10 @@
 
 @keyframes rotate44 {
   from {
-    rotate: 0;
+    transform: rotate(0);
   }
 
   to {
-    rotate: 44deg;
+    transform: rotate(44deg);
   }
 }

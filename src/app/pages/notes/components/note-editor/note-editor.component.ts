@@ -55,6 +55,8 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
 
     const id = this.route.snapshot.paramMap.get('id') as string;
     this.note = this.noteService.getNote(id) as INote | IAuthor;
+
+    this.form?.controls['editorContent'].patchValue(this.note.content);
   }
 
   previewNote() {
