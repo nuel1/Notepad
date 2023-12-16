@@ -1,8 +1,16 @@
 <div #container class="previewer"></div>
 <div class="fab-group" *ngIf="noteIsAuthor">
   <div class="fab">
-    <div class="fab-item" role="button" style="opacity: 1">
+    <div
+      class="fab-item"
+      role="button"
+      style="opacity: 1"
+      (click)="playAudio()"
+    >
       <img src="assets/icon-svgs/speaker.svg" class="icon icon-speaker" />
+    </div>
+    <div class="audio-loader" *ngIf="loading()">
+      <img src="assets/icon-svgs/audio-loader.svg" class="icon icon-loader" />
     </div>
   </div>
 </div>
@@ -21,8 +29,12 @@
       class="fab-item"
       role="button"
       style="--fab-item-delay: 0.1s; --fab-item-distance: -8rem"
+      (click)="playAudio()"
     >
       <img src="assets/icon-svgs/speaker.svg" class="icon icon-speaker" />
+      <div class="audio-loader" *ngIf="loading()">
+        <img src="assets/icon-svgs/audio-loader.svg" class="icon icon-loader" />
+      </div>
     </div>
     <div class="fab-drawer" role="button" (click)="toggleFab()">
       <img src="assets/icon-svgs/fab-plus.svg" class="icon" />

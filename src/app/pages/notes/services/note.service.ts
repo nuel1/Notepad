@@ -1,17 +1,29 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Injectable,
   WritableSignal,
   signal,
   effect,
-  ChangeDetectorRef,
+  inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
+import { edenAPI } from 'src/app/environment/environment';
 import { IAuthor, ICreateNote, INote } from 'src/app/interface/note';
+import { IEdenAPIAudio, IEdentAPIData } from '../interface/note.model';
 
 @Injectable()
 export class NoteService {
+  http = inject(HttpClient);
+  header = new HttpHeaders({
+    'Content-Type': 'application/json',
+    authorization: edenAPI.apiKey,
+  });
+
+  url = edenAPI.url;
+
   constructor(
     private storage: StorageService,
     private global: GlobalsService,
@@ -247,5 +259,18 @@ export class NoteService {
     } else {
       this.pinNote(note);
     }
+  }
+
+  getAudio(text: string): Observable<{ elevenlabs: IEdenAPIAudio }> {
+    const data: IEdentAPIData = {
+      providers: 'elevenlabs',
+      language: 'eng',
+      text: text,
+      option: 'FEMALE',
+    };
+
+    return this.http.post(this.url, data, {
+      headers: this.header,
+    }) as Observable<{ elevenlabs: IEdenAPIAudio }>;
   }
 }

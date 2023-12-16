@@ -4,11 +4,31 @@
   bottom: 20px;
 }
 
+.audio-loader {
+  img {
+    width: 30px;
+    height: auto;
+  }
+}
+
+.audio-loader {
+  background: #000000d9;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.fab,
+.fab-item,
+.fab-drawer,
+.audio-loader {
+  border-radius: 50%;
+}
+
 .fab,
 .fab-item,
 .fab-drawer {
   background: var(--color-dark);
-  border-radius: 50%;
   height: 50px;
   width: 50px;
   display: flex;
@@ -17,7 +37,8 @@
 }
 
 .fab-drawer,
-.fab-item {
+.fab-item,
+.audio-loader {
   position: absolute;
 }
 
