@@ -6,7 +6,7 @@ import {
   effect,
   inject,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivationStart, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
@@ -16,7 +16,6 @@ import { IEdenAPIAudio, IEdentAPIData } from '../interface/note.model';
 
 @Injectable()
 export class NoteService {
-  http = inject(HttpClient);
   header = new HttpHeaders({
     'Content-Type': 'application/json',
     authorization: edenAPI.apiKey,
@@ -27,7 +26,8 @@ export class NoteService {
   constructor(
     private storage: StorageService,
     private global: GlobalsService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.getPinnedNotes().getNotes();
 
@@ -45,6 +45,7 @@ export class NoteService {
   public openFullScreen = false;
   public pinned = false;
   public selectedNote: INote | IAuthor | undefined;
+  public pageData: any;
 
   public createNote(data: ICreateNote) {
     const id = this.global.generateId();

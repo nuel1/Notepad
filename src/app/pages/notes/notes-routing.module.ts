@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: NotesComponent,
+    data: { title: 'Notes' },
     children: [
       {
         path: 'note/preview/:id',

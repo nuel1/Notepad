@@ -72,6 +72,9 @@
       laptop_view: !(isMobile | async)
     }"
   >
+    <div class="cover-page" *ngIf="globalService.pageData.title === 'Notes'">
+      <img src="assets/gif/note.gif" />
+    </div>
     <router-outlet></router-outlet>
   </div>
 </div>

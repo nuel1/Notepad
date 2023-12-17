@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  NavigationEnd,
+  ActivationStart,
+} from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import * as Crypto from 'crypto-js';
 
@@ -7,7 +12,11 @@ import * as Crypto from 'crypto-js';
   providedIn: 'root',
 })
 export class GlobalsService {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.setPageData();
+  }
+
+  pageData: any;
 
   public currentRoute = '';
   private keyLength = 16; // Length of the key in bytes (e.g., 16 bytes for a 128-bit key)
@@ -67,5 +76,13 @@ export class GlobalsService {
         ).toString(16);
       })
       .replace(/-/g, '');
+  }
+
+  setPageData() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof ActivationStart) {
+        this.pageData = event.snapshot.data;
+      }
+    });
   }
 }

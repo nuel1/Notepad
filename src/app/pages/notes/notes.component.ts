@@ -13,7 +13,12 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  ActivationStart,
+  NavigationEnd,
+  Router,
+} from '@angular/router';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { IAuthor, ICreateNote, INote } from 'src/app/interface/note';
 import { NoteService } from './services/note.service';
