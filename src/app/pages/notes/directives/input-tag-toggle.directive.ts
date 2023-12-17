@@ -26,7 +26,6 @@ export class InputTagToggleDirective implements OnDestroy {
   @HostListener('click', ['$event'])
   onClick($event: Event) {
     this.eventService.$showTagInput.next(true);
-    this.eventService.$showTagInput.subscribe((value) => console.log(value));
     $event.stopPropagation();
   }
 }
