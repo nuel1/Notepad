@@ -3,16 +3,20 @@
     <div class="heading">
       <h1>{{ note.title | titlecase }}</h1>
     </div>
-    <div class="note-info-table grid">
-      <div class="row-2 row grid align-c">
-        <div class="col-1">Last Modified</div>
-        <div class="col-2 flex">
+    <div class="note-info-table">
+      <div class="date">
+        <div class="date-title">
+          <p>Last Modified</p>
+        </div>
+        <div class="date-content">
           <p>{{ note.date }}</p>
         </div>
       </div>
-      <div class="row-3 row grid align-c">
-        <div class="col-1">Tags</div>
-        <div class="col-2 flex align-c">
+      <div class="note-tag row grid align-c">
+        <div class="">
+          <p class="note-tag-title">Tags</p>
+        </div>
+        <div class="note-tag-list flex align-c">
           <ng-container *ngIf="note.tags.length">
             <ul class="flex">
               <li *ngFor="let tag of note.tags" class="flex tag align-c">
@@ -26,7 +30,7 @@
             </ul>
           </ng-container>
 
-          <form inputTagToggle class="flex align-c">
+          <form inputTagToggle class="form-tag flex align-c">
             <ng-container *ngIf="eventService.$showTagInput | async">
               <input
                 type="text"

@@ -99,6 +99,17 @@ ul {
   }
 }
 
+@media (min-width: 768px) {
+  .fullscreen {
+    ::ng-deep {
+      .NgxEditor__MenuBar {
+        max-width: 500px;
+        margin-inline: auto;
+      }
+    }
+  }
+}
+
 // @media (min-width: 360px) {
 //   .fullscreen {
 //     ::ng-deep {

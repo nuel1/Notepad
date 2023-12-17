@@ -3,31 +3,58 @@
   padding-bottom: 1rem;
 }
 
+.editor-container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.editor-heading {
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+
+.editor {
+  grid-row: 2/3;
+  grid-column: 1/2;
+}
+
 .note-info-table {
   grid-template-columns: repeat(2, auto);
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   gap: 1rem;
+  display: grid;
 }
 
 form {
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
-.row {
+.date,
+.note-tag {
+  display: grid;
   grid-template-columns: 120px 1fr;
   gap: 1rem;
 }
-.row-1 {
-  grid-row: 1/2;
-}
 
-.row-2 {
+.date {
   grid-row: 2/3;
+  align-items: center;
+
+  .date-title {
+    grid-column: 1/2;
+  }
 }
 
-.row-3 {
+.date-title,
+.note-tag-title {
+  font-weight: 600;
+}
+
+.note-tag {
   grid-row: 3/4;
 }
 
@@ -37,21 +64,20 @@ img {
   margin-right: 0.7rem;
 }
 
-p {
-  font-weight: 600;
+.form-tag {
+  gap: 0.5rem;
 }
 
-.col-1,
-p {
+.note-tag-title {
   color: var(--color-dark-shade);
 }
 
-.col-2 {
+.note-tag-list {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.col-2 {
+.note-tag-list {
   ul {
     flex-wrap: wrap;
     margin-right: 0.5rem;
@@ -65,14 +91,17 @@ p {
 .editor-container {
   ::ng-deep {
     .NgxEditor {
-      height: 320px;
       overflow-y: scroll;
       border: transparent !important;
     }
 
     .NgxEditor__Content {
-      min-height: 320px;
       background: #80808014;
+    }
+
+    .NgxEditor,
+    .NgxEditor__Content {
+      height: 100%;
     }
   }
 }
