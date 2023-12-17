@@ -415,15 +415,12 @@ a {
 
   .main {
     display: grid;
-    grid-template-columns: auto 1fr;
-
-    // .inactive {
-    //   display: block;
-    // }
+    grid-template-columns: 27rem 1fr;
+    height: 100vh;
+    overflow-y: scroll;
   }
 
   .sidebar {
-    width: 23rem;
     position: sticky;
     left: 0;
     top: 0;
