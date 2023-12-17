@@ -84,6 +84,14 @@ section {
   display: none;
 }
 
+@media (min-width: 768px) {
+  .header {
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
 @media (min-width: 1024px) {
   .header-content,
   .section-content {
@@ -128,11 +136,4 @@ section {
       font-size: 3.5rem;
     }
   }
-
-  .header {
-    p {
-      font-size: 0.9rem;
-    }
-  }
 }
-// 255,199,39
