@@ -46,7 +46,7 @@ export class NoteFormInputComponent implements OnDestroy {
   }
 
   addTag() {
-    if (this.formTag.value) {
+    if (this.formTag.value && this.inputEl?.nativeElement.value) {
       this.tags = [...this.tags, this.formTag.value];
       this.onAddTag.emit(this.tags);
       if (this.inputEl !== undefined) this.inputEl.nativeElement.value = '';
