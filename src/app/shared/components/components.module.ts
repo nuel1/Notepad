@@ -23,6 +23,16 @@ import {
   ionChevronForward,
   ionPencil,
   ionMenuOutline,
+  // ionAnalyticsSharp,
+  // ionCaretDownOutline,
+  // ionCopy,
+  // ionCopyOutline,
+  // ionClipboard,
+  // ionEllipsisVerticalSharp,
+  // ionPaperPlane,
+  // ionPaperPlaneOutline,
+  // ionShare,
+  // ionShareOutline,
 } from '@ng-icons/ionicons';
 
 const components = [

@@ -80,6 +80,7 @@ export class NotePreviewerComponent
         if ('content' in obj) {
           obj['content'].forEach((innerObj: any) => {
             result += innerObj['text'];
+            console.log(innerObj['text']);
           });
         }
         return result;

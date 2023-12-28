@@ -52,6 +52,7 @@ p.content {
   background: var(--color-lighter);
   display: block;
   cursor: pointer;
+  position: relative;
 }
 
 .card .delete {
@@ -61,6 +62,65 @@ p.content {
   border: 1px solid #c2c2c2;
   color: inherit;
   line-height: 2;
+}
+
+.options {
+  position: absolute;
+  right: 0;
+  padding: 0.6rem;
+  background: white;
+  border-radius: 5px;
+  top: 2.1rem;
+  border: 1px solid #dddddd;
+  max-height: 129px;
+  overflow-y: auto;
+  cursor: auto;
+
+  img {
+    width: 18px;
+    vertical-align: middle;
+  }
+
+  span {
+    font-size: 0.85rem;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li:not(li:last-child) {
+    margin-bottom: 0.8rem;
+  }
+
+  li {
+    span {
+      vertical-align: bottom;
+    }
+  }
+}
+
+.more-options {
+  div {
+    img {
+      width: 25px;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+
+    span {
+      line-height: 2;
+    }
+  }
+
+  ul {
+    border-top: 1px solid lightgrey;
+    margin-top: 0.7rem;
+    padding-top: 0.5rem;
+  }
 }
 
 // button {
