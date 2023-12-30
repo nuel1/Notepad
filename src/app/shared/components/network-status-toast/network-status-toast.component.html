@@ -1,0 +1,8 @@
+<div class="network-status-toast">
+  <div *ngIf="isOnline">
+    <p>Your internet connection was restored</p>
+  </div>
+  <div *ngIf="!isOnline">
+    <p>Your are currently offline. &nbsp; <a (click)="refresh()">Refresh</a></p>
+  </div>
+</div>

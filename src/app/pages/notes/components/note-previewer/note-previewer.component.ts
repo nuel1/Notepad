@@ -79,8 +79,7 @@ export class NotePreviewerComponent
       return jsonDocs.content.reduce((result: string, obj: any) => {
         if ('content' in obj) {
           obj['content'].forEach((innerObj: any) => {
-            result += innerObj['text'];
-            console.log(innerObj['text']);
+            innerObj['text'] && (result += innerObj['text']);
           });
         }
         return result;
@@ -94,14 +93,17 @@ export class NotePreviewerComponent
       this.loading.set(true);
       const doc = this.getDoc();
       if (doc) {
-        this.noteService.getAudio(doc).subscribe((data) => {
-          this.loading.set(false);
+        this.noteService.getAudio(doc).subscribe(
+          (data) => {
+            this.loading.set(false);
 
-          const { elevenlabs } = data;
-          const audioURL = elevenlabs.audio_resource_url;
-          this.audioElement.setAttribute('src', audioURL);
-          this.audioElement.play();
-        });
+            // const { elevenlabs } = data;
+            // const audioURL = elevenlabs.audio_resource_url;
+            // this.audioElement.setAttribute('src', audioURL);
+            // this.audioElement.play();
+          },
+          (err) => console.log('Error')
+        );
       }
     } else {
       this.audioElement.play();

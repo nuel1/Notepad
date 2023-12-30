@@ -7,7 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, ActivationStart, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { GlobalsService } from 'src/app/core/globals.service';
 import { StorageService } from 'src/app/core/storage.service';
 import { edenAPI } from 'src/app/environment/environment';
@@ -262,7 +262,7 @@ export class NoteService {
     }
   }
 
-  getAudio(text: string): Observable<{ elevenlabs: IEdenAPIAudio }> {
+  getAudio(text: string): Observable<{ elevenlabs: IEdenAPIAudio } | any> {
     const data: IEdentAPIData = {
       providers: 'elevenlabs',
       language: 'eng',
@@ -270,8 +270,14 @@ export class NoteService {
       option: 'FEMALE',
     };
 
-    return this.http.post(this.url, data, {
-      headers: this.header,
-    }) as Observable<{ elevenlabs: IEdenAPIAudio }>;
+    return this.http
+      .post(this.url, data, {
+        headers: this.header,
+      })
+      .pipe(
+        catchError((err) => {
+          return err;
+        })
+      ) as Observable<{ elevenlabs: IEdenAPIAudio } | any>;
   }
 }

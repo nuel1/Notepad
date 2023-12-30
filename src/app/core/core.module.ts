@@ -8,6 +8,6 @@ import { EventService } from './event.service';
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [GlobalsService, StorageService, UserService, EventService],
+  // providers: [GlobalsService, StorageService, UserService, EventService],
 })
 export class CoreModule {}

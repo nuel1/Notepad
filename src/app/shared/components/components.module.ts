@@ -34,6 +34,7 @@ import {
   // ionShare,
   // ionShareOutline,
 } from '@ng-icons/ionicons';
+import { NetworkStatusToastComponent } from './network-status-toast/network-status-toast.component';
 
 const components = [
   ProfileCardComponent,
@@ -41,6 +42,7 @@ const components = [
   SideNavbarTabComponent,
   SearchComponent,
   ModalDeleteComponent,
+  NetworkStatusToastComponent,
 ];
 @NgModule({
   declarations: components,

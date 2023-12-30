@@ -11,6 +11,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventService } from './core/event.service';
 import { SideNavbarComponent } from './shared/components/side-navbar/side-navbar.component';
+import { ErrorHandlerService } from './core/error-handler.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sideNavbar') sideNavbar: SideNavbarComponent | undefined;
   constructor(
     public eventService: EventService,
+    private errorHandler: ErrorHandlerService,
     private router: Router,
     private renderer2: Renderer2
   ) {
