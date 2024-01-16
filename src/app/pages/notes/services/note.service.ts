@@ -19,7 +19,7 @@ export class NoteService {
   header = new HttpHeaders({
     'Content-Type': 'application/json',
     authorization: edenAPI.apiKey,
-  });
+  }); 
 
   url = edenAPI.url;
 
